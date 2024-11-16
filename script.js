@@ -92,16 +92,30 @@ function initializeAnimations() {
 
 // Navegação Suave e Menu Mobile
 function initializeNavigation() {
-    const navbar = document.querySelector('.navbar');
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    let lastScroll = 0;
+    const navbar = document.querySelector('.navbar');
 
-    // Toggle Menu Mobile
+    // Toggle menu mobile
     hamburger.addEventListener('click', () => {
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('active');
-        document.body.classList.toggle('menu-open');
+    });
+
+    // Fechar menu ao clicar em um link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+        }
     });
 
     // Navegação Suave
