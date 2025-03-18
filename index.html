@@ -2,41 +2,104 @@
 <html lang="pt-br">
 
 <head>
+    <!-- Meta Tags Básicas -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicollas Rezende | Desenvolvedor Full Stack</title>
     <meta name="description"
-        content="Portfólio de Nicollas Rezende - Desenvolvedor Full Stack especializado em Python, JavaScript e tecnologias web modernas">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Google Fonts -->
+        content="Portfólio de Nicollas Rezende - Desenvolvedor Full Stack especializado em Python, JavaScript, React e automação. Transformando ideias em soluções digitais eficientes.">
+    <meta name="keywords"
+        content="desenvolvedor full stack, python, javascript, portfólio, programador, react, nodejs, automação, brasília, desenvolvimento web">
+    <meta name="author" content="Nicollas Rezende">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <link rel="canonical" href="https://nicollasrezende.dev/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nikz.vercel.app//">
+    <meta property="og:title" content="Nicollas Rezende | Desenvolvedor Full Stack">
+    <meta property="og:description"
+        content="Desenvolvedor Full Stack especializado em Python, JavaScript e automação. Conheça meus projetos e habilidades.">
+    <meta property="og:image" content="https://nikz.vercel.app//imgs/og-image.jpg">
+    <meta property="og:site_name" content="Nicollas Rezende - Portfólio">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://nikz.vercel.app/">
+    <meta property="twitter:title" content="Nicollas Rezende | Desenvolvedor Full Stack">
+    <meta property="twitter:description"
+        content="Desenvolvedor Full Stack especializado em Python, JavaScript e automação. Conheça meus projetos e habilidades.">
+    <meta property="twitter:image" content="https://nikz.vercel.app/imgs/twitter-image.jpg">
+
+    <!-- Título -->
+    <title>Nicollas Rezende | Desenvolvedor Full Stack | Python, JavaScript, React</title>
+
+    <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <!-- Devicon -->
+
+    <!-- Folhas de Estilo Externas -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-    <!-- Custom CSS -->
+
+    <!-- Folha de Estilo Personalizada -->
     <link rel="stylesheet" href="style.css">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon/favicon.ico">
+
+    <!-- Favicon e App Icons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="manifest" href="favicon/site.webmanifest">
+    <meta name="theme-color" content="#0a1022">
+
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="imgs/55924678.png" as="image">
+
+    <!-- Schema.org markup para Person -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Nicollas Rezende",
+            "url": "https://nikz.vercel.app/",
+            "image": "https://nikz.vercel.app/imgs/55924678.png",
+            "sameAs": [
+                "https://github.com/NicollasRezende",
+                "https://www.linkedin.com/in/nicollas-rezende/"
+            ],
+            "jobTitle": "Desenvolvedor Full Stack",
+            "worksFor": {
+                "@type": "Organization",
+                "name": "SEA Tecnologia"
+            },
+            "knowsAbout": ["Python", "JavaScript", "React", "Node.js", "Automação", "Desenvolvimento Web"]
+        }
+    </script>
 </head>
 
 <body>
-    <!-- Header / Navbar usando Bootstrap -->
+    <!-- ==================== HEADER / NAVBAR ==================== -->
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+        <nav class="navbar navbar-expand-lg fixed-top custom-navbar" aria-label="Navegação principal">
             <div class="container">
-                <a href="#home" class="navbar-brand logo">
+                <!-- Logo -->
+                <a href="#home" class="navbar-brand logo" aria-label="Voltar para o início">
                     <span>N</span>icollas<span>.dev</span>
                 </a>
+
+                <!-- Botão de Menu Mobile -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <!-- Links de Navegação -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
@@ -54,9 +117,12 @@
                         <li class="nav-item">
                             <a href="#contact" class="nav-link">Contato</a>
                         </li>
+
+                        <!-- Botão de Alternância de Tema -->
                         <li class="nav-item ms-2">
-                            <button id="theme-toggle" class="btn btn-theme" aria-label="Alternar tema">
-                                <i class="fas fa-moon"></i>
+                            <button id="theme-toggle" class="btn btn-theme"
+                                aria-label="Alternar entre tema claro e escuro">
+                                <i class="fas fa-moon" aria-hidden="true"></i>
                             </button>
                         </li>
                     </ul>
@@ -65,117 +131,153 @@
         </nav>
     </header>
 
-    <main>
-        <!-- Hero Section -->
+    <main id="conteudo-principal">
+        <!-- ==================== SEÇÃO HERO ==================== -->
         <section id="home" class="hero">
             <div class="container">
                 <div class="hero-content">
+                    <!-- Texto de Apresentação -->
                     <div class="hero-text">
                         <h1>Olá, eu sou <span class="highlight">Nicollas Rezende</span></h1>
                         <h2 class="typewriter">Desenvolvedor Full Stack</h2>
                         <p>Transformando ideias em soluções digitais com código limpo, arquitetura eficiente e
                             experiências de usuário excepcionais.</p>
+
+                        <!-- Botões de Ação -->
                         <div class="hero-buttons">
                             <a href="#projects" class="btn btn-primary">Ver Projetos</a>
                             <a href="#contact" class="btn btn-outline">Contato</a>
                         </div>
+
+                        <!-- Links de Redes Sociais -->
                         <div class="social-links">
-                            <a href="https://github.com/NicollasRezende" target="_blank" class="social-link"
-                                aria-label="GitHub">
-                                <i class="fab fa-github"></i>
+                            <a href="https://github.com/NicollasRezende" target="_blank" rel="noopener noreferrer"
+                                class="social-link" aria-label="GitHub - Confira meus projetos"
+                                title="Meu perfil no GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
                             </a>
-                            <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank" class="social-link"
-                                aria-label="LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
+                            <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank"
+                                rel="noopener noreferrer" class="social-link" aria-label="LinkedIn - Vamos nos conectar"
+                                title="Meu perfil no LinkedIn">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                             </a>
                             <a href="mailto:nicollaspereirarezende@outlook.com.br" class="social-link"
-                                aria-label="Email">
-                                <i class="fas fa-envelope"></i>
+                                aria-label="Email - Entre em contato" title="Enviar email">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
                             </a>
-                            <a href="https://wa.me/5561991769500" target="_blank" class="social-link"
-                                aria-label="WhatsApp">
-                                <i class="fab fa-whatsapp"></i>
+                            <a href="https://wa.me/5561991769500" target="_blank" rel="noopener noreferrer"
+                                class="social-link" aria-label="WhatsApp - Vamos conversar" title="Meu WhatsApp">
+                                <i class="fab fa-whatsapp" aria-hidden="true"></i>
                             </a>
                         </div>
                     </div>
+
+                    <!-- Imagem de Perfil -->
                     <div class="hero-image">
                         <div class="profile-container">
                             <div class="profile-bg"></div>
                             <div class="profile-ring"></div>
-                            <img src="imgs/55924678.png" alt="Nicollas Rezende" class="profile-image">
+                            <img src="imgs/55924678.png" alt="Foto de Nicollas Rezende - Desenvolvedor Full Stack"
+                                width="400" height="400" class="profile-image">
+
+                            <!-- Ícones de Tecnologias -->
                             <div class="tech-icons">
                                 <div class="tech-icon" data-tooltip="Python">
-                                    <i class="devicon-python-plain"></i>
+                                    <i class="devicon-python-plain" aria-hidden="true"></i>
                                 </div>
                                 <div class="tech-icon" data-tooltip="JavaScript">
-                                    <i class="devicon-javascript-plain"></i>
+                                    <i class="devicon-javascript-plain" aria-hidden="true"></i>
                                 </div>
                                 <div class="tech-icon" data-tooltip="React">
-                                    <i class="devicon-react-original"></i>
+                                    <i class="devicon-react-original" aria-hidden="true"></i>
                                 </div>
                                 <div class="tech-icon" data-tooltip="Node.js">
-                                    <i class="devicon-nodejs-plain"></i>
+                                    <i class="devicon-nodejs-plain" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <a href="#about" class="scroll-down">
-                    <i class="fas fa-chevron-down"></i>
+
+                <!-- Botão de Rolagem -->
+                <a href="#about" class="scroll-down" aria-label="Rolar para a seção Sobre">
+                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
                 </a>
             </div>
         </section>
-        <!-- About Section -->
+
+        <!-- ==================== SEÇÃO SOBRE ==================== -->
         <section id="about" class="about section">
             <div class="container">
+                <!-- Cabeçalho da Seção -->
                 <div class="section-header">
                     <h2 class="section-title">Sobre Mim</h2>
-                    <div class="section-line"></div>
+                    <div class="section-line" aria-hidden="true"></div>
                 </div>
-                <div class="about-content">
+
+                <!-- Conteúdo da Seção Sobre -->
+                <div class="about-content glass-effect">
                     <div class="about-text">
-                        <p>Sou um desenvolvedor Full Stack apaixonado por criar soluções inovadoras e funcionais.
-                            Especializado em Python, JavaScript e suas tecnologias modernas, busco constantemente
-                            aprender e aprimorar minhas habilidades para enfrentar novos desafios.</p>
-                        <p>Atualmente cursando Engenharia de Software, combino conhecimentos teóricos com experiência
-                            prática para desenvolver aplicações robustas e escaláveis. Tenho como objetivo criar
-                            produtos que não apenas funcionem perfeitamente, mas também ofereçam uma experiência
-                            excepcional ao usuário, com foco em design intuitivo e performance otimizada.</p>
+                        <p class="fade-up">
+                            Sou um desenvolvedor Full Stack com uma jornada única no mundo da tecnologia.
+                            Desde os 8 anos, quando usava HDs como brinquedo, minha curiosidade pelo universo
+                            digital só cresceu. Apaixonado por Python e JavaScript, transformo linhas de código
+                            em soluções que resolvem problemas reais e proporcionam experiências excepcionais.
+                        </p>
+                        <p class="fade-up delay-100">
+                            Atualmente cursando Engenharia de Software, aplico conhecimentos teóricos em projetos
+                            práticos com foco em arquitetura robusta e interfaces intuitivas. Minha experiência com
+                            desenvolvimento de sistemas automatizados me ensinou que <span class="highlight">nada é
+                                impossível</span>,
+                            e quando parece ser, sempre há um jeito de tornar possível.
+                        </p>
+
+                        <!-- Estatísticas -->
                         <div class="about-stats">
-                            <div class="stat-card">
+                            <div class="stat-card glass-effect scale-in">
                                 <h3>2+</h3>
                                 <p>Anos de Experiência</p>
                             </div>
-                            <div class="stat-card">
+                            <div class="stat-card glass-effect scale-in delay-100">
                                 <h3>20+</h3>
                                 <p>Projetos Completos</p>
                             </div>
-                            <div class="stat-card">
+                            <div class="stat-card glass-effect scale-in delay-200">
                                 <h3>10+</h3>
                                 <p>Tecnologias Dominadas</p>
                             </div>
                         </div>
-                        <div class="about-cta">
+
+                        <!-- CTA -->
+                        <div class="about-cta fade-up delay-300">
                             <a href="#contact" class="btn">Vamos Trabalhar Juntos</a>
+                            <a href="minha-trajetoria.html" class="btn btn-outline journey-btn"
+                                title="Conheça minha história no mundo da tecnologia">
+                                <span>Minha Trajetória</span>
+                                <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Projects Section -->
+        <!-- ==================== SEÇÃO PROJETOS ==================== -->
         <section id="projects" class="projects section">
             <div class="container">
+                <!-- Cabeçalho da Seção -->
                 <div class="section-header">
                     <h2 class="section-title">Projetos em Destaque</h2>
-                    <div class="section-line"></div>
+                    <div class="section-line" aria-hidden="true"></div>
                 </div>
 
                 <!-- Filtro de Linguagens -->
                 <div class="language-filter mb-4">
-                    <div class="d-flex justify-content-center flex-wrap" id="language-buttons">
+                    <div class="d-flex justify-content-center flex-wrap" id="language-buttons" role="tablist"
+                        aria-label="Filtro de linguagens de programação">
                         <!-- Os botões de filtro serão adicionados dinamicamente aqui -->
-                        <button class="btn filter-btn active me-2 mb-2" data-language="all">Todos</button>
+                        <button class="btn filter-btn active me-2 mb-2" data-language="all" role="tab"
+                            aria-selected="true" aria-controls="projects-container">Todos</button>
                     </div>
                 </div>
 
@@ -187,11 +289,11 @@
                 </div>
 
                 <!-- Carrossel de Projetos -->
-                <div id="projectsCarousel" class="carousel slide" data-bs-interval="false">
-                    <!-- Os indicadores serão inseridos aqui pelo JavaScript -->
-
-                    <div class="carousel-inner" id="projects-container">
-                        <!-- Slides do carrossel serão adicionados dinamicamente aqui -->
+                <div id="projectsCarousel" class="carousel slide" data-bs-interval="false"
+                    aria-roledescription="carrossel" aria-label="Projetos em destaque">
+                    <!-- Slides do carrossel -->
+                    <div class="carousel-inner" id="projects-container" role="tabpanel">
+                        <!-- Placeholder de carregamento -->
                         <div class="carousel-item active">
                             <div class="loading-container">
                                 <div class="spinner-border text-primary" role="status">
@@ -204,21 +306,24 @@
 
                     <!-- Controles do Carrossel -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#projectsCarousel"
-                        data-bs-slide="prev">
+                        data-bs-slide="prev" aria-label="Projeto anterior">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Anterior</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#projectsCarousel"
-                        data-bs-slide="next">
+                        data-bs-slide="next" aria-label="Próximo projeto">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Próximo</span>
                     </button>
+
+                    <!-- Botão GitHub -->
                     <div class="github-button-container mt-5">
-                        <a href="https://github.com/NicollasRezende" target="_blank" class="github-button">
+                        <a href="https://github.com/NicollasRezende" target="_blank" rel="noopener noreferrer"
+                            class="github-button" title="Ver todos os projetos no GitHub">
                             <div class="github-button-content">
                                 <div class="github-icon-container">
-                                    <i class="fab fa-github"></i>
-                                    <div class="github-pulse"></div>
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                    <div class="github-pulse" aria-hidden="true"></div>
                                 </div>
                                 <div class="github-text">
                                     <span class="main-text">Explore Meu Universo de Código</span>
@@ -226,47 +331,51 @@
                                 </div>
                             </div>
                             <div class="github-arrow">
-                                <i class="fas fa-arrow-right"></i>
+                                <i class="fas fa-arrow-right" aria-hidden="true"></i>
                             </div>
                         </a>
                     </div>
                 </div>
+            </div>
         </section>
 
-        <!-- Skills Section -->
+        <!-- ==================== SEÇÃO SKILLS ==================== -->
         <section id="skills" class="skills section">
             <div class="container">
+                <!-- Cabeçalho da Seção -->
                 <div class="section-header">
                     <h2 class="section-title">Tecnologias & Habilidades</h2>
-                    <div class="section-line"></div>
+                    <div class="section-line" aria-hidden="true"></div>
                 </div>
+
+                <!-- Container de Habilidades -->
                 <div class="skills-container">
                     <!-- Frontend -->
                     <div class="skill-category">
                         <h3 class="category-title">Frontend</h3>
-                        <div class="skill-group">
+                        <div class="skill-group" aria-label="Habilidades de Frontend">
                             <div class="skill-item" data-tooltip="HTML5">
-                                <i class="devicon-html5-plain colored"></i>
+                                <i class="devicon-html5-plain colored" aria-hidden="true"></i>
                                 <span>HTML5</span>
                             </div>
                             <div class="skill-item" data-tooltip="CSS3">
-                                <i class="devicon-css3-plain colored"></i>
+                                <i class="devicon-css3-plain colored" aria-hidden="true"></i>
                                 <span>CSS3</span>
                             </div>
                             <div class="skill-item" data-tooltip="JavaScript">
-                                <i class="devicon-javascript-plain colored"></i>
+                                <i class="devicon-javascript-plain colored" aria-hidden="true"></i>
                                 <span>JavaScript</span>
                             </div>
                             <div class="skill-item" data-tooltip="React">
-                                <i class="devicon-react-original colored"></i>
+                                <i class="devicon-react-original colored" aria-hidden="true"></i>
                                 <span>React</span>
                             </div>
                             <div class="skill-item" data-tooltip="TypeScript">
-                                <i class="devicon-typescript-plain colored"></i>
+                                <i class="devicon-typescript-plain colored" aria-hidden="true"></i>
                                 <span>TypeScript</span>
                             </div>
                             <div class="skill-item" data-tooltip="Bootstrap">
-                                <i class="devicon-bootstrap-plain colored"></i>
+                                <i class="devicon-bootstrap-plain colored" aria-hidden="true"></i>
                                 <span>Bootstrap</span>
                             </div>
                         </div>
@@ -275,25 +384,25 @@
                     <!-- Backend -->
                     <div class="skill-category">
                         <h3 class="category-title">Backend</h3>
-                        <div class="skill-group">
+                        <div class="skill-group" aria-label="Habilidades de Backend">
                             <div class="skill-item" data-tooltip="Python">
-                                <i class="devicon-python-plain colored"></i>
+                                <i class="devicon-python-plain colored" aria-hidden="true"></i>
                                 <span>Python</span>
                             </div>
                             <div class="skill-item" data-tooltip="Django">
-                                <i class="devicon-django-plain colored"></i>
+                                <i class="devicon-django-plain colored" aria-hidden="true"></i>
                                 <span>Django</span>
                             </div>
                             <div class="skill-item" data-tooltip="Flask">
-                                <i class="devicon-flask-original colored"></i>
+                                <i class="devicon-flask-original colored" aria-hidden="true"></i>
                                 <span>Flask</span>
                             </div>
                             <div class="skill-item" data-tooltip="Node.js">
-                                <i class="devicon-nodejs-plain colored"></i>
+                                <i class="devicon-nodejs-plain colored" aria-hidden="true"></i>
                                 <span>Node.js</span>
                             </div>
                             <div class="skill-item" data-tooltip="Express">
-                                <i class="devicon-express-original colored"></i>
+                                <i class="devicon-express-original colored" aria-hidden="true"></i>
                                 <span>Express</span>
                             </div>
                         </div>
@@ -302,17 +411,17 @@
                     <!-- Banco de Dados -->
                     <div class="skill-category">
                         <h3 class="category-title">Banco de Dados</h3>
-                        <div class="skill-group">
+                        <div class="skill-group" aria-label="Habilidades de Banco de Dados">
                             <div class="skill-item" data-tooltip="PostgreSQL">
-                                <i class="devicon-postgresql-plain colored"></i>
+                                <i class="devicon-postgresql-plain colored" aria-hidden="true"></i>
                                 <span>PostgreSQL</span>
                             </div>
                             <div class="skill-item" data-tooltip="MySQL">
-                                <i class="devicon-mysql-plain colored"></i>
+                                <i class="devicon-mysql-plain colored" aria-hidden="true"></i>
                                 <span>MySQL</span>
                             </div>
                             <div class="skill-item" data-tooltip="MongoDB">
-                                <i class="devicon-mongodb-plain colored"></i>
+                                <i class="devicon-mongodb-plain colored" aria-hidden="true"></i>
                                 <span>MongoDB</span>
                             </div>
                         </div>
@@ -321,25 +430,25 @@
                     <!-- DevOps & Ferramentas -->
                     <div class="skill-category">
                         <h3 class="category-title">DevOps & Ferramentas</h3>
-                        <div class="skill-group">
+                        <div class="skill-group" aria-label="Habilidades de DevOps e Ferramentas">
                             <div class="skill-item" data-tooltip="Git">
-                                <i class="devicon-git-plain colored"></i>
+                                <i class="devicon-git-plain colored" aria-hidden="true"></i>
                                 <span>Git</span>
                             </div>
                             <div class="skill-item" data-tooltip="Docker">
-                                <i class="devicon-docker-plain colored"></i>
+                                <i class="devicon-docker-plain colored" aria-hidden="true"></i>
                                 <span>Docker</span>
                             </div>
                             <div class="skill-item" data-tooltip="Linux">
-                                <i class="devicon-linux-plain"></i>
+                                <i class="devicon-linux-plain" aria-hidden="true"></i>
                                 <span>Linux</span>
                             </div>
                             <div class="skill-item" data-tooltip="VS Code">
-                                <i class="devicon-vscode-plain colored"></i>
+                                <i class="devicon-vscode-plain colored" aria-hidden="true"></i>
                                 <span>VS Code</span>
                             </div>
                             <div class="skill-item" data-tooltip="GitHub">
-                                <i class="devicon-github-original"></i>
+                                <i class="devicon-github-original" aria-hidden="true"></i>
                                 <span>GitHub</span>
                             </div>
                         </div>
@@ -348,17 +457,17 @@
                     <!-- Data Science -->
                     <div class="skill-category">
                         <h3 class="category-title">Data Science</h3>
-                        <div class="skill-group">
+                        <div class="skill-group" aria-label="Habilidades de Data Science">
                             <div class="skill-item" data-tooltip="NumPy">
-                                <i class="devicon-numpy-plain colored"></i>
+                                <i class="devicon-numpy-plain colored" aria-hidden="true"></i>
                                 <span>NumPy</span>
                             </div>
                             <div class="skill-item" data-tooltip="Pandas">
-                                <i class="devicon-pandas-plain colored"></i>
+                                <i class="devicon-pandas-plain colored" aria-hidden="true"></i>
                                 <span>Pandas</span>
                             </div>
                             <div class="skill-item" data-tooltip="Jupyter">
-                                <i class="devicon-jupyter-plain colored"></i>
+                                <i class="devicon-jupyter-plain colored" aria-hidden="true"></i>
                                 <span>Jupyter</span>
                             </div>
                         </div>
@@ -367,22 +476,26 @@
             </div>
         </section>
 
-        <!-- Contact Section usando Bootstrap -->
+        <!-- ==================== SEÇÃO CONTATO ==================== -->
         <section id="contact" class="contact section">
             <div class="container">
+                <!-- Cabeçalho da Seção -->
                 <div class="section-header">
                     <h2 class="section-title">Vamos Conversar?</h2>
-                    <div class="section-line"></div>
+                    <div class="section-line" aria-hidden="true"></div>
                 </div>
 
+                <!-- Grid de Contato -->
                 <div class="row contact-content">
+                    <!-- Informações de Contato -->
                     <div class="col-lg-5 mb-4 mb-lg-0">
                         <div class="row contact-info">
+                            <!-- Email -->
                             <div class="col-md-6 col-lg-12 mb-4">
                                 <div class="card contact-card">
                                     <div class="card-body d-flex align-items-center">
                                         <div class="contact-icon me-3">
-                                            <i class="fas fa-envelope"></i>
+                                            <i class="fas fa-envelope" aria-hidden="true"></i>
                                         </div>
                                         <div class="contact-details">
                                             <h5 class="card-title mb-1">Email</h5>
@@ -393,45 +506,51 @@
                                 </div>
                             </div>
 
+                            <!-- LinkedIn -->
                             <div class="col-md-6 col-lg-12 mb-4">
                                 <div class="card contact-card">
                                     <div class="card-body d-flex align-items-center">
                                         <div class="contact-icon me-3">
-                                            <i class="fab fa-linkedin-in"></i>
+                                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                                         </div>
                                         <div class="contact-details">
                                             <h5 class="card-title mb-1">LinkedIn</h5>
                                             <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank"
+                                                rel="noopener noreferrer"
                                                 class="card-text">linkedin.com/in/nicollas-rezende</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- GitHub -->
                             <div class="col-md-6 col-lg-12 mb-4">
                                 <div class="card contact-card">
                                     <div class="card-body d-flex align-items-center">
                                         <div class="contact-icon me-3">
-                                            <i class="fab fa-github"></i>
+                                            <i class="fab fa-github" aria-hidden="true"></i>
                                         </div>
                                         <div class="contact-details">
                                             <h5 class="card-title mb-1">GitHub</h5>
                                             <a href="https://github.com/NicollasRezende" target="_blank"
+                                                rel="noopener noreferrer"
                                                 class="card-text">github.com/NicollasRezende</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <!-- WhatsApp -->
                             <div class="col-md-6 col-lg-12 mb-4">
                                 <div class="card contact-card">
                                     <div class="card-body d-flex align-items-center">
                                         <div class="contact-icon me-3">
-                                            <i class="fab fa-whatsapp"></i>
+                                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
                                         </div>
                                         <div class="contact-details">
                                             <h5 class="card-title mb-1">WhatsApp</h5>
-                                            <a href="https://wa.me/5561991769500" target="_blank" class="card-text">+55
+                                            <a href="https://wa.me/5561991769500" target="_blank"
+                                                rel="noopener noreferrer" class="card-text">+55
                                                 61 99176-9500</a>
                                         </div>
                                     </div>
@@ -440,40 +559,49 @@
                         </div>
                     </div>
 
+                    <!-- Formulário de Contato -->
                     <div class="col-lg-7">
                         <div class="card contact-form-card">
                             <div class="card-body">
                                 <h3 class="card-title mb-4">Envie uma mensagem</h3>
-                                <form id="contact-form" class="contact-form">
+                                <form id="contact-form" class="contact-form" aria-label="Formulário de contato">
+                                    <!-- Nome e Email (linha) -->
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
                                             <div class="form-group">
                                                 <label for="name" class="form-label">Nome</label>
-                                                <input type="text" class="form-control" id="name" name="name" required>
+                                                <input type="text" class="form-control" id="name" name="name" required
+                                                    aria-required="true" placeholder="Seu nome completo">
                                             </div>
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <div class="form-group">
                                                 <label for="email" class="form-label">Email</label>
                                                 <input type="email" class="form-control" id="email" name="email"
-                                                    required>
+                                                    required aria-required="true" placeholder="seu.email@exemplo.com">
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Assunto -->
                                     <div class="mb-3">
                                         <div class="form-group">
                                             <label for="subject" class="form-label">Assunto</label>
-                                            <input type="text" class="form-control" id="subject" name="subject"
-                                                required>
+                                            <input type="text" class="form-control" id="subject" name="subject" required
+                                                aria-required="true" placeholder="Motivo do contato">
                                         </div>
                                     </div>
+
+                                    <!-- Mensagem -->
                                     <div class="mb-4">
                                         <div class="form-group">
                                             <label for="message" class="form-label">Mensagem</label>
-                                            <textarea class="form-control" id="message" name="message" rows="5"
-                                                required></textarea>
+                                            <textarea class="form-control" id="message" name="message" rows="5" required
+                                                aria-required="true" placeholder="Sua mensagem aqui..."></textarea>
                                         </div>
                                     </div>
+
+                                    <!-- Botão de Envio -->
                                     <button type="submit" class="btn custom-btn-primary w-100">Enviar Mensagem</button>
                                 </form>
                             </div>
@@ -484,59 +612,76 @@
         </section>
     </main>
 
-    <!-- Footer usando Bootstrap -->
+    <!-- ==================== FOOTER ==================== -->
     <footer class="footer py-5">
         <div class="container">
+            <!-- Conteúdo do Footer -->
             <div class="row footer-content align-items-center mb-4">
+                <!-- Logo do Footer -->
                 <div class="col-lg-4 text-center text-lg-start mb-4 mb-lg-0">
                     <a href="#home" class="footer-logo">
                         <span>N</span>icollas<span>.dev</span>
                     </a>
                 </div>
+
+                <!-- Links de Navegação -->
                 <div class="col-lg-4 text-center mb-4 mb-lg-0">
-                    <div class="footer-nav">
-                        <a href="#home" class="footer-link">Home</a>
-                        <a href="#about" class="footer-link">Sobre</a>
-                        <a href="#projects" class="footer-link">Projetos</a>
-                        <a href="#skills" class="footer-link">Skills</a>
-                        <a href="#contact" class="footer-link">Contato</a>
-                    </div>
+                    <nav aria-label="Links do rodapé">
+                        <div class="footer-nav">
+                            <a href="#home" class="footer-link">Home</a>
+                            <a href="#about" class="footer-link">Sobre</a>
+                            <a href="#projects" class="footer-link">Projetos</a>
+                            <a href="#skills" class="footer-link">Skills</a>
+                            <a href="#contact" class="footer-link">Contato</a>
+                        </div>
+                    </nav>
                 </div>
+
+                <!-- Redes Sociais -->
                 <div class="col-lg-4 text-center text-lg-end">
                     <div class="footer-social">
-                        <a href="https://github.com/NicollasRezende" target="_blank" class="social-icon me-2"
-                            aria-label="GitHub">
-                            <i class="fab fa-github"></i>
+                        <a href="https://github.com/NicollasRezende" target="_blank" rel="noopener noreferrer"
+                            class="social-icon me-2" aria-label="GitHub" title="Meu perfil no GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank" class="social-icon me-2"
-                            aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
+                        <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank"
+                            rel="noopener noreferrer" class="social-icon me-2" aria-label="LinkedIn"
+                            title="Meu perfil no LinkedIn">
+                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                         </a>
                         <a href="mailto:nicollaspereirarezende@outlook.com.br" class="social-icon me-2"
-                            aria-label="Email">
-                            <i class="fas fa-envelope"></i>
+                            aria-label="Email" title="Enviar email">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
                         </a>
-                        <a href="https://wa.me/5561991769500" target="_blank" class="social-icon" aria-label="WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
+                        <a href="https://wa.me/5561991769500" target="_blank" rel="noopener noreferrer"
+                            class="social-icon" aria-label="WhatsApp" title="Falar via WhatsApp">
+                            <i class="fab fa-whatsapp" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
             </div>
+
+            <!-- Copyright -->
             <div class="footer-bottom text-center border-top pt-4">
                 <p class="mb-0">&copy; 2025 Nicollas Rezende. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top Button -->
-    <a href="#home" class="back-to-top" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
+    <!-- ==================== BOTÕES AUXILIARES ==================== -->
+    <!-- Botão Voltar ao Topo -->
+    <a href="#home" class="back-to-top" aria-label="Voltar ao topo da página">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
     </a>
 
-    <!-- Bootstrap JS, Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Custom Script -->
-    <script src="script.js"></script>
+    <!-- ==================== SCRIPTS ==================== -->
+    <!-- Bootstrap Bundle (inclui Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"
+        defer></script>
+
+    <!-- Script personalizado -->
+    <script src="script.js" defer></script>
 </body>
 
 </html>

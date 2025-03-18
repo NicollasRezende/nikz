@@ -1,3 +1,20 @@
+/**
+ * SCRIPT.JS - ORGANIZADO
+ *
+ * Estrutura do arquivo:
+ * 1. Inicialização Principal
+ * 2. Gerenciamento de Tema
+ * 3. Navegação e UI
+ * 4. Animações e Efeitos Visuais
+ * 5. Manipulação de Formulários
+ * 6. Interação com API do GitHub
+ * 7. Utilitários
+ */
+
+/* ==================================================================================
+   1. INICIALIZAÇÃO PRINCIPAL
+   ================================================================================== */
+
 // Espera o DOM carregar completamente
 document.addEventListener('DOMContentLoaded', function () {
     // Inicialização de componentes e funcionalidades
@@ -11,9 +28,112 @@ document.addEventListener('DOMContentLoaded', function () {
     initParallaxEffect();
     initCursorEffects();
     initGlassMorphism();
+
+    // Adicionar estilos extras
+    addExtraStyles();
+
+    // Iniciar carregamento de projetos do GitHub
+    initGitHubProjects();
 });
 
-// Alternar entre tema claro e escuro com animação
+/**
+ * Adiciona estilos CSS extras para novas funcionalidades
+ */
+function addExtraStyles() {
+    const extraStyles = document.createElement('style');
+    extraStyles.textContent = `
+        /* Barra de progresso de scroll */
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            width: 0%;
+            z-index: 1001;
+            transition: width 0.1s;
+        }
+        
+        /* Efeito de ripple para botões */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* Cursor hover state */
+        .cursor-hover {
+            transform: scale(1.05);
+        }
+        
+        /* Efeito de pulse para botões */
+        .pulse-effect {
+            animation: pulse-animation 0.5s ease-in-out;
+        }
+        
+        @keyframes pulse-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Animação de shake para formulário inválido */
+        .shake-animation {
+            animation: shake 0.5s ease-in-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        /* Cursor piscante para typewriter */
+        .cursor {
+            display: inline-block;
+            margin-left: 3px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Efeito de transição para troca de tema */
+        .theme-transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+    `;
+    document.head.appendChild(extraStyles);
+}
+
+/* ==================================================================================
+   2. GERENCIAMENTO DE TEMA
+   ================================================================================== */
+
+/**
+ * Inicializa o toggle de tema (claro/escuro)
+ */
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
     const icon = themeToggle.querySelector('i');
@@ -55,7 +175,13 @@ function initThemeToggle() {
     });
 }
 
-// Links ativos na navbar
+/* ==================================================================================
+   3. NAVEGAÇÃO E UI
+   ================================================================================== */
+
+/**
+ * Inicializa a navegação e links ativos na navbar
+ */
 function initNavbarActive() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -115,7 +241,9 @@ function initNavbarActive() {
     });
 }
 
-// Botão voltar ao topo
+/**
+ * Inicializa o botão de voltar ao topo
+ */
 function initBackToTop() {
     const backToTop = document.querySelector('.back-to-top');
 
@@ -146,13 +274,15 @@ function initBackToTop() {
     });
 }
 
-// Filtro de projetos
+/**
+ * Inicializa o filtro de projetos
+ */
 function initProjectFilter() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const projectCards = document.querySelectorAll('.project-card');
 
     filterBtns.forEach((btn) => {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (event) {
             // Remover classe ativa de todos os botões
             filterBtns.forEach((btn) => btn.classList.remove('active'));
 
@@ -190,10 +320,18 @@ function initProjectFilter() {
     });
 }
 
-// Efeito de digitação
+/* ==================================================================================
+   4. ANIMAÇÕES E EFEITOS VISUAIS
+   ================================================================================== */
+
+/**
+ * Inicializa o efeito de typewriter
+ */
 function initTypewriter() {
-    const text = document.querySelector('.typewriter').textContent;
     const typewriterElement = document.querySelector('.typewriter');
+    if (!typewriterElement) return;
+
+    const text = typewriterElement.textContent;
     typewriterElement.textContent = '';
 
     let i = 0;
@@ -216,11 +354,13 @@ function initTypewriter() {
     setTimeout(type, 1000);
 }
 
-// Animações de scroll aprimoradas
+/**
+ * Inicializa animações baseadas em scroll
+ */
 function initScrollAnimation() {
     // Selecionar todos os elementos que precisam de animação
     const fadeElements = document.querySelectorAll(
-        '.project-card, .skill-category, .contact-card, .about-text p, .stat-card, .section-title, .section-line'
+        '.project-card, .skill-category, .contact-card, .about-text p, .stat-card, .section-title, .section-line, .about-cta'
     );
 
     // Configurações do Observador de Interseção
@@ -274,216 +414,89 @@ function initScrollAnimation() {
     });
 }
 
-// Validação e interação do formulário de contato
-function initFormValidation() {
-    const form = document.getElementById('contact-form');
-
-    if (form) {
-        // Adicionar classe para validação em tempo real
-        form.classList.add('needs-validation');
-
-        // Adicionar feedback visual para campos
-        const formControls = form.querySelectorAll('.form-control');
-        formControls.forEach((input) => {
-            // Feedback de validação em tempo real
-            input.addEventListener('input', function () {
-                validateInput(this);
-            });
-
-            // Verificar ao perder o foco
-            input.addEventListener('blur', function () {
-                validateInput(this);
-            });
-        });
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Verificar se o formulário é válido
-            if (!form.checkValidity()) {
-                e.stopPropagation();
-
-                // Marcar todos os campos inválidos
-                formControls.forEach((input) => {
-                    validateInput(input);
-                });
-
-                // Animação de shake no formulário
-                form.classList.add('shake-animation');
-                setTimeout(() => {
-                    form.classList.remove('shake-animation');
-                }, 500);
-
-                return;
-            }
-
-            // Obter valores dos campos
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-
-            // Verificar se todos os campos estão preenchidos
-            if (name && email && subject && message) {
-                // Aqui você pode adicionar código para enviar o formulário via AJAX
-                // Por enquanto, vamos apenas simular o envio
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalText = submitBtn.textContent;
-
-                // Adicionar efeito de loading
-                submitBtn.disabled = true;
-                submitBtn.innerHTML =
-                    '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Enviando...';
-
-                setTimeout(() => {
-                    // Mostrar mensagem de sucesso com animação
-                    const successEl = document.createElement('div');
-                    successEl.className =
-                        'form-success mt-3 alert alert-success';
-                    successEl.innerHTML =
-                        '<i class="fas fa-check-circle me-2"></i> Mensagem enviada com sucesso! Entrarei em contato em breve.';
-
-                    // Inserir depois do botão
-                    submitBtn.parentNode.insertAdjacentElement(
-                        'afterend',
-                        successEl
-                    );
-
-                    // Animar entrada
-                    setTimeout(() => {
-                        successEl.classList.add('active');
-                    }, 10);
-
-                    // Resetar formulário
-                    form.reset();
-                    formControls.forEach((input) => {
-                        input.classList.remove('is-valid');
-                    });
-
-                    // Restaurar botão
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Enviado!';
-
-                    // Restaurar texto original do botão após um tempo
-                    setTimeout(() => {
-                        submitBtn.textContent = originalText;
-
-                        // Remover mensagem de sucesso
-                        successEl.classList.remove('active');
-                        setTimeout(() => {
-                            successEl.remove();
-                        }, 300);
-                    }, 3000);
-                }, 1500);
-            } else {
-                // Feedback visual para campos vazios
-                formControls.forEach((input) => {
-                    validateInput(input);
-                });
-            }
-        });
-    }
-
-    // Função para validar um único campo
-    function validateInput(input) {
-        if (input.checkValidity()) {
-            input.classList.remove('is-invalid');
-            input.classList.add('is-valid');
-        } else {
-            input.classList.remove('is-valid');
-            input.classList.add('is-invalid');
-        }
-    }
-}
-
-// Efeitos Parallax
+/**
+ * Inicializa efeitos parallax
+ */
 function initParallaxEffect() {
     // Adicionar elementos de parallax na seção hero
     const hero = document.querySelector('.hero');
-    if (hero) {
-        // Criar elementos de fundo para efeito parallax
-        const parallaxBg = document.createElement('div');
-        parallaxBg.className = 'parallax-bg';
+    if (!hero) return;
 
-        // Adicionar círculos com gradiente
-        for (let i = 0; i < 3; i++) {
-            const circle = document.createElement('div');
-            circle.className = 'parallax-circle';
-            parallaxBg.appendChild(circle);
+    // Criar elementos de fundo para efeito parallax
+    const parallaxBg = document.createElement('div');
+    parallaxBg.className = 'parallax-bg';
+
+    // Adicionar círculos com gradiente
+    for (let i = 0; i < 3; i++) {
+        const circle = document.createElement('div');
+        circle.className = 'parallax-circle';
+        parallaxBg.appendChild(circle);
+    }
+
+    // Adicionar grid de fundo
+    const parallaxGrid = document.createElement('div');
+    parallaxGrid.className = 'parallax-grid';
+    parallaxBg.appendChild(parallaxGrid);
+
+    // Inserir no início da seção hero
+    hero.insertBefore(parallaxBg, hero.firstChild);
+
+    // Adicionar evento de mousemove para efeito parallax
+    document.addEventListener('mousemove', function (e) {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+
+        // Mover círculos em diferentes velocidades
+        const circles = document.querySelectorAll('.parallax-circle');
+        circles[0].style.transform = `translate(${mouseX * 30}px, ${
+            mouseY * 30
+        }px)`;
+        circles[1].style.transform = `translate(${mouseX * -40}px, ${
+            mouseY * -40
+        }px)`;
+        circles[2].style.transform = `translate(${mouseX * 20}px, ${
+            mouseY * -20
+        }px)`;
+
+        // Mover grid
+        const grid = document.querySelector('.parallax-grid');
+        grid.style.transform = `translate(${mouseX * 10}px, ${mouseY * 10}px)`;
+
+        // Mover elementos da seção hero
+        const profileContainer = document.querySelector('.profile-container');
+        if (profileContainer) {
+            profileContainer.style.transform = `translate(${mouseX * 20}px, ${
+                mouseY * 20
+            }px)`;
+        }
+    });
+
+    // Adicionar evento de scroll para efeito parallax
+    window.addEventListener('scroll', function () {
+        const scrollPosition = window.scrollY;
+        const heroHeight = hero.offsetHeight;
+
+        // Calcular o progresso do scroll dentro da seção hero (0 a 1)
+        const scrollProgress = Math.min(scrollPosition / heroHeight, 1);
+
+        // Mover elementos baseado no scroll
+        const heroText = document.querySelector('.hero-text');
+        if (heroText) {
+            heroText.style.transform = `translateY(${scrollProgress * 50}px)`;
+            heroText.style.opacity = 1 - scrollProgress;
         }
 
-        // Adicionar grid de fundo
-        const parallaxGrid = document.createElement('div');
-        parallaxGrid.className = 'parallax-grid';
-        parallaxBg.appendChild(parallaxGrid);
-
-        // Inserir no início da seção hero
-        hero.insertBefore(parallaxBg, hero.firstChild);
-
-        // Adicionar evento de mousemove para efeito parallax
-        document.addEventListener('mousemove', function (e) {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
-
-            // Mover círculos em diferentes velocidades
-            const circles = document.querySelectorAll('.parallax-circle');
-            circles[0].style.transform = `translate(${mouseX * 30}px, ${
-                mouseY * 30
-            }px)`;
-            circles[1].style.transform = `translate(${mouseX * -40}px, ${
-                mouseY * -40
-            }px)`;
-            circles[2].style.transform = `translate(${mouseX * 20}px, ${
-                mouseY * -20
-            }px)`;
-
-            // Mover grid
-            const grid = document.querySelector('.parallax-grid');
-            grid.style.transform = `translate(${mouseX * 10}px, ${
-                mouseY * 10
-            }px)`;
-
-            // Mover elementos da seção hero
-            const profileContainer =
-                document.querySelector('.profile-container');
-            if (profileContainer) {
-                profileContainer.style.transform = `translate(${
-                    mouseX * 20
-                }px, ${mouseY * 20}px)`;
-            }
-        });
-
-        // Adicionar evento de scroll para efeito parallax
-        window.addEventListener('scroll', function () {
-            const scrollPosition = window.scrollY;
-            const heroHeight = hero.offsetHeight;
-
-            // Calcular o progresso do scroll dentro da seção hero (0 a 1)
-            const scrollProgress = Math.min(scrollPosition / heroHeight, 1);
-
-            // Mover elementos baseado no scroll
-            const heroText = document.querySelector('.hero-text');
-            if (heroText) {
-                heroText.style.transform = `translateY(${
-                    scrollProgress * 50
-                }px)`;
-                heroText.style.opacity = 1 - scrollProgress;
-            }
-
-            const heroImage = document.querySelector('.hero-image');
-            if (heroImage) {
-                heroImage.style.transform = `translateY(${
-                    scrollProgress * 100
-                }px)`;
-            }
-        });
-    }
+        const heroImage = document.querySelector('.hero-image');
+        if (heroImage) {
+            heroImage.style.transform = `translateY(${scrollProgress * 100}px)`;
+        }
+    });
 }
 
-// Efeitos de cursor personalizado
+/**
+ * Inicializa efeitos de cursor personalizado
+ */
 function initCursorEffects() {
-    // Já aplicamos os estilos base de cursor no CSS
-
     // Adicionar efeito de hover para elementos interativos
     const interactiveElements = document.querySelectorAll(
         'a, button, .btn, .nav-link, .social-link, .filter-btn, .project-links a'
@@ -501,7 +514,9 @@ function initCursorEffects() {
     });
 }
 
-// Aplicar efeito glass morphism aos elementos
+/**
+ * Aplica efeito glass morphism aos elementos
+ */
 function initGlassMorphism() {
     // Adicionar a classe glass-effect aos elementos que devem ter o efeito
     const glassElements = document.querySelectorAll(
@@ -513,7 +528,9 @@ function initGlassMorphism() {
     });
 }
 
-// Função para criar efeito ripple em botões
+/**
+ * Cria efeito ripple em botões
+ */
 function createRippleEffect(button, e) {
     // Remover qualquer ripple existente
     const ripple = button.querySelector('.ripple');
@@ -545,147 +562,170 @@ function createRippleEffect(button, e) {
     }, 600);
 }
 
-// Adicionar CSS para novas funcionalidades
-const extraStyles = document.createElement('style');
-extraStyles.textContent = `
-    /* Barra de progresso de scroll */
-    .scroll-progress-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background: var(--gradient-primary);
-        width: 0%;
-        z-index: 1001;
-        transition: width 0.1s;
-    }
-    
-    /* Efeito de ripple para botões */
-    .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.5);
-        transform: scale(0);
-        animation: ripple 0.6s linear;
-        pointer-events: none;
-    }
-    
-    @keyframes ripple {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-    
-    /* Cursor hover state */
-    .cursor-hover {
-        transform: scale(1.05);
-    }
-    
-    /* Efeito de pulse para botões */
-    .pulse-effect {
-        animation: pulse-animation 0.5s ease-in-out;
-    }
-    
-    @keyframes pulse-animation {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
-    
-    /* Animação de shake para formulário inválido */
-    .shake-animation {
-        animation: shake 0.5s ease-in-out;
-    }
-    
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-        20%, 40%, 60%, 80% { transform: translateX(5px); }
-    }
-    
-    /* Cursor piscante para typewriter */
-    .cursor {
-        display: inline-block;
-        margin-left: 3px;
-        animation: blink 1s infinite;
-    }
-    
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0; }
-    }
-    
-    /* Efeito de transição para troca de tema */
-    .theme-transition-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.2);
-        z-index: 9999;
-        pointer-events: none;
-        opacity: 1;
-        transition: opacity 0.3s ease;
-    }
-`;
-document.head.appendChild(extraStyles);
+/* ==================================================================================
+   5. MANIPULAÇÃO DE FORMULÁRIOS
+   ================================================================================== */
 
-// Script para carregar projetos do GitHub dinamicamente
-document.addEventListener('DOMContentLoaded', function () {
-    const username = 'NicollasRezende'; // Seu username do GitHub
-    const projectsPerSlide = 4; // Ajustado para exibir menos projetos por slide
-    const maxProjects = 24; // Número máximo de projetos a serem carregados
+/**
+ * Inicializa a validação do formulário de contato
+ */
+function initFormValidation() {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    // Adicionar classe para validação em tempo real
+    form.classList.add('needs-validation');
+
+    // Adicionar feedback visual para campos
+    const formControls = form.querySelectorAll('.form-control');
+    formControls.forEach((input) => {
+        // Feedback de validação em tempo real
+        input.addEventListener('input', function () {
+            validateInput(this);
+        });
+
+        // Verificar ao perder o foco
+        input.addEventListener('blur', function () {
+            validateInput(this);
+        });
+    });
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        // Verificar se o formulário é válido
+        if (!form.checkValidity()) {
+            e.stopPropagation();
+
+            // Marcar todos os campos inválidos
+            formControls.forEach((input) => {
+                validateInput(input);
+            });
+
+            // Animação de shake no formulário
+            form.classList.add('shake-animation');
+            setTimeout(() => {
+                form.classList.remove('shake-animation');
+            }, 500);
+
+            return;
+        }
+
+        // Obter valores dos campos
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+
+        // Verificar se todos os campos estão preenchidos
+        if (name && email && subject && message) {
+            // Simular envio do formulário
+            simulateFormSubmission(form);
+        } else {
+            // Feedback visual para campos vazios
+            formControls.forEach((input) => {
+                validateInput(input);
+            });
+        }
+    });
+}
+
+/**
+ * Valida um campo do formulário e aplica o feedback visual
+ */
+function validateInput(input) {
+    if (input.checkValidity()) {
+        input.classList.remove('is-invalid');
+        input.classList.add('is-valid');
+    } else {
+        input.classList.remove('is-valid');
+        input.classList.add('is-invalid');
+    }
+}
+
+/**
+ * Simula o envio do formulário com animações e feedback
+ */
+function simulateFormSubmission(form) {
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+
+    // Adicionar efeito de loading
+    submitBtn.disabled = true;
+    submitBtn.innerHTML =
+        '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Enviando...';
+
+    setTimeout(() => {
+        // Mostrar mensagem de sucesso com animação
+        const successEl = document.createElement('div');
+        successEl.className = 'form-success mt-3 alert alert-success';
+        successEl.innerHTML =
+            '<i class="fas fa-check-circle me-2"></i> Mensagem enviada com sucesso! Entrarei em contato em breve.';
+
+        // Inserir depois do botão
+        submitBtn.parentNode.insertAdjacentElement('afterend', successEl);
+
+        // Animar entrada
+        setTimeout(() => {
+            successEl.classList.add('active');
+        }, 10);
+
+        // Resetar formulário
+        form.reset();
+        form.querySelectorAll('.form-control').forEach((input) => {
+            input.classList.remove('is-valid');
+        });
+
+        // Restaurar botão
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviado!';
+
+        // Restaurar texto original do botão após um tempo
+        setTimeout(() => {
+            submitBtn.textContent = originalText;
+
+            // Remover mensagem de sucesso
+            successEl.classList.remove('active');
+            setTimeout(() => {
+                successEl.remove();
+            }, 300);
+        }, 3000);
+    }, 1500);
+}
+
+/* ==================================================================================
+   6. INTERAÇÃO COM API DO GITHUB
+   ================================================================================== */
+
+/**
+ * Inicializa a busca e exibição de projetos do GitHub
+ */
+function initGitHubProjects() {
+    const username = 'NicollasRezende'; // Username do GitHub
+    const projectsPerSlide = 4; // Projetos por slide
+    const maxProjects = 24; // Número máximo de projetos
 
     // Elementos DOM
     const projectsContainer = document.getElementById('projects-container');
     const languageButtons = document.getElementById('language-buttons');
-    const carouselIndicators = document.getElementById('carousel-indicators');
 
-    // Coleção para armazenar linguagens únicas
+    if (!projectsContainer || !languageButtons) return;
+
+    // Variáveis para armazenar dados
     let languages = new Set();
-    // Array para armazenar todos os projetos
     let allProjects = [];
-    // Linguagem de filtro atual
     let currentLanguage = 'all';
 
-    // Mapeamento de linguagens para classificações seguras em CSS
-    const languageMapping = {
-        'c++': 'cpp',
-        'c#': 'csharp',
-        // Adicione outros mapeamentos conforme necessário
-    };
+    // Buscar repositórios do GitHub
+    fetchGitHubRepos();
 
-    // Função para obter uma classe CSS segura para a linguagem
-    function getSafeLanguageClass(language) {
-        if (!language) return 'unknown';
-
-        const lowerLang = language.toLowerCase();
-
-        // Verificar se a linguagem precisa ser mapeada
-        if (languageMapping[lowerLang]) {
-            return languageMapping[lowerLang];
-        }
-
-        // Remover caracteres especiais e espaços
-        return lowerLang.replace(/[^a-z0-9]/g, '');
-    }
-
-    // Função para buscar repositórios do GitHub
+    /**
+     * Busca repositórios do GitHub via API
+     */
     async function fetchGitHubRepos() {
         try {
             // Mostrar estado de carregamento
-            projectsContainer.innerHTML = `
-                <div class="carousel-item active">
-                    <div class="loading-container">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Carregando...</span>
-                        </div>
-                        <p class="mt-3">Buscando projetos do GitHub...</p>
-                    </div>
-                </div>
-            `;
+            showLoadingState();
 
             // Buscar repositórios
             const response = await fetch(
@@ -714,29 +754,51 @@ document.addEventListener('DOMContentLoaded', function () {
             renderProjects(allProjects);
         } catch (error) {
             console.error('Error fetching GitHub repos:', error);
-            projectsContainer.innerHTML = `
-                <div class="carousel-item active">
-                    <div class="error-container">
-                        <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
-                        <h3>Erro ao carregar projetos</h3>
-                        <p>${
-                            error.message ||
-                            'Falha ao conectar com a API do GitHub'
-                        }</p>
-                        <button class="btn btn-primary mt-3" onclick="window.location.reload()">
-                            <i class="fas fa-sync-alt me-2"></i>Tentar novamente
-                        </button>
-                    </div>
-                </div>
-            `;
+            showErrorState(error);
         }
     }
 
-    // Função para renderizar botões de filtro por linguagem
+    /**
+     * Mostra o estado de carregamento
+     */
+    function showLoadingState() {
+        projectsContainer.innerHTML = `
+            <div class="carousel-item active">
+                <div class="loading-container">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <p class="mt-3">Buscando projetos do GitHub...</p>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Mostra o estado de erro
+     */
+    function showErrorState(error) {
+        projectsContainer.innerHTML = `
+            <div class="carousel-item active">
+                <div class="error-container">
+                    <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                    <h3>Erro ao carregar projetos</h3>
+                    <p>${
+                        error.message || 'Falha ao conectar com a API do GitHub'
+                    }</p>
+                    <button class="btn btn-primary mt-3" onclick="window.location.reload()">
+                        <i class="fas fa-sync-alt me-2"></i>Tentar novamente
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    /**
+     * Renderiza botões de filtro por linguagem
+     */
     function renderLanguageButtons() {
         let buttonsHTML = '';
-
-        // Botão "Todos" já está no HTML
 
         // Adicionar botões para cada linguagem
         languages.forEach((lang) => {
@@ -768,7 +830,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Manipulador de clique para botões de filtro
+    /**
+     * Manipulador de clique para botões de filtro
+     */
     function handleFilterClick(e) {
         // Remover classe 'active' de todos os botões
         document.querySelectorAll('.filter-btn').forEach((btn) => {
@@ -795,8 +859,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Função para renderizar projetos com Cards de Glass Morphism
+    /**
+     * Renderiza projetos com Cards de Glass Morphism
+     */
     function renderProjects(projects) {
+        const carouselIndicators = document.getElementById(
+            'carousel-indicators'
+        );
+
         if (projects.length === 0) {
             projectsContainer.innerHTML = `
                 <div class="carousel-item active">
@@ -807,7 +877,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>
             `;
-            carouselIndicators.innerHTML = '';
+            if (carouselIndicators) carouselIndicators.innerHTML = '';
             return;
         }
 
@@ -826,7 +896,7 @@ document.addEventListener('DOMContentLoaded', function () {
             );
             const slideProjects = projects.slice(startIdx, endIdx);
 
-            // Iniciar o slide com uma nova div de projeto-grid
+            // Iniciar o slide
             slidesHTML += `
                 <div class="carousel-item ${i === 0 ? 'active' : ''}">
                     <div class="project-grid">
@@ -850,8 +920,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                     ${
                                         project.homepage
                                             ? `<a href="${project.homepage}" target="_blank" title="Ver Demo">
-                                                <i class="fas fa-external-link-alt"></i>
-                                            </a>`
+                                            <i class="fas fa-external-link-alt"></i>
+                                        </a>`
                                             : ''
                                     }
                                     <a href="${
@@ -916,7 +986,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             `;
 
-            // Adicionar indicador no formato que o Bootstrap espera
+            // Adicionar indicador
             indicatorsHTML += `
                 <button type="button" data-bs-target="#projectsCarousel" data-bs-slide-to="${i}" ${
                 i === 0 ? 'class="active" aria-current="true"' : ''
@@ -924,27 +994,28 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
         }
 
-        // Atualizar DOM - Nota: Agora adicionamos os indicadores diretamente ao elemento do carrossel
+        // Atualizar DOM
         projectsContainer.innerHTML = slidesHTML;
 
-        // Adicionar os indicadores antes do carrossel-inner
+        // Adicionar os indicadores
         const carousel = document.getElementById('projectsCarousel');
+        if (carousel) {
+            // Criar o elemento div para os indicadores se ele não existir
+            let indicatorsDiv = carousel.querySelector('.carousel-indicators');
+            if (!indicatorsDiv) {
+                indicatorsDiv = document.createElement('div');
+                indicatorsDiv.className = 'carousel-indicators';
+                carousel.insertBefore(indicatorsDiv, projectsContainer);
+            }
 
-        // Criar o elemento div para os indicadores se ele não existir
-        let indicatorsDiv = carousel.querySelector('.carousel-indicators');
-        if (!indicatorsDiv) {
-            indicatorsDiv = document.createElement('div');
-            indicatorsDiv.className = 'carousel-indicators';
-            carousel.insertBefore(indicatorsDiv, projectsContainer);
+            // Atualizar os indicadores
+            indicatorsDiv.innerHTML = indicatorsHTML;
+
+            // Reinicializar carrossel
+            const carouselInstance = new bootstrap.Carousel(carousel, {
+                interval: false, // Desativa a rolagem automática
+            });
         }
-
-        // Atualizar os indicadores
-        indicatorsDiv.innerHTML = indicatorsHTML;
-
-        // Reinicializar carrossel com a opção interval: false para desativar o deslizamento automático
-        const carouselInstance = new bootstrap.Carousel(carousel, {
-            interval: false, // Desativa a rolagem automática
-        });
 
         // Adicionar as classes para ativar as animações
         setTimeout(() => {
@@ -953,12 +1024,39 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }, 100);
     }
+}
 
-    // Função auxiliar para capitalizar primeira letra
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
+/* ==================================================================================
+   7. UTILITÁRIOS
+   ================================================================================== */
+
+/**
+ * Retorna uma classe CSS segura para a linguagem
+ */
+function getSafeLanguageClass(language) {
+    if (!language) return 'unknown';
+
+    // Mapeamento de linguagens para classificações seguras em CSS
+    const languageMapping = {
+        'c++': 'cpp',
+        'c#': 'csharp',
+        // Adicione outros mapeamentos conforme necessário
+    };
+
+    const lowerLang = language.toLowerCase();
+
+    // Verificar se a linguagem precisa ser mapeada
+    if (languageMapping[lowerLang]) {
+        return languageMapping[lowerLang];
     }
 
-    // Iniciar carregamento de repositórios
-    fetchGitHubRepos();
-});
+    // Remover caracteres especiais e espaços
+    return lowerLang.replace(/[^a-z0-9]/g, '');
+}
+
+/**
+ * Capitaliza a primeira letra de uma string
+ */
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

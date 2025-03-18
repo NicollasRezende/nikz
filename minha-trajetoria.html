@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conheça a jornada de Nicollas Rezende no mundo da tecnologia e desenvolvimento">
+
+    <!-- Título -->
+    <title>Minha Trajetória | Nicollas Rezende</title>
+
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Folhas de Estilo Externas -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Folha de Estilo Personalizada -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon/favicon.ico">
+    <link rel="manifest" href="favicon/site.webmanifest">
+</head>
+
+<body>
+    <!-- ==================== HEADER / NAVBAR ==================== -->
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+            <div class="container">
+                <!-- Logo -->
+                <a href="index.html" class="navbar-brand logo">
+                    <span>N</span>icollas<span>.dev</span>
+                </a>
+
+                <!-- Botão de Menu Mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Links de Navegação -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#about" class="nav-link">Sobre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#projects" class="nav-link">Projetos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#skills" class="nav-link">Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.html#contact" class="nav-link">Contato</a>
+                        </li>
+
+                        <!-- Botão de Alternância de Tema -->
+                        <li class="nav-item ms-2">
+                            <button id="theme-toggle" class="btn btn-theme" aria-label="Alternar tema">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ==================== CABEÇALHO DA JORNADA ==================== -->
+        <section class="journey-header">
+            <!-- Elementos de Background -->
+            <div class="journey-particles" id="particles"></div>
+            <div class="journey-grid"></div>
+
+            <div class="container">
+                <!-- Título e Subtítulo -->
+                <h1 class="journey-title" data-aos="fade-up">Minha Jornada como Desenvolvedor</h1>
+                <p class="journey-subtitle" data-aos="fade-up" data-aos-delay="200">
+                    Uma história de paixão, desafios e crescimento no mundo da tecnologia
+                </p>
+
+                <!-- Navegação da Jornada -->
+                <div class="journey-nav" data-aos="fade-up" data-aos-delay="300">
+                    <div class="journey-nav-item active" data-scroll="timeline">Linha do Tempo</div>
+                    <div class="journey-nav-item" data-scroll="current-position">Posição Atual</div>
+                    <div class="journey-nav-item" data-scroll="quote">Filosofia</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SEÇÃO TIMELINE ==================== -->
+        <section class="timeline" id="timeline">
+            <div class="container">
+                <!-- Item 1: Primeiros Contatos (8 anos) -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-date">8 anos</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-effect">
+                        <div class="timeline-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3>Primeiros Contatos com a Tecnologia</h3>
+                        <p>Minha história com o mundo da tecnologia começou cedo. Meu padrasto, que já trabalhava na
+                            área, foi quem me apresentou a esse universo fascinante. Ele me mostrou como um computador
+                            funcionava por dentro, despertando minha curiosidade.</p>
+                        <p>Enquanto outras crianças brincavam com carrinhos, eu usava um <span class="highlight">HD como
+                                brinquedo</span>. Desde cedo, já dava para perceber que eu não era uma criança muito
+                            comum.</p>
+
+                        <!-- Botão e Conteúdo Expandível -->
+                        <div class="read-more-btn" data-toggle="more-childhood">Saiba mais <i
+                                class="fas fa-angle-down ms-1"></i></div>
+
+                        <div class="read-more-content" id="more-childhood">
+                            <p>Esses primeiros contatos com hardware despertaram uma curiosidade que me acompanha até
+                                hoje. Passava horas desmontando periféricos antigos, tentando entender como cada peça se
+                                conectava e funcionava em conjunto.</p>
+                            <p>Essa fase foi fundamental para desenvolver não apenas habilidades técnicas, mas também um
+                                olhar analítico e uma capacidade de resolver problemas que se tornariam essenciais na
+                                minha carreira como desenvolvedor.</p>
+                        </div>
+
+                        <!-- Tags de Tecnologia -->
+                        <div class="tech-stack">
+                            <div class="tech-tag">Hardware</div>
+                            <div class="tech-tag">Curiosidade</div>
+                            <div class="tech-tag">Fundamentos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Lan Houses (Ensino Fundamental) -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-date">Ensino Fundamental</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-effect">
+                        <div class="timeline-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>A Descoberta das Lan Houses</h3>
+                        <p>Foi no ensino fundamental que tudo começou a fazer mais sentido. Descobri as lan houses e,
+                            mesmo minha cidade tendo apenas uma (e não das melhores), aqueles momentos foram mágicos.
+                        </p>
+                        <p>Guardava o dinheiro do lanche só para passar o final de semana jogando horas a fio. Não eram
+                            só os jogos que me fascinavam, mas a magia por trás deles: por que o personagem se mexe
+                            daquele jeito? Como ele interage com o mundo ao redor?</p>
+                        <p>Essas perguntas me levaram a descobrir o <span class="highlight">mundo da programação</span>
+                            e como era possível criar universos inteiros com código.</p>
+
+                        <!-- Tags de Tecnologia -->
+                        <div class="tech-stack">
+                            <div class="tech-tag">Jogos</div>
+                            <div class="tech-tag">Lógica</div>
+                            <div class="tech-tag">Criatividade</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Primeiro Computador (Ensino Médio) -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-date">Ensino Médio</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-effect">
+                        <div class="timeline-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Primeiro Computador e Hello World</h3>
+                        <p>No ensino médio, ganhei meu primeiro computador. Foi como se tivesse recebido as chaves de um
+                            novo mundo. Nesse período, conheci <span class="highlight">Lua Script</span>, uma linguagem
+                            orientada a objetos que descobri em fóruns que frequentava.</p>
+                        <p>Em poucos dias, criei meu primeiro <em>Hello World</em> e me senti o maior programador do
+                            planeta. Logo depois, desenvolvi meu primeiro jogo: um RPG com física bugada, sprites
+                            horríveis e movimentação que parecia bêbada, mas para mim era a coisa mais incrível do
+                            mundo.</p>
+
+                        <!-- Botão e Conteúdo Expandível -->
+                        <div class="read-more-btn" data-toggle="more-first-code">Ver código <i
+                                class="fas fa-code ms-1"></i></div>
+
+                        <div class="read-more-content" id="more-first-code">
+                            <pre
+                                style="background: rgba(0,0,0,0.1); padding: 1rem; border-radius: 8px; overflow-x: auto; color: var(--text-secondary);">
+-- Meu primeiro código em Lua
+function love.draw()
+    love.graphics.setColor(1, 1, 1)
+    love.graphics.print("Hello World!", 400, 300)
+end
+
+function love.update(dt)
+    -- Lógica do jogo aqui
+    if love.keyboard.isDown("right") then
+        player.x = player.x + player.speed * dt
+    end
+end
+                            </pre>
+                            <p>Embora simples, este código me ensinou conceitos fundamentais de programação como
+                                funções, condicionais e lógica de eventos. Foi o início de uma paixão que só cresceria
+                                com o tempo.</p>
+                        </div>
+
+                        <!-- Tags de Tecnologia -->
+                        <div class="tech-stack">
+                            <div class="tech-tag">Lua Script</div>
+                            <div class="tech-tag">Game Dev</div>
+                            <div class="tech-tag">Hello World</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4: Paixão pelo Python (17 anos) -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-date">17 anos</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-effect">
+                        <div class="timeline-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3>A Paixão pelo Python</h3>
+                        <p>Com 17 anos, no meu último ano do ensino médio, conheci o amor da minha vida: <span
+                                class="highlight">Python</span>. Me apaixonei por ser uma linguagem poderosa e, ao mesmo
+                            tempo, simples de usar.</p>
+                        <p>Passei aquele ano todo focado nela, chegando até a matar aula para estudar (não faz sentido,
+                            mas a paixão era verdadeira). Criei meus primeiros projetos solo, ainda sem frameworks, só
+                            Python puro.</p>
+                        <p>No fim do ensino médio, achei que era um gênio da programação, pronto para conquistar o
+                            mundo. Mal sabia eu que o mundo real tinha outros planos para mim.</p>
+
+                        <!-- Tags de Tecnologia -->
+                        <div class="tech-stack">
+                            <div class="tech-tag">Python</div>
+                            <div class="tech-tag">Desenvolvimento</div>
+                            <div class="tech-tag">Autodidatismo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5: Primeira Experiência (17-18 anos) -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-date">17-18 anos</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content glass-effect">
+                        <div class="timeline-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Primeira Grande Experiência</h3>
+                        <p>Aos 17 para 18 anos, tive minha primeira oportunidade real: desenvolver um sistema de
+                            automação de vendas com a <span class="highlight">API do WhatsApp da Meta</span>. Aceitei o
+                            desafio cheio de confiança, sem imaginar o que estava por vir.</p>
+                        <p>A realidade bateu forte: documentação terrível, meu inglês pior ainda, e nenhuma experiência
+                            prática. Passei noites em claro estudando <span class="highlight">webhooks</span>, <span
+                                class="highlight">Flask</span>, e como enviar e receber mensagens automatizadas.</p>
+                        <p>Meu código era um verdadeiro Frankenstein, com partes improvisadas e adaptações de tutoriais.
+                            Mas, apesar do caos, consegui finalizar o sistema. O bot entrou em produção e funcionava!
+                        </p>
+
+                        <!-- Botão e Conteúdo Expandível -->
+                        <div class="read-more-btn" data-toggle="more-first-job">Lição aprendida <i
+                                class="fas fa-lightbulb ms-1"></i></div>
+
+                        <div class="read-more-content" id="more-first-job">
+                            <p>Esta experiência me ensinou uma valiosa lição: no mundo real, as soluções raramente são
+                                perfeitas ou elegantes, especialmente no início. O importante é persistir, ser
+                                resiliente e entregar resultados, mesmo que o processo seja caótico.</p>
+                            <p>Também percebi a importância do inglês técnico e da capacidade de interpretar
+                                documentações, habilidades que passei a desenvolver com maior dedicação depois desta
+                                experiência.</p>
+                        </div>
+
+                        <!-- Tags de Tecnologia -->
+                        <div class="tech-stack">
+                            <div class="tech-tag">API</div>
+                            <div class="tech-tag">Flask</div>
+                            <div class="tech-tag">Webhooks</div>
+                            <div class="tech-tag">Automação</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SEÇÃO POSIÇÃO ATUAL ==================== -->
+        <section class="timeline" id="current-position">
+            <div class="container">
+                <div class="current-role" data-aos="fade-up">
+                    <!-- Cabeçalho da Função Atual -->
+                    <div class="current-role-header">
+                        <h3 class="current-role-title">Desenvolvedor na SEA Tecnologia</h3>
+                        <div class="company-logo">
+                            <span>SEA</span> Tecnologia
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo da Função Atual -->
+                    <div class="current-role-content">
+                        <div class="role-description">
+                            <p>Atualmente, trabalho como Desenvolvedor na <span class="highlight">SEA Tecnologia</span>,
+                                onde aplico meus conhecimentos em Python para criar soluções de automação robustas e
+                                eficientes, além de contribuir com a criação e migração de portais governamentais.</p>
+
+                            <p>Esta posição me permitiu expandir minhas habilidades em diversas áreas críticas:</p>
+
+                            <!-- Lista de Responsabilidades -->
+                            <ul class="timeline-list">
+                                <li><span class="highlight">Automação de Processos:</span> Desenvolvimento de sistemas
+                                    automatizados utilizando Python para otimizar fluxos de trabalho e aumentar a
+                                    eficiência operacional.</li>
+                                <li><span class="highlight">Portais Governamentais:</span> Criação e migração de portais
+                                    do governo para novos sistemas de gerenciamento de conteúdo (CMS), garantindo melhor
+                                    usabilidade e manutenção.</li>
+                                <li><span class="highlight">Integração de Sistemas:</span> Desenvolvimento de interfaces
+                                    e conectores para permitir a comunicação entre diversos sistemas governamentais.
+                                </li>
+                                <li><span class="highlight">Análise de Dados:</span> Extração, processamento e análise
+                                    de conjuntos de dados para apoiar tomadas de decisão e melhorias de processos.</li>
+                            </ul>
+
+                            <p>Esta experiência tem sido fundamental no meu crescimento profissional, permitindo que eu
+                                aplique conhecimentos teóricos em situações práticas de alto impacto, desenvolvendo
+                                soluções que otimizam processos e melhoram serviços ao cidadão.</p>
+                        </div>
+
+                        <!-- Grade de Tecnologias -->
+                        <h4 class="gallery-title">Principais Tecnologias</h4>
+                        <div class="skills-grid">
+                            <div class="skill-pill">
+                                <i class="fab fa-python"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fas fa-cogs"></i>
+                                <span>Automação</span>
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fas fa-database"></i>
+                                <span>SQL</span>
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fab fa-js"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fas fa-file-code"></i>
+                                <span>CMS</span>
+                            </div>
+                            <div class="skill-pill">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Análise de Dados</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== SEÇÃO DE CITAÇÃO ==================== -->
+        <section class="container" id="quote">
+            <div class="divider" data-aos="fade-in"></div>
+            <p class="quote" data-aos="fade-in">
+                "Nada é impossível, e, se for, você sempre pode dar um jeito de tornar possível."
+            </p>
+            <div class="divider" data-aos="fade-in"></div>
+        </section>
+
+        <!-- ==================== SEÇÃO CTA ==================== -->
+        <section class="journey-cta">
+            <div class="container">
+                <a href="index.html" class="btn btn-outline" data-aos="fade-up">
+                    <i class="fas fa-arrow-left me-2"></i> Voltar ao Portfólio
+                </a>
+                <a href="index.html#contact" class="btn btn-primary" data-aos="fade-up" data-aos-delay="200">
+                    Vamos Conversar
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer py-5">
+        <div class="container">
+            <!-- Conteúdo do Footer -->
+            <div class="row footer-content align-items-center mb-4">
+                <!-- Logo do Footer -->
+                <div class="col-lg-4 text-center text-lg-start mb-4 mb-lg-0">
+                    <a href="index.html" class="footer-logo">
+                        <span>N</span>icollas<span>.dev</span>
+                    </a>
+                </div>
+
+                <!-- Links de Navegação -->
+                <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                    <div class="footer-nav">
+                        <a href="index.html" class="footer-link">Home</a>
+                        <a href="index.html#about" class="footer-link">Sobre</a>
+                        <a href="index.html#projects" class="footer-link">Projetos</a>
+                        <a href="index.html#skills" class="footer-link">Skills</a>
+                        <a href="index.html#contact" class="footer-link">Contato</a>
+                    </div>
+                </div>
+
+                <!-- Redes Sociais -->
+                <div class="col-lg-4 text-center text-lg-end">
+                    <div class="footer-social">
+                        <a href="https://github.com/NicollasRezende" target="_blank" class="social-icon me-2"
+                            aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank" class="social-icon me-2"
+                            aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:nicollaspereirarezende@outlook.com.br" class="social-icon me-2"
+                            aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/5561991769500" target="_blank" class="social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="footer-bottom text-center border-top pt-4">
+                <p class="mb-0">&copy; 2025 Nicollas Rezende. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== BOTÕES AUXILIARES ==================== -->
+    <!-- Botão Voltar ao Topo -->
+    <a href="#" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <!-- Scripts Externos -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Script Personalizado -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicializar AOS (Animate On Scroll)
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+
+            // Inicialização de componentes e funcionalidades
+            initThemeToggle();
+            initBackToTop();
+            initReadMore();
+            initJourneyNav();
+            initParticles();
+
+            /**
+             * Inicializa o toggle de tema
+             */
+            function initThemeToggle() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const icon = themeToggle.querySelector('i');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+                const savedTheme = localStorage.getItem('theme');
+
+                // Verificar tema salvo
+                if (savedTheme === 'light') {
+                    document.body.classList.add('light-theme');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else if (savedTheme === 'dark') {
+                    document.body.classList.remove('light-theme');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                } else if (prefersDark.matches) {
+                    document.body.classList.remove('light-theme');
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                } else {
+                    document.body.classList.add('light-theme');
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+
+                // Evento de clique para alternar tema
+                themeToggle.addEventListener('click', function () {
+                    document.body.classList.toggle('light-theme');
+
+                    if (document.body.classList.contains('light-theme')) {
+                        localStorage.setItem('theme', 'light');
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        localStorage.setItem('theme', 'dark');
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                });
+            }
+
+            /**
+             * Inicializa o botão voltar ao topo
+             */
+            function initBackToTop() {
+                const backToTop = document.querySelector('.back-to-top');
+
+                window.addEventListener('scroll', function () {
+                    if (window.pageYOffset > 300) {
+                        backToTop.classList.add('active');
+                    } else {
+                        backToTop.classList.remove('active');
+                    }
+                });
+
+                backToTop.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            /**
+             * Inicializa a funcionalidade "Saiba mais"
+             */
+            function initReadMore() {
+                const readMoreBtns = document.querySelectorAll('.read-more-btn');
+
+                readMoreBtns.forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const targetId = this.getAttribute('data-toggle');
+                        const contentEl = document.getElementById(targetId);
+
+                        if (contentEl.classList.contains('active')) {
+                            contentEl.style.height = '0';
+                            setTimeout(() => {
+                                contentEl.classList.remove('active');
+                            }, 500);
+                            this.innerHTML = `${this.textContent.split('<')[0]} <i class="fas fa-angle-down ms-1"></i>`;
+                        } else {
+                            contentEl.classList.add('active');
+                            contentEl.style.height = contentEl.scrollHeight + 'px';
+                            this.innerHTML = `Recolher <i class="fas fa-angle-up ms-1"></i>`;
+                        }
+                    });
+                });
+            }
+
+            /**
+             * Inicializa a navegação da jornada
+             */
+            function initJourneyNav() {
+                const navItems = document.querySelectorAll('.journey-nav-item');
+
+                navItems.forEach(item => {
+                    item.addEventListener('click', function () {
+                        // Remove active class from all items
+                        navItems.forEach(nav => nav.classList.remove('active'));
+
+                        // Add active class to clicked item
+                        this.classList.add('active');
+
+                        // Scroll to target section
+                        const targetId = this.getAttribute('data-scroll');
+                        const targetSection = document.getElementById(targetId);
+
+                        if (targetSection) {
+                            window.scrollTo({
+                                top: targetSection.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }
+                    });
+                });
+            }
+
+            /**
+             * Inicializa o efeito de partículas
+             */
+            function initParticles() {
+                const container = document.getElementById('particles');
+                if (!container) return;
+
+                // Criar partículas
+                for (let i = 0; i < 30; i++) {
+                    createParticle(container);
+                }
+            }
+
+            /**
+             * Cria uma partícula no container
+             */
+            function createParticle(container) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                // Tamanho aleatório
+                const size = Math.random() * 10 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // Posição aleatória
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+
+                // Opacidade aleatória
+                const opacity = Math.random() * 0.5 + 0.1;
+                particle.style.opacity = opacity;
+
+                // Adicionar ao contêiner
+                container.appendChild(particle);
+
+                // Animar
+                animateParticle(particle);
+            }
+
+            /**
+             * Anima uma partícula
+             */
+            function animateParticle(particle) {
+                // Valores de movimento aleatórios
+                const moveX = (Math.random() - 0.5) * 20;
+                const moveY = (Math.random() - 0.5) * 20;
+
+                // Duração aleatória
+                const duration = Math.random() * 20 + 10;
+
+                // Definir animação CSS
+                particle.style.animation = `float ${duration}s infinite ease-in-out`;
+
+                // Mover partícula com parallax no mousemove
+                document.addEventListener('mousemove', function (e) {
+                    const mouseX = e.clientX / window.innerWidth;
+                    const mouseY = e.clientY / window.innerHeight;
+
+                    const moveFactorX = (mouseX - 0.5) * moveX;
+                    const moveFactorY = (mouseY - 0.5) * moveY;
+
+                    particle.style.transform = `translate(${moveFactorX}px, ${moveFactorY}px)`;
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
