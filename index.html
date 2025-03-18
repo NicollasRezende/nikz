@@ -7,565 +7,535 @@
     <title>Nicollas Rezende | Desenvolvedor Full Stack</title>
     <meta name="description"
         content="Portfólio de Nicollas Rezende - Desenvolvedor Full Stack especializado em Python, JavaScript e tecnologias web modernas">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <!-- Devicon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon.ico">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon/favicon.ico">
     <link rel="manifest" href="favicon/site.webmanifest">
-    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#06b6d4">
-    <meta name="msapplication-TileColor" content="#06b6d4">
-    <meta name="theme-color" content="#0f172a">
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <span>N</span>icollas.<span>dev</span>
-            </div>
-            <div class="nav-links">
-                <a href="#home" class="active">Home</a>
-                <a href="#about">Sobre</a>
-                <a href="#projects">Projetos</a>
-                <a href="#skills">Skills</a>
-                <a href="#contact">Contato</a>
-                <button id="theme-toggle" aria-label="Toggle theme">
-                    <i class="fas fa-moon"></i>
+    <!-- Header / Navbar usando Bootstrap -->
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+            <div class="container">
+                <a href="#home" class="navbar-brand logo">
+                    <span>N</span>icollas<span>.dev</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
-            </div>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Olá, eu sou <span class="highlight">Nicollas Rezende</span></h1>
-                <p class="typewriter">Desenvolvedor Full Stack</p>
-                <div class="hero-cta">
-                    <a href="#projects" class="primary-btn">Ver Projetos</a>
-                    <a href="#contact" class="secondary-btn">Contato</a>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a href="#home" class="nav-link active" aria-current="page">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#about" class="nav-link">Sobre</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#projects" class="nav-link">Projetos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#skills" class="nav-link">Skills</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#contact" class="nav-link">Contato</a>
+                        </li>
+                        <li class="nav-item ms-2">
+                            <button id="theme-toggle" class="btn btn-theme" aria-label="Alternar tema">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-                <div class="social-links">
-                    <a href="https://github.com/NicollasRezende" target="_blank" aria-label="GitHub">
-                        <i class="fab fa-github"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Olá, eu sou <span class="highlight">Nicollas Rezende</span></h1>
+                        <h2 class="typewriter">Desenvolvedor Full Stack</h2>
+                        <p>Transformando ideias em soluções digitais com código limpo, arquitetura eficiente e
+                            experiências de usuário excepcionais.</p>
+                        <div class="hero-buttons">
+                            <a href="#projects" class="btn btn-primary">Ver Projetos</a>
+                            <a href="#contact" class="btn btn-outline">Contato</a>
+                        </div>
+                        <div class="social-links">
+                            <a href="https://github.com/NicollasRezende" target="_blank" class="social-link"
+                                aria-label="GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank" class="social-link"
+                                aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="mailto:nicollaspereirarezende@outlook.com.br" class="social-link"
+                                aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://wa.me/5561991769500" target="_blank" class="social-link"
+                                aria-label="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="profile-container">
+                            <div class="profile-bg"></div>
+                            <div class="profile-ring"></div>
+                            <img src="imgs/55924678.png" alt="Nicollas Rezende" class="profile-image">
+                            <div class="tech-icons">
+                                <div class="tech-icon" data-tooltip="Python">
+                                    <i class="devicon-python-plain"></i>
+                                </div>
+                                <div class="tech-icon" data-tooltip="JavaScript">
+                                    <i class="devicon-javascript-plain"></i>
+                                </div>
+                                <div class="tech-icon" data-tooltip="React">
+                                    <i class="devicon-react-original"></i>
+                                </div>
+                                <div class="tech-icon" data-tooltip="Node.js">
+                                    <i class="devicon-nodejs-plain"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#about" class="scroll-down">
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </div>
+        </section>
+        <!-- About Section -->
+        <section id="about" class="about section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Sobre Mim</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Sou um desenvolvedor Full Stack apaixonado por criar soluções inovadoras e funcionais.
+                            Especializado em Python, JavaScript e suas tecnologias modernas, busco constantemente
+                            aprender e aprimorar minhas habilidades para enfrentar novos desafios.</p>
+                        <p>Atualmente cursando Engenharia de Software, combino conhecimentos teóricos com experiência
+                            prática para desenvolver aplicações robustas e escaláveis. Tenho como objetivo criar
+                            produtos que não apenas funcionem perfeitamente, mas também ofereçam uma experiência
+                            excepcional ao usuário, com foco em design intuitivo e performance otimizada.</p>
+                        <div class="about-stats">
+                            <div class="stat-card">
+                                <h3>2+</h3>
+                                <p>Anos de Experiência</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>20+</h3>
+                                <p>Projetos Completos</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3>10+</h3>
+                                <p>Tecnologias Dominadas</p>
+                            </div>
+                        </div>
+                        <div class="about-cta">
+                            <a href="#contact" class="btn">Vamos Trabalhar Juntos</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Projects Section -->
+        <section id="projects" class="projects section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Projetos em Destaque</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <!-- Filtro de Linguagens -->
+                <div class="language-filter mb-4">
+                    <div class="d-flex justify-content-center flex-wrap" id="language-buttons">
+                        <!-- Os botões de filtro serão adicionados dinamicamente aqui -->
+                        <button class="btn filter-btn active me-2 mb-2" data-language="all">Todos</button>
+                    </div>
+                </div>
+
+                <!-- Indicadores do Carrossel -->
+                <div class="carousel-indicators-custom mb-4">
+                    <div class="d-flex justify-content-center" id="carousel-indicators">
+                        <!-- Indicadores serão adicionados dinamicamente aqui -->
+                    </div>
+                </div>
+
+                <!-- Carrossel de Projetos -->
+                <div id="projectsCarousel" class="carousel slide" data-bs-interval="false">
+                    <!-- Os indicadores serão inseridos aqui pelo JavaScript -->
+
+                    <div class="carousel-inner" id="projects-container">
+                        <!-- Slides do carrossel serão adicionados dinamicamente aqui -->
+                        <div class="carousel-item active">
+                            <div class="loading-container">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Carregando...</span>
+                                </div>
+                                <p class="mt-3">Buscando projetos do GitHub...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Controles do Carrossel -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#projectsCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Anterior</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#projectsCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Próximo</span>
+                    </button>
+                    <div class="github-button-container mt-5">
+                        <a href="https://github.com/NicollasRezende" target="_blank" class="github-button">
+                            <div class="github-button-content">
+                                <div class="github-icon-container">
+                                    <i class="fab fa-github"></i>
+                                    <div class="github-pulse"></div>
+                                </div>
+                                <div class="github-text">
+                                    <span class="main-text">Explore Meu Universo de Código</span>
+                                    <span class="sub-text">Descubra todos os projetos no GitHub</span>
+                                </div>
+                            </div>
+                            <div class="github-arrow">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Tecnologias & Habilidades</h2>
+                    <div class="section-line"></div>
+                </div>
+                <div class="skills-container">
+                    <!-- Frontend -->
+                    <div class="skill-category">
+                        <h3 class="category-title">Frontend</h3>
+                        <div class="skill-group">
+                            <div class="skill-item" data-tooltip="HTML5">
+                                <i class="devicon-html5-plain colored"></i>
+                                <span>HTML5</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="CSS3">
+                                <i class="devicon-css3-plain colored"></i>
+                                <span>CSS3</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="JavaScript">
+                                <i class="devicon-javascript-plain colored"></i>
+                                <span>JavaScript</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="React">
+                                <i class="devicon-react-original colored"></i>
+                                <span>React</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="TypeScript">
+                                <i class="devicon-typescript-plain colored"></i>
+                                <span>TypeScript</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Bootstrap">
+                                <i class="devicon-bootstrap-plain colored"></i>
+                                <span>Bootstrap</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="skill-category">
+                        <h3 class="category-title">Backend</h3>
+                        <div class="skill-group">
+                            <div class="skill-item" data-tooltip="Python">
+                                <i class="devicon-python-plain colored"></i>
+                                <span>Python</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Django">
+                                <i class="devicon-django-plain colored"></i>
+                                <span>Django</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Flask">
+                                <i class="devicon-flask-original colored"></i>
+                                <span>Flask</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Node.js">
+                                <i class="devicon-nodejs-plain colored"></i>
+                                <span>Node.js</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Express">
+                                <i class="devicon-express-original colored"></i>
+                                <span>Express</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banco de Dados -->
+                    <div class="skill-category">
+                        <h3 class="category-title">Banco de Dados</h3>
+                        <div class="skill-group">
+                            <div class="skill-item" data-tooltip="PostgreSQL">
+                                <i class="devicon-postgresql-plain colored"></i>
+                                <span>PostgreSQL</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="MySQL">
+                                <i class="devicon-mysql-plain colored"></i>
+                                <span>MySQL</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="MongoDB">
+                                <i class="devicon-mongodb-plain colored"></i>
+                                <span>MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DevOps & Ferramentas -->
+                    <div class="skill-category">
+                        <h3 class="category-title">DevOps & Ferramentas</h3>
+                        <div class="skill-group">
+                            <div class="skill-item" data-tooltip="Git">
+                                <i class="devicon-git-plain colored"></i>
+                                <span>Git</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Docker">
+                                <i class="devicon-docker-plain colored"></i>
+                                <span>Docker</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Linux">
+                                <i class="devicon-linux-plain"></i>
+                                <span>Linux</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="VS Code">
+                                <i class="devicon-vscode-plain colored"></i>
+                                <span>VS Code</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="GitHub">
+                                <i class="devicon-github-original"></i>
+                                <span>GitHub</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Science -->
+                    <div class="skill-category">
+                        <h3 class="category-title">Data Science</h3>
+                        <div class="skill-group">
+                            <div class="skill-item" data-tooltip="NumPy">
+                                <i class="devicon-numpy-plain colored"></i>
+                                <span>NumPy</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Pandas">
+                                <i class="devicon-pandas-plain colored"></i>
+                                <span>Pandas</span>
+                            </div>
+                            <div class="skill-item" data-tooltip="Jupyter">
+                                <i class="devicon-jupyter-plain colored"></i>
+                                <span>Jupyter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section usando Bootstrap -->
+        <section id="contact" class="contact section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Vamos Conversar?</h2>
+                    <div class="section-line"></div>
+                </div>
+
+                <div class="row contact-content">
+                    <div class="col-lg-5 mb-4 mb-lg-0">
+                        <div class="row contact-info">
+                            <div class="col-md-6 col-lg-12 mb-4">
+                                <div class="card contact-card">
+                                    <div class="card-body d-flex align-items-center">
+                                        <div class="contact-icon me-3">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h5 class="card-title mb-1">Email</h5>
+                                            <a href="mailto:nicollaspereirarezende@outlook.com.br"
+                                                class="card-text">nicollaspereirarezende@outlook.com.br</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-12 mb-4">
+                                <div class="card contact-card">
+                                    <div class="card-body d-flex align-items-center">
+                                        <div class="contact-icon me-3">
+                                            <i class="fab fa-linkedin-in"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h5 class="card-title mb-1">LinkedIn</h5>
+                                            <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank"
+                                                class="card-text">linkedin.com/in/nicollas-rezende</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-12 mb-4">
+                                <div class="card contact-card">
+                                    <div class="card-body d-flex align-items-center">
+                                        <div class="contact-icon me-3">
+                                            <i class="fab fa-github"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h5 class="card-title mb-1">GitHub</h5>
+                                            <a href="https://github.com/NicollasRezende" target="_blank"
+                                                class="card-text">github.com/NicollasRezende</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-12 mb-4">
+                                <div class="card contact-card">
+                                    <div class="card-body d-flex align-items-center">
+                                        <div class="contact-icon me-3">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </div>
+                                        <div class="contact-details">
+                                            <h5 class="card-title mb-1">WhatsApp</h5>
+                                            <a href="https://wa.me/5561991769500" target="_blank" class="card-text">+55
+                                                61 99176-9500</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="card contact-form-card">
+                            <div class="card-body">
+                                <h3 class="card-title mb-4">Envie uma mensagem</h3>
+                                <form id="contact-form" class="contact-form">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="name" class="form-label">Nome</label>
+                                                <input type="text" class="form-control" id="name" name="name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="email" class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="form-group">
+                                            <label for="subject" class="form-label">Assunto</label>
+                                            <input type="text" class="form-control" id="subject" name="subject"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="form-group">
+                                            <label for="message" class="form-label">Mensagem</label>
+                                            <textarea class="form-control" id="message" name="message" rows="5"
+                                                required></textarea>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn custom-btn-primary w-100">Enviar Mensagem</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer usando Bootstrap -->
+    <footer class="footer py-5">
+        <div class="container">
+            <div class="row footer-content align-items-center mb-4">
+                <div class="col-lg-4 text-center text-lg-start mb-4 mb-lg-0">
+                    <a href="#home" class="footer-logo">
+                        <span>N</span>icollas<span>.dev</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank"
-                        aria-label="LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="mailto:nicollaspereirarezende@outlook.com.br" aria-label="Email">
-                        <i class="fas fa-envelope"></i>
-                    </a>
                 </div>
-            </div>
-            <div class="hero-image">
-                <img src="imgs/55924678.png" alt="Nicollas Rezende" class="profile-image">
-                <div class="floating-tech">
-                    <span class="tech-icon"><i class="fab fa-python"></i></span>
-                    <span class="tech-icon"><i class="fab fa-js"></i></span>
-                    <span class="tech-icon"><i class="fab fa-react"></i></span>
-                    <span class="tech-icon"><i class="fab fa-node"></i></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <h2 class="section-title">Sobre Mim</h2>
-        <div class="about-container">
-            <div class="about-content">
-                <p>Desenvolvedor Full Stack apaixonado por criar soluções inovadoras. Especializado em Python,
-                    JavaScript e suas tecnologias modernas. Atualmente cursando Engenharia de Software e sempre em busca
-                    de novos desafios.</p>
-                <div class="stats">
-                    <div class="stat-item">
-                        <h3>2+</h3>
-                        <p>Anos de Experiência</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>20+</h3>
-                        <p>Projetos Completos</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>10+</h3>
-                        <p>Tecnologias Dominadas</p>
+                <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                    <div class="footer-nav">
+                        <a href="#home" class="footer-link">Home</a>
+                        <a href="#about" class="footer-link">Sobre</a>
+                        <a href="#projects" class="footer-link">Projetos</a>
+                        <a href="#skills" class="footer-link">Skills</a>
+                        <a href="#contact" class="footer-link">Contato</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Projetos Atualizados -->
-    
-    <section id="projects" class="projects">
-        <h2 class="section-title">Projetos em Destaque</h2>
-        <div class="projects-grid">
-
-            <!-- Asas Projeto -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="WPP Bot de Vendas">
-                </div>
-                <div class="project-content">
-                    <h3>Site institucional Projeto ASAS</h3>
-                    <p>Um Site institucional Feito para um projeto de incentivo ao esporte da minha cidade.</p>
-                    <div class="project-tech">
-                        <span>React</span>
-                        <span>TypeScript</span>
-                        <span>Vite</span>
-                        <span>Styled Components</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://previa-asas.vercel.app/" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Site
+                <div class="col-lg-4 text-center text-lg-end">
+                    <div class="footer-social">
+                        <a href="https://github.com/NicollasRezende" target="_blank" class="social-icon me-2"
+                            aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank" class="social-icon me-2"
+                            aria-label="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="mailto:nicollaspereirarezende@outlook.com.br" class="social-icon me-2"
+                            aria-label="Email">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                        <a href="https://wa.me/5561991769500" target="_blank" class="social-icon" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            
-            <!-- Bot de Vendas WhatsApp -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="WPP Bot de Vendas">
-                </div>
-                <div class="project-content">
-                    <h3>WPP Bot de Vendas Auto</h3>
-                    <p>Bot automatizado para vendas via WhatsApp, utilizando Python e Selenium para automatizar
-                        interações e aumentar eficiência em vendas.</p>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>Selenium</span>
-                        <span>WhatsApp API</span>
-                        <span>Automação</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/botvendaswhats" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
+            <div class="footer-bottom text-center border-top pt-4">
+                <p class="mb-0">&copy; 2025 Nicollas Rezende. Todos os direitos reservados.</p>
             </div>
-
-            <!-- Integração Stripe -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="Integração Stripe">
-                </div>
-                <div class="project-content">
-                    <h3>Integração de Pagamento Stripe</h3>
-                    <p>Sistema de pagamento integrado com a API da Stripe, oferecendo checkout seguro e processamento de
-                        pagamentos em tempo real.</p>
-                    <div class="project-tech">
-                        <span>Node.js</span>
-                        <span>Express</span>
-                        <span>Stripe API</span>
-                        <span>JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/integracao-strype" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- IA-RESUM -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="IA-RESUM">
-                </div>
-                <div class="project-content">
-                    <h3>IA-RESUM</h3>
-                    <p>Sistema de IA para geração automática de resumos de vídeos, utilizando processamento de linguagem
-                        natural e APIs de reconhecimento de fala.</p>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>NLP</span>
-                        <span>APIs</span>
-                        <span>IA</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/AI-VIDEO-RESUM" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Docker Flask -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="Docker Flask">
-                </div>
-                <div class="project-content">
-                    <h3>Docker Flask</h3>
-                    <p>Sistema de containerização de aplicações Flask utilizando Docker, implementando boas práticas de
-                        DevOps e deployment.</p>
-                    <div class="project-tech">
-                        <span>Docker</span>
-                        <span>Flask</span>
-                        <span>Python</span>
-                        <span>DevOps</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/Docker-Flask" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- PDF Generator -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="PDF Generator">
-                </div>
-                <div class="project-content">
-                    <h3>PDF Generator</h3>
-                    <p>Gerador de PDF versátil para diferentes aplicações, com suporte a múltiplos formatos e templates
-                        personalizáveis.</p>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>ReportLab</span>
-                        <span>PyPDF2</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/PDF-generator" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Numpy Jogo de Conways -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="Jogo de Conway">
-                </div>
-                <div class="project-content">
-                    <h3>Jogo de Conway</h3>
-                    <p>Implementação do famoso Jogo da Vida de Conway utilizando NumPy para processamento eficiente de
-                        arrays.</p>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>NumPy</span>
-                        <span>Matplotlib</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/numpy-jogo-de-conways" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Django Doc -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="Django Doc">
-                </div>
-                <div class="project-content">
-                    <h3>Como Usar Django</h3>
-                    <p>Documentação abrangente sobre Django, incluindo tutoriais, boas práticas e exemplos práticos de
-                        implementação.</p>
-                    <div class="project-tech">
-                        <span>Django</span>
-                        <span>Python</span>
-                        <span>Web Dev</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/DJANGO-COMO-USAR" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- React Project -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="React Project">
-                </div>
-                <div class="project-content">
-                    <h3>React Project</h3>
-                    <p>Aplicação web moderna desenvolvida com React, implementando conceitos avançados como hooks e
-                        gerenciamento de estado.</p>
-                    <div class="project-tech">
-                        <span>React</span>
-                        <span>JavaScript</span>
-                        <span>CSS</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/REACT" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SkyDevs -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="SkyDevs">
-                </div>
-                <div class="project-content">
-                    <h3>SkyDevs</h3>
-                    <p>Website moderno para startup fictícia, demonstrando habilidades em design responsivo e UX/UI.</p>
-                    <div class="project-tech">
-                        <span>HTML5</span>
-                        <span>CSS3</span>
-                        <span>JavaScript</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/SkyDevs" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- SGI-WEB -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="SGI-WEB">
-                </div>
-                <div class="project-content">
-                    <h3>SGI-WEB</h3>
-                    <p>Sistema web completo para gerenciamento de inventário, com funcionalidades CRUD e relatórios.</p>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>Django</span>
-                        <span>PostgreSQL</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/SGI-WEB" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ZionTecnologia -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="ZionTecnologia">
-                </div>
-                <div class="project-content">
-                    <h3>ZionTecnologia</h3>
-                    <p>Site institucional desenvolvido para a empresa ZionTecnologia, com design moderno e responsivo
-                        focado na experiência do usuário.</p>
-                    <div class="project-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                        <span>UI/UX</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/ziontecnologia" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Calculadora de Calorias -->
-            <div class="project-card">
-                <div class="project-image">
-                    <img src="imgs/55924678.png" alt="Calculadora de Calorias">
-                </div>
-                <div class="project-content">
-                    <h3>Calculadora de Calorias para Corredores</h3>
-                    <p>Aplicação web para cálculo de calorias desenvolvida especialmente para um grupo de corredores,
-                        auxiliando no controle do gasto calórico durante atividades físicas.</p>
-                    <div class="project-tech">
-                        <span>HTML</span>
-                        <span>CSS</span>
-                        <span>JavaScript</span>
-                        <span>Fitness</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/NicollasRezende/calcular-calorias" target="_blank" class="btn">
-                            <i class="fab fa-github"></i> Código
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-        </div>
-    </section>
-
-
-
-    <!-- Seção Skills atualizada -->
-    <section id="skills" class="skills">
-        <h2 class="section-title">Tecnologias & Ferramentas</h2>
-        <div class="skills-container">
-            <!-- Backend -->
-            <div class="skill-category">
-                <h3>Backend</h3>
-                <div class="skill-grid">
-                    <div class="skill-item">
-                        <i class="devicon-python-plain colored"></i>
-                        <span>Python</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-django-plain colored"></i>
-                        <span>Django</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-flask-original colored"></i>
-                        <span>Flask</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-nodejs-plain colored"></i>
-                        <span>Node.js</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-express-original colored"></i>
-                        <span>Express</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Frontend -->
-            <div class="skill-category">
-                <h3>Frontend</h3>
-                <div class="skill-grid">
-                    <div class="skill-item">
-                        <i class="devicon-html5-plain colored"></i>
-                        <span>HTML5</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-css3-plain colored"></i>
-                        <span>CSS3</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-javascript-plain colored"></i>
-                        <span>JavaScript</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-react-original colored"></i>
-                        <span>React</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-bootstrap-plain colored"></i>
-                        <span>Bootstrap</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Banco de Dados -->
-            <div class="skill-category">
-                <h3>Banco de Dados</h3>
-                <div class="skill-grid">
-                    <div class="skill-item">
-                        <i class="devicon-postgresql-plain colored"></i>
-                        <span>PostgreSQL</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-mysql-plain colored"></i>
-                        <span>MySQL</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-mongodb-plain colored"></i>
-                        <span>MongoDB</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- DevOps & Ferramentas -->
-            <div class="skill-category">
-                <h3>DevOps & Ferramentas</h3>
-                <div class="skill-grid">
-                    <div class="skill-item">
-                        <i class="devicon-git-plain colored"></i>
-                        <span>Git</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-docker-plain colored"></i>
-                        <span>Docker</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-linux-plain"></i>
-                        <span>Linux</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-vscode-plain colored"></i>
-                        <span>VS Code</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-github-plain"></i>
-                        <span>GitHub</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Data Science -->
-            <div class="skill-category">
-                <h3>Data Science</h3>
-                <div class="skill-grid">
-                    <div class="skill-item">
-                        <i class="devicon-numpy-plain colored"></i>
-                        <span>NumPy</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-pandas-plain colored"></i>
-                        <span>Pandas</span>
-                    </div>
-                    <div class="skill-item">
-                        <i class="devicon-jupyter-plain colored"></i>
-                        <span>Jupyter</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contato Atualizado -->
-    <section id="contact" class="contact">
-        <h2 class="section-title">Vamos Conversar?</h2>
-        <div class="contact-container">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <a href="mailto:nicollaspereirarezende@outlook.com.br">nicollaspereirarezende@outlook.com.br</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-linkedin"></i>
-                    <a href="https://www.linkedin.com/in/nicollas-rezende/" target="_blank">LinkedIn</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-github"></i>
-                    <a href="https://github.com/NicollasRezende" target="_blank">GitHub</a>
-                </div>
-                <div class="contact-item">
-                    <i class="fab fa-whatsapp"></i>
-                    <a href="https://wa.me/5561991769500" target="_blank">WhatsApp</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Nicollas Rezende. Todos os direitos reservados.</p>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <a href="#home" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Bootstrap JS, Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom Script -->
     <script src="script.js"></script>
 </body>
 
