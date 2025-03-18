@@ -8,9 +8,12 @@ document.addEventListener('DOMContentLoaded', function () {
     initTypewriter();
     initScrollAnimation();
     initFormValidation();
+    initParallaxEffect();
+    initCursorEffects();
+    initGlassMorphism();
 });
 
-// Alternar entre tema claro e escuro
+// Alternar entre tema claro e escuro com animação
 function initThemeToggle() {
     const themeToggle = document.getElementById('theme-toggle');
     const icon = themeToggle.querySelector('i');
@@ -57,6 +60,11 @@ function initNavbarActive() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    // Adicionar indicador de progresso na navegação
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress-bar';
+    document.body.appendChild(progressBar);
+
     // Observador de interseção para seções
     const observer = new IntersectionObserver(
         (entries) => {
@@ -94,6 +102,17 @@ function initNavbarActive() {
             }
         });
     });
+
+    // Atualizar barra de progresso ao rolar
+    window.addEventListener('scroll', function () {
+        const winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop;
+        const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        progressBar.style.width = scrolled + '%';
+    });
 }
 
 // Botão voltar ao topo
@@ -106,6 +125,24 @@ function initBackToTop() {
         } else {
             backToTop.classList.remove('active');
         }
+    });
+
+    // Adicionar animação ao clicar
+    backToTop.addEventListener('click', function (e) {
+        e.preventDefault();
+        // Iniciar animação de pulso
+        this.classList.add('pulse-effect');
+
+        // Rolar suavemente para o topo
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+
+        // Remover classe de animação
+        setTimeout(() => {
+            this.classList.remove('pulse-effect');
+        }, 500);
     });
 }
 
@@ -121,6 +158,9 @@ function initProjectFilter() {
 
             // Adicionar classe ativa ao botão clicado
             this.classList.add('active');
+
+            // Adicionar efeito de ripple ao botão
+            createRippleEffect(this, event);
 
             // Obter categoria do filtro
             const filterValue = this.getAttribute('data-filter');
@@ -162,43 +202,120 @@ function initTypewriter() {
             typewriterElement.textContent += text.charAt(i);
             i++;
             setTimeout(type, 100);
+        } else {
+            // Adicionar cursor piscante após terminar de digitar
+            typewriterElement.insertAdjacentHTML(
+                'beforeend',
+                '<span class="cursor">|</span>'
+            );
+            const cursor = document.querySelector('.cursor');
+            cursor.style.animation = 'blink 1s infinite';
         }
     }
 
     setTimeout(type, 1000);
 }
 
-// Animações de scroll
+// Animações de scroll aprimoradas
 function initScrollAnimation() {
-    const elements = document.querySelectorAll(
-        '.project-card, .skill-category, .contact-card, .about-text p, .stat-card'
+    // Selecionar todos os elementos que precisam de animação
+    const fadeElements = document.querySelectorAll(
+        '.project-card, .skill-category, .contact-card, .about-text p, .stat-card, .section-title, .section-line'
     );
 
-    const observer = new IntersectionObserver(
-        (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { threshold: 0.1 }
-    );
+    // Configurações do Observador de Interseção
+    const options = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.1,
+    };
 
-    elements.forEach((element) => {
-        element.classList.add('fade-item');
+    // Criar diferentes tipos de animações
+    fadeElements.forEach((element, index) => {
+        // Determinar o tipo de animação com base no elemento ou em um padrão
+        let animationType;
+
+        if (element.classList.contains('project-card')) {
+            animationType = 'fade-up';
+        } else if (element.classList.contains('skill-category')) {
+            animationType = 'scale-in';
+        } else if (
+            element.classList.contains('section-title') ||
+            element.classList.contains('section-line')
+        ) {
+            animationType = 'fade-in';
+        } else {
+            // Alternar entre diferentes animações para outros elementos
+            const animations = ['fade-up', 'scale-in', 'fade-in'];
+            animationType = animations[index % animations.length];
+        }
+
+        // Adicionar classe de animação e delay
+        element.classList.add(animationType);
+        element.classList.add(`delay-${(index % 5) * 100}`);
+    });
+
+    // Função callback do observador
+    const callback = (entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Parar de observar após ativar
+            }
+        });
+    };
+
+    // Criar observador
+    const observer = new IntersectionObserver(callback, options);
+
+    // Observar todos os elementos
+    fadeElements.forEach((element) => {
         observer.observe(element);
     });
 }
 
-// Validação do formulário de contato
+// Validação e interação do formulário de contato
 function initFormValidation() {
     const form = document.getElementById('contact-form');
 
     if (form) {
+        // Adicionar classe para validação em tempo real
+        form.classList.add('needs-validation');
+
+        // Adicionar feedback visual para campos
+        const formControls = form.querySelectorAll('.form-control');
+        formControls.forEach((input) => {
+            // Feedback de validação em tempo real
+            input.addEventListener('input', function () {
+                validateInput(this);
+            });
+
+            // Verificar ao perder o foco
+            input.addEventListener('blur', function () {
+                validateInput(this);
+            });
+        });
+
         form.addEventListener('submit', function (e) {
             e.preventDefault();
+
+            // Verificar se o formulário é válido
+            if (!form.checkValidity()) {
+                e.stopPropagation();
+
+                // Marcar todos os campos inválidos
+                formControls.forEach((input) => {
+                    validateInput(input);
+                });
+
+                // Animação de shake no formulário
+                form.classList.add('shake-animation');
+                setTimeout(() => {
+                    form.classList.remove('shake-animation');
+                }, 500);
+
+                return;
+            }
 
             // Obter valores dos campos
             const name = document.getElementById('name').value;
@@ -213,46 +330,309 @@ function initFormValidation() {
                 const submitBtn = form.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
 
+                // Adicionar efeito de loading
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Enviando...';
+                submitBtn.innerHTML =
+                    '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Enviando...';
 
                 setTimeout(() => {
-                    // Mostrar mensagem de sucesso
-                    alert(
-                        'Mensagem enviada com sucesso! Em breve entrarei em contato.'
+                    // Mostrar mensagem de sucesso com animação
+                    const successEl = document.createElement('div');
+                    successEl.className =
+                        'form-success mt-3 alert alert-success';
+                    successEl.innerHTML =
+                        '<i class="fas fa-check-circle me-2"></i> Mensagem enviada com sucesso! Entrarei em contato em breve.';
+
+                    // Inserir depois do botão
+                    submitBtn.parentNode.insertAdjacentElement(
+                        'afterend',
+                        successEl
                     );
+
+                    // Animar entrada
+                    setTimeout(() => {
+                        successEl.classList.add('active');
+                    }, 10);
 
                     // Resetar formulário
                     form.reset();
+                    formControls.forEach((input) => {
+                        input.classList.remove('is-valid');
+                    });
 
                     // Restaurar botão
                     submitBtn.disabled = false;
-                    submitBtn.textContent = originalText;
+                    submitBtn.textContent = 'Enviado!';
+
+                    // Restaurar texto original do botão após um tempo
+                    setTimeout(() => {
+                        submitBtn.textContent = originalText;
+
+                        // Remover mensagem de sucesso
+                        successEl.classList.remove('active');
+                        setTimeout(() => {
+                            successEl.remove();
+                        }, 300);
+                    }, 3000);
                 }, 1500);
             } else {
-                alert('Por favor, preencha todos os campos.');
+                // Feedback visual para campos vazios
+                formControls.forEach((input) => {
+                    validateInput(input);
+                });
+            }
+        });
+    }
+
+    // Função para validar um único campo
+    function validateInput(input) {
+        if (input.checkValidity()) {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+        }
+    }
+}
+
+// Efeitos Parallax
+function initParallaxEffect() {
+    // Adicionar elementos de parallax na seção hero
+    const hero = document.querySelector('.hero');
+    if (hero) {
+        // Criar elementos de fundo para efeito parallax
+        const parallaxBg = document.createElement('div');
+        parallaxBg.className = 'parallax-bg';
+
+        // Adicionar círculos com gradiente
+        for (let i = 0; i < 3; i++) {
+            const circle = document.createElement('div');
+            circle.className = 'parallax-circle';
+            parallaxBg.appendChild(circle);
+        }
+
+        // Adicionar grid de fundo
+        const parallaxGrid = document.createElement('div');
+        parallaxGrid.className = 'parallax-grid';
+        parallaxBg.appendChild(parallaxGrid);
+
+        // Inserir no início da seção hero
+        hero.insertBefore(parallaxBg, hero.firstChild);
+
+        // Adicionar evento de mousemove para efeito parallax
+        document.addEventListener('mousemove', function (e) {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+
+            // Mover círculos em diferentes velocidades
+            const circles = document.querySelectorAll('.parallax-circle');
+            circles[0].style.transform = `translate(${mouseX * 30}px, ${
+                mouseY * 30
+            }px)`;
+            circles[1].style.transform = `translate(${mouseX * -40}px, ${
+                mouseY * -40
+            }px)`;
+            circles[2].style.transform = `translate(${mouseX * 20}px, ${
+                mouseY * -20
+            }px)`;
+
+            // Mover grid
+            const grid = document.querySelector('.parallax-grid');
+            grid.style.transform = `translate(${mouseX * 10}px, ${
+                mouseY * 10
+            }px)`;
+
+            // Mover elementos da seção hero
+            const profileContainer =
+                document.querySelector('.profile-container');
+            if (profileContainer) {
+                profileContainer.style.transform = `translate(${
+                    mouseX * 20
+                }px, ${mouseY * 20}px)`;
+            }
+        });
+
+        // Adicionar evento de scroll para efeito parallax
+        window.addEventListener('scroll', function () {
+            const scrollPosition = window.scrollY;
+            const heroHeight = hero.offsetHeight;
+
+            // Calcular o progresso do scroll dentro da seção hero (0 a 1)
+            const scrollProgress = Math.min(scrollPosition / heroHeight, 1);
+
+            // Mover elementos baseado no scroll
+            const heroText = document.querySelector('.hero-text');
+            if (heroText) {
+                heroText.style.transform = `translateY(${
+                    scrollProgress * 50
+                }px)`;
+                heroText.style.opacity = 1 - scrollProgress;
+            }
+
+            const heroImage = document.querySelector('.hero-image');
+            if (heroImage) {
+                heroImage.style.transform = `translateY(${
+                    scrollProgress * 100
+                }px)`;
             }
         });
     }
 }
 
-// Adicionar CSS para animações de fade
-const style = document.createElement('style');
-style.textContent = `
-    .fade-item {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+// Efeitos de cursor personalizado
+function initCursorEffects() {
+    // Já aplicamos os estilos base de cursor no CSS
+
+    // Adicionar efeito de hover para elementos interativos
+    const interactiveElements = document.querySelectorAll(
+        'a, button, .btn, .nav-link, .social-link, .filter-btn, .project-links a'
+    );
+
+    interactiveElements.forEach((element) => {
+        // Efeito de escala ao passar o mouse
+        element.addEventListener('mouseenter', function () {
+            this.classList.add('cursor-hover');
+        });
+
+        element.addEventListener('mouseleave', function () {
+            this.classList.remove('cursor-hover');
+        });
+    });
+}
+
+// Aplicar efeito glass morphism aos elementos
+function initGlassMorphism() {
+    // Adicionar a classe glass-effect aos elementos que devem ter o efeito
+    const glassElements = document.querySelectorAll(
+        '.card, .navbar, .contact-card, .contact-form-card, .skill-category, .project-card'
+    );
+
+    glassElements.forEach((element) => {
+        element.classList.add('glass-effect');
+    });
+}
+
+// Função para criar efeito ripple em botões
+function createRippleEffect(button, e) {
+    // Remover qualquer ripple existente
+    const ripple = button.querySelector('.ripple');
+    if (ripple) {
+        ripple.remove();
+    }
+
+    // Criar novo elemento ripple
+    const circle = document.createElement('span');
+    circle.className = 'ripple';
+    button.appendChild(circle);
+
+    // Calcular tamanho do ripple (deve ser maior que o botão)
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+
+    // Posicionar o ripple baseado na posição do clique
+    const rect = button.getBoundingClientRect();
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${e.clientX - rect.left - radius}px`;
+    circle.style.top = `${e.clientY - rect.top - radius}px`;
+
+    // Adicionar classe para animar
+    circle.classList.add('animate');
+
+    // Remover após a animação
+    setTimeout(() => {
+        circle.remove();
+    }, 600);
+}
+
+// Adicionar CSS para novas funcionalidades
+const extraStyles = document.createElement('style');
+extraStyles.textContent = `
+    /* Barra de progresso de scroll */
+    .scroll-progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: var(--gradient-primary);
+        width: 0%;
+        z-index: 1001;
+        transition: width 0.1s;
     }
     
-    .fade-in {
+    /* Efeito de ripple para botões */
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.5);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+    }
+    
+    @keyframes ripple {
+        to {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    /* Cursor hover state */
+    .cursor-hover {
+        transform: scale(1.05);
+    }
+    
+    /* Efeito de pulse para botões */
+    .pulse-effect {
+        animation: pulse-animation 0.5s ease-in-out;
+    }
+    
+    @keyframes pulse-animation {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+    
+    /* Animação de shake para formulário inválido */
+    .shake-animation {
+        animation: shake 0.5s ease-in-out;
+    }
+    
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+    
+    /* Cursor piscante para typewriter */
+    .cursor {
+        display: inline-block;
+        margin-left: 3px;
+        animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+    
+    /* Efeito de transição para troca de tema */
+    .theme-transition-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        z-index: 9999;
+        pointer-events: none;
         opacity: 1;
-        transform: translateY(0);
+        transition: opacity 0.3s ease;
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(extraStyles);
 
-// Script para carregar projetos do GitHub dinamicamente (ajustado)
+// Script para carregar projetos do GitHub dinamicamente
 document.addEventListener('DOMContentLoaded', function () {
     const username = 'NicollasRezende'; // Seu username do GitHub
     const projectsPerSlide = 4; // Ajustado para exibir menos projetos por slide
@@ -415,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Função para renderizar projetos
+    // Função para renderizar projetos com Cards de Glass Morphism
     function renderProjects(projects) {
         if (projects.length === 0) {
             projectsContainer.innerHTML = `
@@ -454,12 +834,13 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
 
             // Adicionar projetos
-            slideProjects.forEach((project) => {
+            slideProjects.forEach((project, index) => {
                 const languageClass = getSafeLanguageClass(project.language);
+                const delayClass = `delay-${(index % 5) * 100}`;
 
                 slidesHTML += `
                     <div class="col-md-6">
-                        <div class="project-card" data-language="${languageClass}">
+                        <div class="project-card fade-up ${delayClass}" data-language="${languageClass}">
                             <div class="project-header">
                                 <h3 class="project-title">
                                     <i class="fas fa-code-branch"></i>
@@ -564,86 +945,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const carouselInstance = new bootstrap.Carousel(carousel, {
             interval: false, // Desativa a rolagem automática
         });
-    }
 
-    // Função para renderizar uma linha de projetos
-    function renderProjectRow(projects) {
-        let rowHTML = '';
-
-        projects.forEach((project) => {
-            const languageClass = getSafeLanguageClass(project.language);
-
-            rowHTML += `
-                <div class="col-md-6">
-                    <div class="project-card mb-4" data-language="${languageClass}">
-                        <div class="project-header">
-                            <h3 class="project-title">
-                                <i class="fas fa-code-branch"></i>
-                                ${project.name}
-                            </h3>
-                            <div class="project-links">
-                                ${
-                                    project.homepage
-                                        ? `<a href="${project.homepage}" target="_blank" title="Ver Demo">
-                                        <i class="fas fa-external-link-alt"></i>
-                                    </a>`
-                                        : ''
-                                }
-                                <a href="${
-                                    project.html_url
-                                }" target="_blank" title="Ver no GitHub">
-                                    <i class="fab fa-github"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-body">
-                            <p class="project-description">
-                                ${
-                                    project.description ||
-                                    'Sem descrição disponível.'
-                                }
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">${
-                                    project.language || 'N/A'
-                                }</span>
-                                ${
-                                    project.topics && project.topics.length > 0
-                                        ? project.topics
-                                              .slice(0, 3)
-                                              .map(
-                                                  (topic) =>
-                                                      `<span class="tech-tag">${topic}</span>`
-                                              )
-                                              .join('')
-                                        : ''
-                                }
-                            </div>
-                        </div>
-                        <div class="project-footer">
-                            <div class="project-language">
-                                <span class="language-dot ${languageClass}"></span>
-                                <span class="language-name">${
-                                    project.language || 'N/A'
-                                }</span>
-                            </div>
-                            <div class="project-meta">
-                                <div class="meta-item" title="Stars">
-                                    <i class="fas fa-star"></i>
-                                    <span>${project.stargazers_count}</span>
-                                </div>
-                                <div class="meta-item" title="Forks">
-                                    <i class="fas fa-code-branch"></i>
-                                    <span>${project.forks_count}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-
-        return rowHTML;
+        // Adicionar as classes para ativar as animações
+        setTimeout(() => {
+            document.querySelectorAll('.project-card').forEach((card) => {
+                card.classList.add('active');
+            });
+        }, 100);
     }
 
     // Função auxiliar para capitalizar primeira letra
