@@ -573,6 +573,14 @@ function initFormValidation() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
+    // Verificar se o EmailJS já inicializou o formulário
+    if (window.emailJSInitialized === true) {
+        console.log(
+            'Formulário já inicializado pelo EmailJS, ignorando inicialização padrão'
+        );
+        return;
+    }
+
     // Adicionar classe para validação em tempo real
     form.classList.add('needs-validation');
 
