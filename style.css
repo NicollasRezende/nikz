@@ -513,6 +513,25 @@ button,
     animation: fadeIn 0.5s ease forwards;
 }
 
+.input-icon i {
+    position: relative;
+    top: 55px;
+    left: 10px;
+    transform: translateY(-60%); /* De -50% para -60% para alinhar melhor com o texto */
+    color: var(--accent-primary, #00c6ff);
+    font-size: 1.1rem; /* Levemente maior para melhor proporção */
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 2;
+    line-height: 1;
+}
+.input-icon input,
+.input-icon textarea {
+    padding-left: 2.2rem !important;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+
 /* ----- Cards ----- */
 .card {
     background-color: var(--card-bg);
@@ -2866,8 +2885,6 @@ button,
     position: absolute;
 }
 
-/* Continuação do arquivo CSS organizado */
-
 .quote::before {
     top: -10px;
     left: 0;
@@ -2895,7 +2912,7 @@ button,
 
 .journey-cta .btn:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    box-shadow: 0 10px 20px rgba(0, 198, 255, 0.3), var(--shadow-glow);
 }
 
 /* ==========================================================================
@@ -3305,3 +3322,4 @@ button,
         --accent-secondary: #00ff00;
     }
 }
+
