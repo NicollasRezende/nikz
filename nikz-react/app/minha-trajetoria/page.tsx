@@ -15,7 +15,7 @@ export default function MinhaTrajetoriaPage() {
   return (
     <div className="min-h-screen">
       {/* Header Section */}
-      <Section className="py-24 md:py-32 bg-gradient-to-b from-primary/5 to-transparent">
+      <Section id="header" className="py-24 md:py-32 bg-gradient-to-b from-primary/5 to-transparent">
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
             Minha Jornada como Desenvolvedor
@@ -29,10 +29,10 @@ export default function MinhaTrajetoriaPage() {
 
       {/* Timeline Section */}
       <Section id="timeline">
-        <SectionHeader
-          title="Linha do Tempo"
-          subtitle="Do primeiro contato com hardware até hoje"
-        />
+        <SectionHeader title="Linha do Tempo" />
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+          Do primeiro contato com hardware até hoje
+        </p>
 
         <div className="max-w-4xl mx-auto space-y-12">
           {/* Timeline Item 1 */}
@@ -301,10 +301,10 @@ end`}</code>
 
       {/* Current Position Section */}
       <Section id="current-position" className="bg-gradient-to-b from-transparent to-primary/5">
-        <SectionHeader
-          title="Posição Atual"
-          subtitle="Onde estou hoje na minha jornada"
-        />
+        <SectionHeader title="Posição Atual" />
+        <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+          Onde estou hoje na minha jornada
+        </p>
 
         <div className="max-w-4xl mx-auto">
           <GlassCard className="p-8">
@@ -428,7 +428,7 @@ end`}</code>
       </Section>
 
       {/* CTA Section */}
-      <Section className="pb-24">
+      <Section id="cta" className="pb-24">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <h2 className="text-3xl font-bold mb-8">
             Vamos construir algo incrível juntos?

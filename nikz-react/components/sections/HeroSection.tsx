@@ -1,4 +1,6 @@
 // components/sections/HeroSection.tsx
+"use client";
+
 import Image from "next/image";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";

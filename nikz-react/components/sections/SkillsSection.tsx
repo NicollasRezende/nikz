@@ -1,4 +1,6 @@
 // components/sections/SkillsSection.tsx
+"use client";
+
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { GlassCard } from "@/components/ui/GlassCard";
