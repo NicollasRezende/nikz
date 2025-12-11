@@ -61,6 +61,69 @@ export const TYPEWRITER_TEXTS = [
   "Problem Solver",
 ];
 
+export const SKILLS = {
+  frontend: [
+    { name: "HTML5", icon: "devicon-html5-plain colored" },
+    { name: "CSS3", icon: "devicon-css3-plain colored" },
+    { name: "JavaScript", icon: "devicon-javascript-plain colored" },
+    { name: "React", icon: "devicon-react-original colored" },
+    { name: "TypeScript", icon: "devicon-typescript-plain colored" },
+    { name: "Bootstrap", icon: "devicon-bootstrap-plain colored" },
+  ],
+  backend: [
+    { name: "Python", icon: "devicon-python-plain colored" },
+    { name: "Django", icon: "devicon-django-plain colored" },
+    { name: "Flask", icon: "devicon-flask-original colored" },
+    { name: "Node.js", icon: "devicon-nodejs-plain colored" },
+    { name: "Express", icon: "devicon-express-original colored" },
+    { name: "Java", icon: "devicon-java-plain colored" },
+  ],
+  database: [
+    { name: "PostgreSQL", icon: "devicon-postgresql-plain colored" },
+    { name: "MySQL", icon: "devicon-mysql-plain colored" },
+    { name: "MongoDB", icon: "devicon-mongodb-plain colored" },
+  ],
+  devops: [
+    { name: "Git", icon: "devicon-git-plain colored" },
+    { name: "Docker", icon: "devicon-docker-plain colored" },
+    { name: "Linux", icon: "devicon-linux-plain" },
+    { name: "VS Code", icon: "devicon-vscode-plain colored" },
+    { name: "GitHub", icon: "devicon-github-original" },
+  ],
+  dataScience: [
+    { name: "NumPy", icon: "devicon-numpy-plain colored" },
+    { name: "Pandas", icon: "devicon-pandas-plain colored" },
+    { name: "Jupyter", icon: "devicon-jupyter-plain colored" },
+  ],
+};
+
+export const CONTACT_INFO = [
+  {
+    icon: "fas fa-envelope",
+    label: "Email",
+    value: "nicollaspereirarezende@outlook.com.br",
+    href: "mailto:nicollaspereirarezende@outlook.com.br",
+  },
+  {
+    icon: "fab fa-linkedin-in",
+    label: "LinkedIn",
+    value: "linkedin.com/in/nicollas-rezende",
+    href: "https://www.linkedin.com/in/nicollas-rezende/",
+  },
+  {
+    icon: "fab fa-github",
+    label: "GitHub",
+    value: "github.com/NicollasRezende",
+    href: "https://github.com/NicollasRezende",
+  },
+  {
+    icon: "fab fa-whatsapp",
+    label: "WhatsApp",
+    value: "+55 61 99176-9500",
+    href: "https://wa.me/5561991769500",
+  },
+];
+
 export const SITE_CONFIG = {
   name: "Nicollas Rezende",
   title: "Nicollas Rezende | Desenvolvedor Full Stack",
