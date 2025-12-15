@@ -325,12 +325,6 @@ export const SITE_CONFIG = {
 
 ---
 
-## 📝 Licença
-
-Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
 ## 👤 Autor
 
 **Nicollas Pereira Rezende**
@@ -341,27 +335,6 @@ Este projeto está sob a licença **MIT**. Veja o arquivo [LICENSE](LICENSE) par
 - 📧 Email: nicollasprezende@gmail.com
 
 ---
-
-## 🙏 Agradecimentos
-
-- **Next.js Team** pela framework incrível
-- **Vercel** pelo hosting gratuito
-- **Tailwind CSS** pelo sistema de design
-- **Framer Motion** pelas animações suaves
-- **Comunidade Open Source** por todas as bibliotecas
-
----
-
-## 🚀 Roadmap
-
-- [ ] Adicionar blog com MDX
-- [ ] Integração com CMS (Sanity/Contentful)
-- [ ] Tema light/dark toggle
-- [ ] Modo de acessibilidade avançado
-- [ ] PWA (Progressive Web App)
-- [ ] Internacionalização (i18n) - PT/EN
-- [ ] Analytics com Google Analytics
-- [ ] Testes E2E com Playwright
 
 ---
 
