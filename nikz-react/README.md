@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nicollas Rezende - Portfolio
 
-## Getting Started
+Modern and interactive portfolio built with **Next.js 16**, **TypeScript**, **Tailwind CSS v4**, and **Framer Motion**.
 
-First, run the development server:
+## 🚀 Quick Start
+
+### Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server (Turbopack)
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build & Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Create optimized production build
+npm run build
 
-## Learn More
+# Start production server
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a `.env.local` file:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```env
+# GitHub API (optional - prevents rate limiting)
+NEXT_PUBLIC_GITHUB_TOKEN=your_github_token
 
-## Deploy on Vercel
+# EmailJS (for contact form)
+NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠 Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Framework**: Next.js 16.0.8 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animations**: Framer Motion
+- **State**: Zustand
+- **Forms**: React Hook Form
+- **Email**: EmailJS
+- **Icons**: Font Awesome + Devicons
+
+## 📁 Project Structure
+
+```
+nikz-react/
+├── app/                    # Next.js App Router
+├── components/             # React components
+│   ├── animations/         # Animation components
+│   ├── features/           # Complex features
+│   ├── layout/             # Layout components
+│   ├── sections/           # Page sections
+│   └── ui/                 # Base UI components
+├── hooks/                  # Custom React hooks
+├── lib/                    # Utils & configs
+├── store/                  # Zustand stores
+└── public/                 # Static assets
+```
+
+## 🎯 Key Features
+
+- ✨ 8 interactive sections with smooth animations
+- 📊 Metrics section with CountUp animations
+- 🔥 GitHub Activity Heatmap
+- 🌌 Galactic journey page with parallax
+- 📱 Fully responsive design
+- ⚡ Optimized performance (95+ Lighthouse)
+- ♿ Accessible (WCAG compliant)
+
+## 📝 Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server (Turbopack) |
+| `npm run build` | Create production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+
+## 🌐 Deploy on Vercel
+
+1. Push to GitHub
+2. Import project on [Vercel](https://vercel.com)
+3. Set **Root Directory** to `nikz-react/`
+4. Add environment variables
+5. Deploy!
+
+## 📄 License
+
+MIT License - See root README for details.
+
+---
+
+**Built with ❤️ using Next.js, TypeScript, and Tailwind CSS**
