@@ -6,25 +6,41 @@ const GITHUB_API_BASE = "https://api.github.com";
 const USERNAME = process.env.NEXT_PUBLIC_GITHUB_USERNAME || "NicollasRezende";
 
 /**
- * Fetch user repositories from GitHub API
+ * Fetch all user repositories from GitHub API with pagination
  */
 export async function fetchGitHubRepos(): Promise<GitHubRepo[]> {
   try {
-    const response = await axios.get<GitHubRepo[]>(
-      `${GITHUB_API_BASE}/users/${USERNAME}/repos`,
-      {
-        params: {
-          sort: "updated",
-          per_page: 30,
-          type: "owner",
-        },
-      }
-    );
+    let allRepos: GitHubRepo[] = [];
+    let page = 1;
+    let hasMore = true;
 
-    // Filter out forks and repos without descriptions
-    const filtered = response.data.filter(
-      (repo) => !repo.fork && repo.description
-    );
+    // Fetch all pages
+    while (hasMore) {
+      const response = await axios.get<GitHubRepo[]>(
+        `${GITHUB_API_BASE}/users/${USERNAME}/repos`,
+        {
+          params: {
+            sort: "updated",
+            per_page: 100,
+            page,
+            type: "owner",
+          },
+        }
+      );
+
+      if (response.data.length === 0) {
+        hasMore = false;
+      } else {
+        allRepos = [...allRepos, ...response.data];
+        page++;
+
+        // Safety limit to prevent infinite loops
+        if (page > 10) hasMore = false;
+      }
+    }
+
+    // Filter out only forks (keep repos even without descriptions)
+    const filtered = allRepos.filter((repo) => !repo.fork);
 
     return filtered;
   } catch (error) {

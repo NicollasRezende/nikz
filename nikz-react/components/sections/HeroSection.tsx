@@ -1,119 +1,308 @@
 // components/sections/HeroSection.tsx
 "use client";
 
-import Image from "next/image";
+import { motion } from "framer-motion";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { TypeWriter } from "@/components/features/TypeWriter";
-import { FadeUp } from "@/components/animations/FadeUp";
-import { SOCIAL_LINKS, TECH_ICONS, TYPEWRITER_TEXTS } from "@/lib/constants";
+import { OrbitingIcons } from "@/components/features/OrbitingIcons";
+import { SOCIAL_LINKS, TYPEWRITER_TEXTS } from "@/lib/constants";
 import { scrollToElement } from "@/lib/utils";
 
 export function HeroSection() {
   return (
     <Section
       id="home"
-      className="min-h-screen flex items-center pt-16 bg-gradient-to-b from-gray-50 to-white dark:from-dark-bg dark:to-dark-card"
+      className="relative min-h-screen flex items-center pt-20 pb-20 overflow-hidden"
     >
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        {/* Text Content */}
-        <FadeUp>
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-              Olá, eu sou{" "}
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Nicollas Rezende
-              </span>
-            </h1>
+      {/* Animated Background Gradients */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Top-left gradient orb */}
+        <motion.div
+          className="absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-30"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(0,198,255,0.4) 0%, rgba(77,140,255,0.2) 50%, transparent 100%)",
+            filter: "blur(60px)",
+          }}
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
 
-            <h2 className="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300 h-12">
+        {/* Top-right gradient orb */}
+        <motion.div
+          className="absolute -top-20 -right-40 w-[500px] h-[500px] rounded-full opacity-30"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(157,92,252,0.4) 0%, rgba(255,86,177,0.2) 50%, transparent 100%)",
+            filter: "blur(60px)",
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            x: [0, -30, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+
+        {/* Bottom gradient orb */}
+        <motion.div
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full opacity-20"
+          style={{
+            background:
+              "radial-gradient(ellipse, rgba(0,198,255,0.3) 0%, rgba(77,140,255,0.15) 40%, transparent 100%)",
+            filter: "blur(80px)",
+          }}
+          animate={{
+            scale: [1, 1.15, 1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Grid pattern overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
+            `,
+            backgroundSize: "50px 50px",
+          }}
+        />
+
+        {/* Floating particles */}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={`particle-${i}`}
+            className="absolute w-1 h-1 rounded-full bg-cyan-400"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              boxShadow: "0 0 10px rgba(0,198,255,0.8)",
+            }}
+            animate={{
+              y: [0, -30, 0],
+              opacity: [0.2, 0.8, 0.2],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: 3 + Math.random() * 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: Math.random() * 2,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        {/* Text Content - Left Side */}
+        <motion.div
+          className="space-y-8 order-2 lg:order-1"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          {/* Greeting */}
+          <motion.h1
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Olá, eu sou{" "}
+            <motion.span
+              className="inline-block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+              style={{
+                backgroundSize: "200% 200%",
+              }}
+            >
+              Nicollas Rezende
+            </motion.span>
+          </motion.h1>
+
+          {/* TypeWriter */}
+          <motion.div
+            className="h-12 sm:h-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-light-text-secondary dark:text-gray-300">
               <TypeWriter texts={TYPEWRITER_TEXTS} />
             </h2>
+          </motion.div>
 
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Transformando ideias em soluções digitais com código limpo,
-              arquitetura eficiente e experiências de usuário excepcionais.
-            </p>
+          {/* Description */}
+          <motion.p
+            className="text-lg sm:text-xl text-light-text-secondary dark:text-gray-400 max-w-2xl leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            Transformando ideias em soluções digitais com código limpo,
+            arquitetura eficiente e experiências de usuário{" "}
+            <span className="text-cyan-500 font-semibold">excepcionais</span>.
+          </motion.p>
 
-            {/* CTA Buttons */}
-            <div className="flex gap-4">
-              <Button onClick={() => scrollToElement("projects")}>
-                Ver Projetos
+          {/* CTA Buttons */}
+          <motion.div
+            className="flex flex-wrap gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Button
+                onClick={() => scrollToElement("projects")}
+                className="relative overflow-hidden group px-8 py-4 text-base sm:text-lg"
+                style={{
+                  background: "linear-gradient(120deg, #00c6ff, #4d8cff)",
+                  boxShadow: "0 4px 20px rgba(0,198,255,0.4)",
+                }}
+              >
+                <span className="relative z-10">Ver Projetos</span>
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
+                />
               </Button>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Button
                 variant="outline"
                 onClick={() => scrollToElement("contact")}
+                className="px-8 py-4 text-base sm:text-lg border-2 border-cyan-500 text-cyan-500 hover:bg-cyan-500/10"
               >
                 Contato
               </Button>
-            </div>
+            </motion.div>
+          </motion.div>
 
-            {/* Social Links */}
-            <div className="flex gap-4 pt-4">
-              {SOCIAL_LINKS.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target={link.name !== "Email" ? "_blank" : undefined}
-                  rel={
-                    link.name !== "Email" ? "noopener noreferrer" : undefined
-                  }
-                  className="w-12 h-12 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-700 hover:bg-primary hover:text-white transition-all hover:scale-110"
-                  aria-label={link.ariaLabel}
-                  title={link.name}
-                >
-                  <i className={link.icon} />
-                </a>
-              ))}
-            </div>
-          </div>
-        </FadeUp>
-
-        {/* Profile Image */}
-        <FadeUp delay={0.2}>
-          <div className="relative">
-            {/* Decorative Background */}
-            <div className="absolute inset-0 bg-gradient-primary rounded-full blur-3xl opacity-20 animate-pulse" />
-
-            {/* Profile Container */}
-            <div className="relative">
-              <div className="w-full max-w-md mx-auto aspect-square rounded-full overflow-hidden border-4 border-primary shadow-2xl">
-                <Image
-                  src="/imgs/55924678.png"
-                  alt="Foto de Nicollas Rezende - Desenvolvedor Full Stack"
-                  width={400}
-                  height={400}
-                  priority
-                  className="w-full h-full object-cover"
+          {/* Social Links */}
+          <motion.div
+            className="flex gap-4 pt-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1 }}
+          >
+            {SOCIAL_LINKS.map((link, index) => (
+              <motion.a
+                key={link.name}
+                href={link.url}
+                target={link.name !== "Email" ? "_blank" : undefined}
+                rel={link.name !== "Email" ? "noopener noreferrer" : undefined}
+                className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center overflow-hidden group"
+                style={{
+                  background: "rgba(255, 255, 255, 0.05)",
+                  backdropFilter: "blur(10px)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                }}
+                aria-label={link.ariaLabel}
+                title={link.name}
+                whileHover={{ scale: 1.15, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 1 + index * 0.1 }}
+              >
+                <i className={`${link.icon} text-xl relative z-10`} />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 opacity-0 group-hover:opacity-100"
+                  transition={{ duration: 0.3 }}
                 />
-              </div>
+              </motion.a>
+            ))}
+          </motion.div>
+        </motion.div>
 
-              {/* Tech Icons */}
-              <div className="absolute -right-4 top-1/4 space-y-4">
-                {TECH_ICONS.map((tech, index) => (
-                  <div
-                    key={tech.name}
-                    className="w-12 h-12 rounded-lg bg-white dark:bg-gray-800 shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                    title={tech.tooltip}
-                  >
-                    <i className={`${tech.icon} text-2xl`} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </FadeUp>
+        {/* Orbiting Icons - Right Side */}
+        <motion.div
+          className="flex items-center justify-center order-1 lg:order-2"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <OrbitingIcons
+            imageUrl="/imgs/55924678.png"
+            imageAlt="Foto de Nicollas Rezende - Desenvolvedor Full Stack"
+          />
+        </motion.div>
       </div>
 
       {/* Scroll Down Indicator */}
-      <button
+      <motion.button
         onClick={() => scrollToElement("about")}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 group cursor-pointer"
         aria-label="Rolar para a seção Sobre"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 10, 0] }}
+        transition={{
+          opacity: { duration: 0.6, delay: 1.2 },
+          y: {
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          },
+        }}
+        whileHover={{ scale: 1.1 }}
       >
-        <i className="fas fa-chevron-down text-2xl text-primary" />
-      </button>
+        <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-cyan-500 transition-colors">
+          Role para baixo
+        </span>
+        <motion.div
+          className="w-6 h-10 rounded-full border-2 border-cyan-500 flex items-start justify-center p-2"
+          whileHover={{
+            boxShadow: "0 0 20px rgba(0,198,255,0.6)",
+          }}
+        >
+          <motion.div
+            className="w-1.5 h-1.5 rounded-full bg-cyan-500"
+            animate={{
+              y: [0, 12, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </motion.div>
+      </motion.button>
     </Section>
   );
 }

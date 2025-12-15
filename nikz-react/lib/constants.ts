@@ -37,46 +37,47 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 export const TECH_ICONS: TechIcon[] = [
+  { name: "Java", icon: "devicon-java-plain", tooltip: "Java" },
+  { name: "Spring", icon: "devicon-spring-plain", tooltip: "Spring Framework" },
   { name: "Python", icon: "devicon-python-plain", tooltip: "Python" },
-  {
-    name: "JavaScript",
-    icon: "devicon-javascript-plain",
-    tooltip: "JavaScript",
-  },
   { name: "React", icon: "devicon-react-original", tooltip: "React" },
-  { name: "Node.js", icon: "devicon-nodejs-plain", tooltip: "Node.js" },
+  { name: "Next.js", icon: "devicon-nextjs-plain", tooltip: "Next.js" },
+  { name: "TypeScript", icon: "devicon-typescript-plain", tooltip: "TypeScript" },
+  { name: "Docker", icon: "devicon-docker-plain", tooltip: "Docker" },
+  { name: "PostgreSQL", icon: "devicon-postgresql-plain", tooltip: "PostgreSQL" },
 ];
 
 export const STAT_CARDS: StatCard[] = [
   { value: "2+", label: "Anos de Experiência" },
-  { value: "20+", label: "Projetos Completos" },
-  { value: "10+", label: "Tecnologias Dominadas" },
+  { value: "4x", label: "Hackathons Vencidos" },
+  { value: "30+", label: "Tecnologias Dominadas" },
 ];
 
 export const TYPEWRITER_TEXTS = [
   "Desenvolvedor Full Stack",
-  "Python Enthusiast",
-  "JavaScript Developer",
-  "React Specialist",
-  "Problem Solver",
+  "Java (Spring/Liferay) Developer",
+  "Python (Flask/FastAPI) Expert",
+  "React/Next.js Specialist",
+  "APIs & Microservices Architect",
+  "Automação & CI/CD Engineer",
 ];
 
 export const SKILLS = {
   frontend: [
-    { name: "HTML5", icon: "devicon-html5-plain colored" },
-    { name: "CSS3", icon: "devicon-css3-plain colored" },
-    { name: "JavaScript", icon: "devicon-javascript-plain colored" },
     { name: "React", icon: "devicon-react-original colored" },
+    { name: "Next.js", icon: "devicon-nextjs-plain colored" },
     { name: "TypeScript", icon: "devicon-typescript-plain colored" },
-    { name: "Bootstrap", icon: "devicon-bootstrap-plain colored" },
+    { name: "JavaScript", icon: "devicon-javascript-plain colored" },
+    { name: "Tailwind", icon: "devicon-tailwindcss-plain colored" },
+    { name: "Sass", icon: "devicon-sass-original colored" },
   ],
   backend: [
-    { name: "Python", icon: "devicon-python-plain colored" },
-    { name: "Django", icon: "devicon-django-plain colored" },
-    { name: "Flask", icon: "devicon-flask-original colored" },
-    { name: "Node.js", icon: "devicon-nodejs-plain colored" },
-    { name: "Express", icon: "devicon-express-original colored" },
     { name: "Java", icon: "devicon-java-plain colored" },
+    { name: "Spring", icon: "devicon-spring-plain colored" },
+    { name: "Python", icon: "devicon-python-plain colored" },
+    { name: "Flask", icon: "devicon-flask-original colored" },
+    { name: "FastAPI", icon: "devicon-fastapi-plain colored" },
+    { name: "Node.js", icon: "devicon-nodejs-plain colored" },
   ],
   database: [
     { name: "PostgreSQL", icon: "devicon-postgresql-plain colored" },
@@ -84,16 +85,16 @@ export const SKILLS = {
     { name: "MongoDB", icon: "devicon-mongodb-plain colored" },
   ],
   devops: [
-    { name: "Git", icon: "devicon-git-plain colored" },
     { name: "Docker", icon: "devicon-docker-plain colored" },
+    { name: "GitLab", icon: "devicon-gitlab-plain colored" },
+    { name: "Git", icon: "devicon-git-plain colored" },
     { name: "Linux", icon: "devicon-linux-plain" },
-    { name: "VS Code", icon: "devicon-vscode-plain colored" },
     { name: "GitHub", icon: "devicon-github-original" },
   ],
-  dataScience: [
-    { name: "NumPy", icon: "devicon-numpy-plain colored" },
-    { name: "Pandas", icon: "devicon-pandas-plain colored" },
-    { name: "Jupyter", icon: "devicon-jupyter-plain colored" },
+  frameworks: [
+    { name: "Liferay", icon: "fas fa-server" },
+    { name: "Django", icon: "devicon-django-plain colored" },
+    { name: "Keycloak", icon: "fas fa-lock" },
   ],
 };
 
@@ -128,7 +129,7 @@ export const SITE_CONFIG = {
   name: "Nicollas Rezende",
   title: "Nicollas Rezende | Desenvolvedor Full Stack",
   description:
-    "Desenvolvedor Full Stack especializado em Python, JavaScript, React e automação. Transformando ideias em soluções digitais eficientes.",
+    "Desenvolvedor Full Stack | Java (Spring/Liferay), Python (Flask/FastAPI), React/Next.js | APIs, Automação e Microserviços | Docker, CI/CD | Especialista em portais governamentais e soluções escaláveis.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://nicollasrezende.dev",
   ogImage: "/imgs/og-image.jpg",
   email: "nicollaspereirarezende@outlook.com.br",

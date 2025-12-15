@@ -1,33 +1,66 @@
 @import "tailwindcss";
 
-/* Custom Theme Configuration for Tailwind v4 */
+/* ==================== CUSTOM THEME CONFIGURATION ==================== */
 @theme {
-  /* Primary Colors */
-  --color-primary: #6366f1;
-  --color-primary-light: #818cf8;
-  --color-primary-dark: #4f46e5;
+  /* Primary Color Palette - Cyan & Blue Gradient Theme */
+  --color-primary: #00c6ff;
+  --color-primary-light: #4d8cff;
+  --color-primary-dark: #0099cc;
+
+  /* Secondary Colors - Purple & Pink Accents */
+  --color-secondary: #9d5cfc;
+  --color-secondary-light: #b47dff;
+  --color-secondary-dark: #7a3fd6;
+
+  --color-accent: #ff56b1;
+  --color-accent-light: #ff89d0;
+  --color-accent-dark: #d63388;
+
+  /* Cyan Shades */
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+
+  /* Blue Shades */
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+
+  /* Purple Shades */
+  --color-purple-400: #c084fc;
+  --color-purple-500: #a855f7;
+  --color-purple-600: #9333ea;
 
   /* Dark Theme Colors */
   --color-dark-bg: #0a1022;
   --color-dark-card: #1a1f3a;
   --color-dark-border: #2a2f4a;
+  --color-dark-hover: #252b4a;
 
-  /* Light Theme Colors */
-  --color-light-bg: #ffffff;
-  --color-light-card: #f8f9fa;
-  --color-light-border: #e9ecef;
+  /* Glass Effect Colors */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-bg-light: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
 
-  /* Animations */
+  /* Animation Durations */
   --animate-fade-up: fade-up 0.6s ease-out;
   --animate-scale-in: scale-in 0.6s ease-out;
   --animate-shake: shake 0.5s ease-in-out;
   --animate-blink: blink 1s infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 4s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 30s linear infinite;
+  --animate-glow: glow 3s ease-in-out infinite;
 
   /* Backdrop Blur */
   --backdrop-blur-xs: 2px;
+  --backdrop-blur-sm: 4px;
+  --backdrop-blur-md: 8px;
+  --backdrop-blur-lg: 12px;
+  --backdrop-blur-xl: 16px;
 }
 
-/* Keyframe Animations */
+/* ==================== KEYFRAME ANIMATIONS ==================== */
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -67,36 +100,184 @@
     opacity: 1;
   }
   50% {
-    opacity: 0;
+    opacity: 0.3;
   }
 }
 
-/* Custom Utility Classes */
-@layer utilities {
-  .bg-gradient-primary {
-    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
   }
-
-  .bg-gradient-secondary {
-    background-image: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  }
-
-  .text-gradient-primary {
-    background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  50% {
+    transform: translateY(-20px);
   }
 }
 
-/* Base Styles */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 198, 255, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 198, 255, 0.6);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 198, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 198, 255, 0.6);
+  }
+}
+
+/* ==================== BASE STYLES ==================== */
 @layer base {
   * {
-    @apply border-gray-200 dark:border-gray-700;
+    @apply border-gray-700;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Para compensar o header fixo */
+  }
+
+  /* Otimização de performance */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: linear-gradient(120deg, #00c6ff, #4d8cff);
+    border-radius: 10px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(120deg, #4d8cff, #00c6ff);
   }
 
   body {
-    @apply bg-white dark:bg-dark-bg text-gray-900 dark:text-white;
+    @apply bg-dark-bg text-white;
     transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden; /* Previne scroll horizontal indesejado */
+    min-height: 100vh;
+  }
+
+  /* Otimização para animações */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Selection Color */
+  ::selection {
+    background: rgba(0, 198, 255, 0.3);
+    color: #ffffff;
+  }
+
+  ::-moz-selection {
+    background: rgba(0, 198, 255, 0.3);
+    color: #ffffff;
+  }
+}
+
+/* ==================== COMPONENT STYLES ==================== */
+@layer components {
+  /* Glass Card Effects */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Card Styles */
+  .card-primary {
+    @apply bg-dark-card rounded-xl p-6 shadow-lg;
+    @apply transition-all duration-300;
+    @apply hover:shadow-2xl hover:-translate-y-2;
+  }
+
+  .card-glass {
+    @apply rounded-xl p-6;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .card-glass:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(0, 198, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 198, 255, 0.2);
+    transform: translateY(-5px);
+  }
+
+  /* Button Styles */
+  .btn-primary {
+    @apply px-6 py-3 rounded-lg font-semibold;
+    @apply text-white;
+    @apply transition-all duration-300;
+    @apply hover:shadow-lg hover:scale-105;
+    background: linear-gradient(120deg, #00c6ff 0%, #4d8cff 100%);
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 rounded-lg font-semibold;
+    @apply border-2 border-cyan-500 text-cyan-500;
+    @apply transition-all duration-300;
+    @apply hover:bg-cyan-500 hover:text-white;
+  }
+
+  .btn-glass {
+    @apply px-6 py-3 rounded-lg font-semibold;
+    @apply text-white;
+    @apply transition-all duration-300;
+    @apply hover:scale-105;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-glass:hover {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+@media (max-width: 768px) {
+  .section {
+    @apply py-12;
+  }
+}
+
+/* ==================== PRINT STYLES ==================== */
+@media print {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 }

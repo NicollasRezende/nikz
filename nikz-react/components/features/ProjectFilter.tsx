@@ -14,10 +14,10 @@ export function ProjectFilter() {
       <button
         onClick={() => setFilter("all")}
         className={cn(
-          "px-4 py-2 rounded-lg font-medium transition-all",
+          "px-6 py-3 rounded-xl font-semibold transition-all duration-300 relative z-10",
           filter === "all"
-            ? "bg-gradient-primary text-white shadow-lg"
-            : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+            ? "bg-linear-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/50"
+            : "bg-light-bg-tertiary/90 dark:bg-slate-800/90 text-light-text-primary dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 border border-light-card-border dark:border-slate-700/50 hover:border-cyan-500/50"
         )}
       >
         Todos
@@ -28,10 +28,10 @@ export function ProjectFilter() {
           key={lang}
           onClick={() => setFilter(lang)}
           className={cn(
-            "px-4 py-2 rounded-lg font-medium transition-all",
+            "px-6 py-3 rounded-xl font-semibold transition-all duration-300 relative z-10",
             filter === lang
-              ? "bg-gradient-primary text-white shadow-lg"
-              : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
+              ? "bg-linear-to-r from-cyan-500 to-blue-500 text-white shadow-lg shadow-cyan-500/50"
+              : "bg-light-bg-tertiary/90 dark:bg-slate-800/90 text-light-text-primary dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 border border-light-card-border dark:border-slate-700/50 hover:border-cyan-500/50"
           )}
         >
           {lang}

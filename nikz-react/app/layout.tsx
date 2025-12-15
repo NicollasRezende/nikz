@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { SITE_CONFIG } from "@/lib/constants";
 import { Navbar } from "@/components/layout/Navbar";
@@ -112,13 +111,11 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <ScrollProgress />
-          <Navbar />
-          <main id="conteudo-principal">{children}</main>
-          <Footer />
-          <BackToTop />
-        </ThemeProvider>
+        <ScrollProgress />
+        <Navbar />
+        <main id="conteudo-principal">{children}</main>
+        <Footer />
+        <BackToTop />
       </body>
     </html>
   );
