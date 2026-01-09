@@ -6,8 +6,10 @@ import { useProjectStore } from "@/store/useProjectStore";
 import { fetchGitHubRepos } from "@/lib/github";
 
 export function useGitHubProjects() {
-  const { projects, setProjects, isLoading, setIsLoading } =
-    useProjectStore();
+  const projects = useProjectStore((state) => state.projects);
+  const setProjects = useProjectStore((state) => state.setProjects);
+  const isLoading = useProjectStore((state) => state.isLoading);
+  const setIsLoading = useProjectStore((state) => state.setIsLoading);
 
   useEffect(() => {
     async function loadProjects() {
@@ -26,7 +28,8 @@ export function useGitHubProjects() {
     }
 
     loadProjects();
-  }, []); // Empty deps - only run once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Intencional: queremos executar apenas uma vez na montagem
 
   return { projects, isLoading };
 }

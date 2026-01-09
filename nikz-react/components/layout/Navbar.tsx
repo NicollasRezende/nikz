@@ -1,7 +1,7 @@
 // components/layout/Navbar.tsx
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo, memo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/constants";
@@ -9,12 +9,15 @@ import { useScrollSpy } from "@/hooks/useScrollSpy";
 import { scrollToElement } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
-export function Navbar() {
+export const Navbar = memo(function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
-  const activeSection = useScrollSpy(NAV_ITEMS.map((item) => item.id));
+
+  // Memoizar array de IDs para evitar recriação
+  const sectionIds = useMemo(() => NAV_ITEMS.map((item) => item.id), []);
+  const activeSection = useScrollSpy(sectionIds);
 
   // Otimizado com useCallback
   const handleNavClick = useCallback((id: string) => {
@@ -27,11 +30,22 @@ export function Navbar() {
     setIsMobileMenuOpen(false);
   }, [isHomePage]);
 
-  // Detect scroll para adicionar sombra no header
+  // Detect scroll para adicionar sombra no header - com throttle manual
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 10);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+
+    // Verificar estado inicial
+    handleScroll();
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -160,4 +174,4 @@ export function Navbar() {
       </nav>
     </header>
   );
-}
+});

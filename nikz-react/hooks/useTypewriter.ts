@@ -27,46 +27,45 @@ export function useTypewriter({
     const currentText = texts[currentIndex];
 
     const typeNextChar = () => {
-      if (!isDeleting) {
-        // Typing
-        if (displayText.length < currentText.length) {
-          setDisplayText(currentText.slice(0, displayText.length + 1));
-          timeoutRef.current = setTimeout(typeNextChar, speed);
+      setDisplayText((prevText) => {
+        if (!isDeleting) {
+          // Typing
+          if (prevText.length < currentText.length) {
+            const nextText = currentText.slice(0, prevText.length + 1);
+            timeoutRef.current = setTimeout(typeNextChar, speed);
+            return nextText;
+          } else {
+            // Finished typing, wait then start deleting
+            timeoutRef.current = setTimeout(() => {
+              setIsDeleting(true);
+            }, delayBetween);
+            return prevText;
+          }
         } else {
-          // Finished typing, wait then start deleting
-          timeoutRef.current = setTimeout(() => {
-            setIsDeleting(true);
-          }, delayBetween);
+          // Deleting
+          if (prevText.length > 0) {
+            const nextText = prevText.slice(0, -1);
+            timeoutRef.current = setTimeout(typeNextChar, deleteSpeed);
+            return nextText;
+          } else {
+            // Finished deleting, move to next text
+            setIsDeleting(false);
+            setCurrentIndex((prev) => (prev + 1) % texts.length);
+            return prevText;
+          }
         }
-      } else {
-        // Deleting
-        if (displayText.length > 0) {
-          setDisplayText(displayText.slice(0, -1));
-          timeoutRef.current = setTimeout(typeNextChar, deleteSpeed);
-        } else {
-          // Finished deleting, move to next text
-          setIsDeleting(false);
-          setCurrentIndex((prev) => (prev + 1) % texts.length);
-        }
-      }
+      });
     };
 
-    timeoutRef.current = setTimeout(typeNextChar, speed);
+    // Iniciar animação
+    timeoutRef.current = setTimeout(typeNextChar, isDeleting ? deleteSpeed : speed);
 
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [
-    displayText,
-    currentIndex,
-    isDeleting,
-    texts,
-    speed,
-    deleteSpeed,
-    delayBetween,
-  ]);
+  }, [currentIndex, isDeleting, texts, speed, deleteSpeed, delayBetween]);
 
   return displayText;
 }

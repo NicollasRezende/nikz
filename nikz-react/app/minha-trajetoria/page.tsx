@@ -3,7 +3,99 @@
 
 import Link from "next/link";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
+
+// Tipos para as partículas e estrelas
+type Star = {
+  id: number;
+  left: number;
+  top: number;
+  opacity: number;
+  duration: number;
+  delay: number;
+};
+
+type ModalParticle = {
+  id: number;
+  left: number;
+  top: number;
+};
+
+type ModalInnerParticle = {
+  id: number;
+  left: number;
+  top: number;
+  delay: number;
+};
+
+type CardParticle = {
+  id: number;
+  angle: number;
+  left: number;
+  top: number;
+  xOffset: number;
+  yOffset: number;
+};
+
+// Funções geradoras (serão chamadas apenas no cliente)
+const generateStarsLayer1 = () =>
+  Array.from({ length: 40 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+    opacity: Math.random() * 0.7 + 0.3,
+    duration: Math.random() * 3 + 2,
+    delay: Math.random() * 2,
+  }));
+
+const generateStarsLayer2 = () =>
+  Array.from({ length: 15 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+    opacity: Math.random() * 0.5 + 0.2,
+    duration: Math.random() * 4 + 3,
+    delay: Math.random() * 3,
+  }));
+
+const generateStarsLayer3 = () =>
+  Array.from({ length: 10 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+    opacity: Math.random() * 0.6 + 0.2,
+    duration: Math.random() * 5 + 4,
+    delay: Math.random() * 4,
+  }));
+
+const generateModalParticles = () =>
+  Array.from({ length: 10 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+  }));
+
+const generateModalInnerParticles = () =>
+  Array.from({ length: 5 }, (_, i) => ({
+    id: i,
+    left: Math.random() * 100,
+    top: Math.random() * 100,
+    delay: i * 0.6,
+  }));
+
+const generateCardParticles = () =>
+  Array.from({ length: 12 }, (_, i) => {
+    const angle = (i * 360) / 12;
+    const radius = 45;
+    return {
+      id: i,
+      angle,
+      left: 50 + Math.cos((angle * Math.PI) / 180) * radius,
+      top: 50 + Math.sin((angle * Math.PI) / 180) * radius,
+      xOffset: Math.cos((angle * Math.PI) / 180) * 10,
+      yOffset: Math.sin((angle * Math.PI) / 180) * 10,
+    };
+  });
 
 const experiences = [
   {
@@ -174,6 +266,24 @@ export default function MinhaTrajetoriaPage() {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
+  // Estados para partículas e estrelas (geradas apenas no cliente)
+  const [starsLayer1, setStarsLayer1] = useState<Star[]>([]);
+  const [starsLayer2, setStarsLayer2] = useState<Star[]>([]);
+  const [starsLayer3, setStarsLayer3] = useState<Star[]>([]);
+  const [modalParticles, setModalParticles] = useState<ModalParticle[]>([]);
+  const [modalInnerParticles, setModalInnerParticles] = useState<ModalInnerParticle[]>([]);
+  const [cardParticles, setCardParticles] = useState<CardParticle[]>([]);
+
+  // Gerar todas as partículas apenas no cliente para evitar hydration mismatch
+  useEffect(() => {
+    setStarsLayer1(generateStarsLayer1());
+    setStarsLayer2(generateStarsLayer2());
+    setStarsLayer3(generateStarsLayer3());
+    setModalParticles(generateModalParticles());
+    setModalInnerParticles(generateModalInnerParticles());
+    setCardParticles(generateCardParticles());
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -189,73 +299,73 @@ export default function MinhaTrajetoriaPage() {
     <div ref={containerRef} className="min-h-screen bg-dark-bg relative overflow-hidden">
       {/* Galactic Background with Parallax */}
       <div className="fixed inset-0 pointer-events-none">
-        {/* Stars Layer 1 - Fastest */}
+        {/* Stars Layer 1 - Fastest (Otimizado: 50→40 estrelas) */}
         <motion.div
           className="absolute inset-0"
           style={{ y: y1, opacity }}
         >
-          {[...Array(50)].map((_, i) => (
+          {starsLayer1.map((star) => (
             <motion.div
-              key={`star1-${i}`}
+              key={`star1-${star.id}`}
               className="absolute w-1 h-1 bg-white rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                opacity: Math.random() * 0.7 + 0.3,
+                left: `${star.left}%`,
+                top: `${star.top}%`,
+                opacity: star.opacity,
               }}
               animate={{
                 opacity: [0.3, 1, 0.3],
                 scale: [1, 1.5, 1],
               }}
               transition={{
-                duration: Math.random() * 3 + 2,
+                duration: star.duration,
                 repeat: Infinity,
-                delay: Math.random() * 2,
+                delay: star.delay,
               }}
             />
           ))}
         </motion.div>
 
-        {/* Stars Layer 2 - Medium */}
+        {/* Stars Layer 2 - Medium (Otimizado: 25→15 estrelas) */}
         <motion.div
           className="absolute inset-0"
           style={{ y: y2 }}
         >
-          {[...Array(25)].map((_, i) => (
+          {starsLayer2.map((star) => (
             <motion.div
-              key={`star2-${i}`}
+              key={`star2-${star.id}`}
               className="absolute w-2 h-2 bg-cyan-400 rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                opacity: Math.random() * 0.5 + 0.2,
+                left: `${star.left}%`,
+                top: `${star.top}%`,
+                opacity: star.opacity,
                 boxShadow: "0 0 10px rgba(0,198,255,0.5)",
               }}
               animate={{
                 opacity: [0.2, 0.8, 0.2],
               }}
               transition={{
-                duration: Math.random() * 4 + 3,
+                duration: star.duration,
                 repeat: Infinity,
-                delay: Math.random() * 3,
+                delay: star.delay,
               }}
             />
           ))}
         </motion.div>
 
-        {/* Stars Layer 3 - Slowest */}
+        {/* Stars Layer 3 - Slowest (Otimizado: 15→10 estrelas) */}
         <motion.div
           className="absolute inset-0"
           style={{ y: y3 }}
         >
-          {[...Array(15)].map((_, i) => (
+          {starsLayer3.map((star) => (
             <motion.div
-              key={`star3-${i}`}
+              key={`star3-${star.id}`}
               className="absolute w-1.5 h-1.5 bg-purple-400 rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                opacity: Math.random() * 0.6 + 0.2,
+                left: `${star.left}%`,
+                top: `${star.top}%`,
+                opacity: star.opacity,
                 boxShadow: "0 0 15px rgba(157,92,252,0.6)",
               }}
               animate={{
@@ -263,9 +373,9 @@ export default function MinhaTrajetoriaPage() {
                 scale: [1, 2, 1],
               }}
               transition={{
-                duration: Math.random() * 5 + 4,
+                duration: star.duration,
                 repeat: Infinity,
-                delay: Math.random() * 4,
+                delay: star.delay,
               }}
             />
           ))}
@@ -333,7 +443,7 @@ export default function MinhaTrajetoriaPage() {
             </motion.div>
 
             <motion.h1
-              className="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 bg-linear-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 bg-linear-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent px-4"
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
@@ -349,7 +459,7 @@ export default function MinhaTrajetoriaPage() {
               Minha Trajetória
             </motion.h1>
             <motion.p
-              className="text-xl md:text-2xl lg:text-3xl text-slate-300 mb-12"
+              className="text-lg sm:text-xl md:text-2xl text-slate-300 mb-12 px-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 1 }}
@@ -391,120 +501,95 @@ export default function MinhaTrajetoriaPage() {
         {/* Galaxy Timeline Section */}
         <section className="py-20 px-4 relative">
           <div className="max-w-7xl mx-auto">
-            {/* Galaxy Cards - Masonry Layout */}
+            {/* Galaxy Cards - Masonry Layout Otimizado */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.5, rotateY: -30 }}
-                  whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
                   transition={{
-                    duration: 0.8,
-                    delay: index * 0.15,
-                    type: "spring",
-                    stiffness: 100
+                    duration: 0.5,
+                    delay: index * 0.1,
                   }}
                   className="relative group"
-                  style={{ perspective: "1000px" }}
                   onMouseEnter={() => setHoveredCard(index)}
                   onMouseLeave={() => setHoveredCard(null)}
                 >
-                  {/* Galaxy Card */}
+                  {/* Galaxy Card - Animações otimizadas */}
                   <motion.div
                     className="relative cursor-pointer h-full"
                     onClick={() => setExpandedCard(expandedCard === index ? null : index)}
-                    whileHover={{
-                      scale: 1.05,
-                      rotateY: 5,
-                      z: 50
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ duration: 0.2 }}
                   >
-                    {/* Outer Glow Ring */}
-                    <motion.div
-                      className="absolute -inset-4 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    {/* Outer Glow Ring - Otimizado */}
+                    <div
+                      className="absolute -inset-2 md:-inset-4 rounded-3xl opacity-0 group-hover:opacity-60 transition-opacity duration-300"
                       style={{
                         background: `radial-gradient(circle at center, ${exp.glowColor} 0%, transparent 70%)`,
-                        filter: "blur(20px)",
-                      }}
-                      animate={hoveredCard === index ? {
-                        scale: [1, 1.1, 1],
-                      } : {}}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
+                        filter: "blur(15px)",
                       }}
                     />
 
                     {/* Main Card Container */}
                     <div className="relative rounded-3xl overflow-hidden bg-slate-900/80 backdrop-blur-xl border-2 border-slate-700/50 group-hover:border-cyan-500/80 transition-all duration-500 shadow-2xl group-hover:shadow-[0_0_50px_rgba(0,198,255,0.3)]">
-                      {/* Animated Galaxy Background */}
+                      {/* Animated Galaxy Background - Otimizado */}
                       <div className="absolute inset-0 overflow-hidden">
-                        {/* Rotating spiral galaxy */}
-                        <motion.div
-                          className={`absolute inset-0 bg-linear-to-br ${exp.color} opacity-20`}
-                          animate={{
-                            rotate: [0, 360],
-                          }}
-                          transition={{
-                            duration: 30,
-                            repeat: Infinity,
-                            ease: "linear",
-                          }}
+                        {/* Static gradient background */}
+                        <div
+                          className={`absolute inset-0 bg-linear-to-br ${exp.color} opacity-15`}
                           style={{
                             backgroundImage: `radial-gradient(circle at 30% 50%, ${exp.glowColor} 0%, transparent 50%), radial-gradient(circle at 70% 50%, ${exp.glowColor} 0%, transparent 50%)`,
                           }}
                         />
 
-                        {/* Pulsing core */}
-                        <motion.div
-                          className="absolute inset-0"
-                          style={{
-                            background: `radial-gradient(circle at center, ${exp.glowColor} 0%, transparent 60%)`,
-                            filter: "blur(60px)",
-                          }}
-                          animate={{
-                            opacity: [0.2, 0.5, 0.2],
-                            scale: [0.8, 1.3, 0.8],
-                          }}
-                          transition={{
-                            duration: 4,
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                          }}
-                        />
+                        {/* Subtle pulsing core - apenas no hover */}
+                        {hoveredCard === index && (
+                          <motion.div
+                            className="absolute inset-0"
+                            style={{
+                              background: `radial-gradient(circle at center, ${exp.glowColor} 0%, transparent 60%)`,
+                              filter: "blur(40px)",
+                            }}
+                            animate={{
+                              opacity: [0.1, 0.3, 0.1],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          />
+                        )}
 
-                        {/* Orbiting particles - Optimized */}
-                        {[...Array(12)].map((_, i) => {
-                          const angle = (i * 360) / 12;
-                          const radius = 45;
-                          return (
-                            <motion.div
-                              key={i}
-                              className="absolute w-1 h-1 rounded-full"
-                              style={{
-                                left: `${50 + Math.cos(angle * Math.PI / 180) * radius}%`,
-                                top: `${50 + Math.sin(angle * Math.PI / 180) * radius}%`,
-                                backgroundColor: exp.particleColor,
-                                boxShadow: `0 0 10px ${exp.particleColor}`,
-                              }}
-                              animate={{
-                                opacity: [0, 1, 0],
-                                scale: [0, 2, 0],
-                                x: [0, Math.cos(angle * Math.PI / 180) * 10, 0],
-                                y: [0, Math.sin(angle * Math.PI / 180) * 10, 0],
-                              }}
-                              transition={{
-                                duration: 3,
-                                repeat: Infinity,
-                                delay: i * 0.15,
-                                ease: "easeOut",
-                              }}
-                            />
-                          );
-                        })}
+                        {/* Orbiting particles - Otimizado com pré-cálculo */}
+                        {cardParticles.map((particle) => (
+                          <motion.div
+                            key={particle.id}
+                            className="absolute w-1 h-1 rounded-full"
+                            style={{
+                              left: `${particle.left}%`,
+                              top: `${particle.top}%`,
+                              backgroundColor: exp.particleColor,
+                              boxShadow: `0 0 10px ${exp.particleColor}`,
+                            }}
+                            animate={{
+                              opacity: [0, 1, 0],
+                              scale: [0, 2, 0],
+                              x: [0, particle.xOffset, 0],
+                              y: [0, particle.yOffset, 0],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              delay: particle.id * 0.15,
+                              ease: "easeOut",
+                            }}
+                          />
+                        ))}
 
                         {/* Shooting stars on hover - Reduced for performance */}
                         {hoveredCard === index && [...Array(2)].map((_, i) => (
@@ -674,14 +759,14 @@ export default function MinhaTrajetoriaPage() {
               onClick={() => setExpandedCard(null)}
             >
               {/* Animated particles in background - Optimized */}
-              {[...Array(15)].map((_, i) => (
+              {modalParticles.map((particle) => (
                 <motion.div
-                  key={i}
+                  key={particle.id}
                   className="absolute w-2 h-2 rounded-full"
                   style={{
                     backgroundColor: experiences[expandedCard].particleColor,
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
+                    left: `${particle.left}%`,
+                    top: `${particle.top}%`,
                   }}
                   animate={{
                     opacity: [0, 0.6, 0],
@@ -691,21 +776,20 @@ export default function MinhaTrajetoriaPage() {
                   transition={{
                     duration: 3,
                     repeat: Infinity,
-                    delay: i * 0.2,
+                    delay: particle.id * 0.2,
                   }}
                 />
               ))}
 
               <motion.div
-                initial={{ scale: 0.5, rotateX: -30, opacity: 0 }}
-                animate={{ scale: 1, rotateX: 0, opacity: 1 }}
-                exit={{ scale: 0.5, rotateX: 30, opacity: 0 }}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="relative max-w-5xl w-full max-h-[90vh] overflow-y-auto"
+                className="relative max-w-5xl w-full max-h-[90vh] overflow-y-auto mx-4 md:mx-0"
                 onClick={(e) => e.stopPropagation()}
-                style={{ perspective: "1000px" }}
               >
-                <div className={`relative bg-linear-to-br from-slate-800/98 to-slate-900/98 backdrop-blur-xl rounded-3xl border-2 border-slate-700/50 p-8 md:p-12 overflow-hidden shadow-2xl`}>
+                <div className={`relative bg-linear-to-br from-slate-800/98 to-slate-900/98 backdrop-blur-xl rounded-2xl md:rounded-3xl border-2 border-slate-700/50 p-6 md:p-12 overflow-hidden shadow-2xl`}>
                   {/* Animated background */}
                   <motion.div
                     className={`absolute inset-0 bg-linear-to-br ${experiences[expandedCard].color} opacity-10`}
@@ -722,14 +806,14 @@ export default function MinhaTrajetoriaPage() {
                     }}
                   />
 
-                  {/* Floating particles - Optimized */}
-                  {[...Array(8)].map((_, i) => (
+                  {/* Floating particles - Otimizado (8→5) */}
+                  {modalInnerParticles.map((particle) => (
                     <motion.div
-                      key={i}
+                      key={particle.id}
                       className="absolute w-1 h-1 rounded-full bg-white/30"
                       style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
+                        left: `${particle.left}%`,
+                        top: `${particle.top}%`,
                       }}
                       animate={{
                         y: [0, -30, 0],
@@ -738,19 +822,23 @@ export default function MinhaTrajetoriaPage() {
                       transition={{
                         duration: 4,
                         repeat: Infinity,
-                        delay: i * 0.5,
+                        delay: particle.delay,
                       }}
                     />
                   ))}
 
-                  {/* Close button */}
+                  {/* Close button - Melhorado para mobile */}
                   <motion.button
-                    onClick={() => setExpandedCard(null)}
-                    className="absolute top-6 right-6 w-14 h-14 rounded-full bg-slate-800/90 border-2 border-slate-700 flex items-center justify-center text-white hover:bg-red-500/30 hover:border-red-500/70 transition-all z-10 shadow-lg"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setExpandedCard(null);
+                    }}
+                    className="absolute top-4 right-4 md:top-6 md:right-6 w-12 h-12 md:w-14 md:h-14 rounded-full bg-red-500/90 border-2 border-red-600 flex items-center justify-center text-white hover:bg-red-600 transition-all z-50 shadow-2xl backdrop-blur-sm"
                     whileHover={{ scale: 1.15, rotate: 90 }}
                     whileTap={{ scale: 0.9 }}
+                    aria-label="Fechar modal"
                   >
-                    <i className="fas fa-times text-2xl" />
+                    <i className="fas fa-times text-xl md:text-2xl" />
                   </motion.button>
 
                   {/* Content */}

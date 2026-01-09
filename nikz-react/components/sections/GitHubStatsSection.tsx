@@ -4,7 +4,7 @@
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 interface GitHubStats {
   totalRepos: number;
@@ -14,55 +14,61 @@ interface GitHubStats {
   languageStats: { name: string; percentage: number; color: string }[];
 }
 
-export function GitHubStatsSection() {
-  const [stats, setStats] = useState<GitHubStats>({
-    totalRepos: 67,
-    followers: 17,
-    following: 11,
-    accountAge: 6,
-    languageStats: [
-      { name: "Python", percentage: 35, color: "#3776ab" },
-      { name: "TypeScript", percentage: 25, color: "#3178c6" },
-      { name: "JavaScript", percentage: 20, color: "#f7df1e" },
-      { name: "Java", percentage: 15, color: "#007396" },
-      { name: "CSS", percentage: 5, color: "#1572b6" },
-    ],
-  });
+type Contribution = { week: number; day: number; count: number };
 
-  const [isLoading, setIsLoading] = useState(true);
+// Mover dados estáticos para fora do componente
+const GITHUB_STATS: GitHubStats = {
+  totalRepos: 67,
+  followers: 17,
+  following: 11,
+  accountAge: 6,
+  languageStats: [
+    { name: "Python", percentage: 35, color: "#3776ab" },
+    { name: "TypeScript", percentage: 25, color: "#3178c6" },
+    { name: "JavaScript", percentage: 20, color: "#f7df1e" },
+    { name: "Java", percentage: 15, color: "#007396" },
+    { name: "CSS", percentage: 5, color: "#1572b6" },
+  ],
+};
+
+// Função geradora de contribuições
+const generateContributions = () => {
+  const weeks = 52;
+  const data: Contribution[] = [];
+
+  for (let week = 0; week < weeks; week++) {
+    for (let day = 0; day < 7; day++) {
+      const count = Math.random() > 0.3 ? Math.floor(Math.random() * 10) : 0;
+      data.push({ week, day, count });
+    }
+  }
+
+  return data;
+};
+
+// Mover função pura para fora do componente
+const getContributionColor = (count: number) => {
+  if (count === 0) return "bg-slate-800/50";
+  if (count <= 2) return "bg-emerald-900/60";
+  if (count <= 4) return "bg-emerald-700/70";
+  if (count <= 6) return "bg-emerald-500/80";
+  return "bg-emerald-400";
+};
+
+export function GitHubStatsSection() {
+  const stats = GITHUB_STATS;
+
+  // Gerar dados apenas no cliente para evitar hydration mismatch
+  const [contributions, setContributions] = useState<Contribution[]>([]);
+  const [totalContributions, setTotalContributions] = useState(0);
+  const [currentStreak, setCurrentStreak] = useState(0);
 
   useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => setIsLoading(false), 1000);
-    return () => clearTimeout(timer);
+    const data = generateContributions();
+    setContributions(data);
+    setTotalContributions(data.reduce((sum, c) => sum + c.count, 0));
+    setCurrentStreak(Math.floor(Math.random() * 30) + 15);
   }, []);
-
-  // Generate mock contribution data (simplified heatmap)
-  const generateContributions = () => {
-    const weeks = 52;
-    const data: { week: number; day: number; count: number }[] = [];
-
-    for (let week = 0; week < weeks; week++) {
-      for (let day = 0; day < 7; day++) {
-        const count = Math.random() > 0.3 ? Math.floor(Math.random() * 10) : 0;
-        data.push({ week, day, count });
-      }
-    }
-
-    return data;
-  };
-
-  const contributions = generateContributions();
-  const totalContributions = contributions.reduce((sum, c) => sum + c.count, 0);
-  const currentStreak = Math.floor(Math.random() * 30) + 15; // Mock streak
-
-  const getContributionColor = (count: number) => {
-    if (count === 0) return "bg-slate-800/50";
-    if (count <= 2) return "bg-emerald-900/60";
-    if (count <= 4) return "bg-emerald-700/70";
-    if (count <= 6) return "bg-emerald-500/80";
-    return "bg-emerald-400";
-  };
 
   return (
     <Section

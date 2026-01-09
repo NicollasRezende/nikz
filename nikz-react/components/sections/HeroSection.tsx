@@ -2,6 +2,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { TypeWriter } from "@/components/features/TypeWriter";
@@ -9,7 +10,30 @@ import { OrbitingIcons } from "@/components/features/OrbitingIcons";
 import { SOCIAL_LINKS, TYPEWRITER_TEXTS } from "@/lib/constants";
 import { scrollToElement } from "@/lib/utils";
 
+// Tipo para as partículas
+type Particle = {
+  id: number;
+  left: number;
+  top: number;
+  duration: number;
+  delay: number;
+};
+
 export function HeroSection() {
+  // Gerar partículas apenas no cliente para evitar hydration mismatch
+  const [particles, setParticles] = useState<Particle[]>([]);
+
+  useEffect(() => {
+    setParticles(
+      Array.from({ length: 10 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: 3 + Math.random() * 3,
+        delay: Math.random() * 2,
+      }))
+    );
+  }, []);
   return (
     <Section
       id="home"
@@ -88,14 +112,14 @@ export function HeroSection() {
           }}
         />
 
-        {/* Floating particles */}
-        {[...Array(15)].map((_, i) => (
+        {/* Floating particles - reduzido de 15 para 10 e otimizado */}
+        {particles.map((particle) => (
           <motion.div
-            key={`particle-${i}`}
+            key={`particle-${particle.id}`}
             className="absolute w-1 h-1 rounded-full bg-cyan-400"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
               boxShadow: "0 0 10px rgba(0,198,255,0.8)",
             }}
             animate={{
@@ -104,10 +128,10 @@ export function HeroSection() {
               scale: [1, 1.5, 1],
             }}
             transition={{
-              duration: 3 + Math.random() * 3,
+              duration: particle.duration,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: Math.random() * 2,
+              delay: particle.delay,
             }}
           />
         ))}
