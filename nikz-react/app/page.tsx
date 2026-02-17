@@ -1,22 +1,31 @@
-// app/page.tsx
-import { HeroSection } from "@/components/sections/HeroSection";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { MetricsSection } from "@/components/sections/MetricsSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { SkillsSection } from "@/components/sections/SkillsSection";
-import { GitHubStatsSection } from "@/components/sections/GitHubStatsSection";
-import { ContactSection } from "@/components/sections/ContactSection";
+import NavBar from "@/components/ui/NavBar";
+import ScrollProgress from "@/components/ui/ScrollProgress";
+import Hero from "@/components/sections/Hero";
+import About from "@/components/sections/About";
+import Skills from "@/components/sections/Skills";
+import Projects from "@/components/sections/Projects";
+import Hackathons from "@/components/sections/Hackathons";
+import GitHubStats from "@/components/sections/GitHubStats";
+import Experience from "@/components/sections/Experience";
+import Contact from "@/components/sections/Contact";
+import { getGitHubRepos } from "@/lib/github";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch GitHub repos on the server with ISR
+  const repos = await getGitHubRepos();
+
   return (
-    <>
-      <HeroSection />
-      <AboutSection />
-      <MetricsSection />
-      <ProjectsSection />
-      <SkillsSection />
-      <GitHubStatsSection />
-      <ContactSection />
-    </>
+    <main className="relative">
+      <ScrollProgress />
+      <NavBar />
+      <Hero />
+      <About />
+      <Skills />
+      <Projects repos={repos} />
+      <Hackathons />
+      <GitHubStats repos={repos} />
+      <Experience />
+      <Contact />
+    </main>
   );
 }
