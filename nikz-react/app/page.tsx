@@ -8,11 +8,13 @@ import Hackathons from "@/components/sections/Hackathons";
 import GitHubStats from "@/components/sections/GitHubStats";
 import Experience from "@/components/sections/Experience";
 import Contact from "@/components/sections/Contact";
-import { getGitHubRepos } from "@/lib/github";
+import { getGitHubRepos, getGitHubContributions } from "@/lib/github";
 
 export default async function Home() {
-  // Fetch GitHub repos on the server with ISR
-  const repos = await getGitHubRepos();
+  const [repos, contributions] = await Promise.all([
+    getGitHubRepos(),
+    getGitHubContributions(),
+  ]);
 
   return (
     <main className="relative">
@@ -23,7 +25,7 @@ export default async function Home() {
       <Skills />
       <Projects repos={repos} />
       <Hackathons />
-      <GitHubStats repos={repos} />
+      <GitHubStats repos={repos} contributions={contributions} />
       <Experience />
       <Contact />
     </main>

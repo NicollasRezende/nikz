@@ -49,23 +49,23 @@ export default function Contact() {
               </div>
 
               {socialLinks.map((link, index) => (
-                <div key={link.label} className="pl-4">
-                  <span className="text-syntax-blue">.{link.label}</span>
-                  <span className="text-fg-primary">: </span>
+                <div key={link.label} className="pl-4 flex flex-wrap items-baseline gap-x-1 gap-y-1 min-w-0">
+                  <span className="text-syntax-blue shrink-0">.{link.label}</span>
+                  <span className="text-fg-primary shrink-0">: </span>
                   <a
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-syntax-green hover:text-accent-cyan transition-colors inline-flex items-center gap-2 group"
+                    className="text-syntax-green hover:text-accent-cyan transition-colors inline-flex items-center gap-1.5 group min-w-0 break-all"
                   >
-                    <link.icon size={16} className="inline" />
-                    &quot;{link.value}&quot;
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity">
+                    <link.icon size={14} className="inline shrink-0" />
+                    <span className="break-all">&quot;{link.value}&quot;</span>
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
                       →
                     </span>
                   </a>
                   {index < socialLinks.length - 1 && (
-                    <span className="text-fg-primary">,</span>
+                    <span className="text-fg-primary shrink-0">,</span>
                   )}
                 </div>
               ))}
