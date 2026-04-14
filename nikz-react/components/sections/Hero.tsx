@@ -28,7 +28,7 @@ export default function Hero() {
               delay: HERO_SEQUENCE.title.delay,
               duration: HERO_SEQUENCE.title.duration,
             }}
-            className="font-display font-black text-6xl sm:text-8xl lg:text-9xl text-fg-primary tracking-tight"
+            className="font-display font-black text-5xl sm:text-8xl lg:text-9xl text-fg-primary tracking-tight wrap-break-word"
           >
             {PERSONAL_INFO.name}
           </motion.h1>
@@ -54,7 +54,7 @@ export default function Hero() {
               delay: HERO_SEQUENCE.codeBlock.delay,
               duration: HERO_SEQUENCE.codeBlock.duration,
             }}
-            className="inline-block text-left font-code text-sm sm:text-base bg-bg-secondary/50 backdrop-blur-sm border border-fg-primary/10 rounded-lg p-6 sm:p-8"
+            className="w-full max-w-lg mx-auto text-left font-code text-sm sm:text-base bg-bg-secondary/50 backdrop-blur-sm border border-fg-primary/10 rounded-lg p-4 sm:p-8 overflow-x-auto"
           >
             <pre className="text-fg-secondary">
               <code>

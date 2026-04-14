@@ -27,7 +27,7 @@ export default function About() {
 
           <motion.div
             variants={fadeInUp}
-            className="font-code text-sm bg-bg-secondary/50 border border-fg-primary/10 rounded-lg p-6"
+            className="font-code text-sm bg-bg-secondary/50 border border-fg-primary/10 rounded-lg p-4 sm:p-6 overflow-x-auto"
           >
             <pre className="text-fg-secondary">
               <code>

@@ -32,21 +32,21 @@ export default function Hackathons() {
               >
                 <div className="relative bg-bg-primary border border-fg-primary/10 rounded-lg p-6 hover:border-accent-cyan/50 transition-colors duration-200 h-full">
                   {/* Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="w-10 h-10 rounded-lg bg-accent-cyan/10 flex items-center justify-center">
+                        <div className="w-10 h-10 shrink-0 rounded-lg bg-accent-cyan/10 flex items-center justify-center">
                           <Icon className="text-accent-cyan" size={20} />
                         </div>
-                        <div>
-                          <h3 className="font-display font-bold text-lg text-fg-primary">
+                        <div className="min-w-0">
+                          <h3 className="font-display font-bold text-lg text-fg-primary wrap-break-word">
                             {hackathon.title}
                           </h3>
-                          <p className="text-sm text-fg-muted">{hackathon.location}</p>
+                          <p className="text-sm text-fg-muted truncate">{hackathon.location}</p>
                         </div>
                       </div>
                     </div>
-                    <span className="px-3 py-1 bg-bg-secondary border border-accent-purple/30 rounded text-xs font-code text-accent-purple">
+                    <span className="shrink-0 px-3 py-1 bg-bg-secondary border border-accent-purple/30 rounded text-xs font-code text-accent-purple">
                       {hackathon.year}
                     </span>
                   </div>
@@ -79,17 +79,17 @@ export default function Hackathons() {
           transition={{ delay: 0.3, duration: 0.3 }}
           className="mt-12 text-center"
         >
-          <div className="inline-flex items-center gap-8 px-8 py-4 bg-bg-secondary/50 border border-accent-cyan/20 rounded-full">
+          <div className="inline-flex flex-wrap justify-center items-center gap-6 px-8 py-4 bg-bg-secondary/50 border border-accent-cyan/20 rounded-2xl">
             <div>
               <div className="text-3xl font-bold text-accent-cyan">4</div>
               <div className="text-xs text-fg-muted font-code">hackathons</div>
             </div>
-            <div className="w-px h-8 bg-fg-primary/10" />
+            <div className="hidden sm:block w-px h-8 bg-fg-primary/10" />
             <div>
               <div className="text-3xl font-bold text-accent-purple">3</div>
               <div className="text-xs text-fg-muted font-code">1º lugares</div>
             </div>
-            <div className="w-px h-8 bg-fg-primary/10" />
+            <div className="hidden sm:block w-px h-8 bg-fg-primary/10" />
             <div>
               <div className="text-3xl font-bold text-accent-pink">1</div>
               <div className="text-xs text-fg-muted font-code">3º lugar</div>

@@ -50,14 +50,14 @@ export default function Skills() {
                 {/* Header */}
                 <div className="mb-6">
                   <div className="flex items-center gap-3 mb-2">
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center`}>
+                    <div className={`w-10 h-10 rounded-lg bg-linear-to-br ${category.color} flex items-center justify-center`}>
                       <category.Icon className="text-bg-primary" size={20} />
                     </div>
-                    <h3 className={`font-display text-xl font-bold bg-gradient-to-r ${category.color} bg-clip-text text-transparent`}>
+                    <h3 className={`font-display text-xl font-bold bg-linear-to-r ${category.color} bg-clip-text text-transparent`}>
                       {category.label}
                     </h3>
                   </div>
-                  <div className={`h-1 w-16 bg-gradient-to-r ${category.color} rounded-full`} />
+                  <div className={`h-1 w-16 bg-linear-to-r ${category.color} rounded-full`} />
                 </div>
 
                 {/* Skills */}
@@ -81,7 +81,7 @@ export default function Skills() {
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
                           transition={{ duration: 0.5, ease: "easeOut" }}
-                          className={`h-full bg-gradient-to-r ${category.color} rounded-full`}
+                          className={`h-full bg-linear-to-r ${category.color} rounded-full`}
                         />
                       </div>
                     </div>
@@ -100,23 +100,23 @@ export default function Skills() {
           transition={{ delay: 0.2, duration: 0.3 }}
           className="mt-16 text-center"
         >
-          <div className="inline-flex flex-wrap items-center justify-center gap-8 px-8 py-6 bg-bg-primary/50 border border-fg-primary/10 rounded-2xl">
+          <div className="inline-flex flex-wrap items-center justify-center gap-6 px-6 sm:px-8 py-6 bg-bg-primary/50 border border-fg-primary/10 rounded-2xl">
             <div className="text-center">
-              <div className="text-4xl font-bold bg-gradient-to-r from-accent-cyan to-blue-400 bg-clip-text text-transparent">
+              <div className="text-4xl font-bold bg-linear-to-r from-accent-cyan to-blue-400 bg-clip-text text-transparent">
                 {SKILLS.frontend.length + SKILLS.backend.length + SKILLS.tools.length}
               </div>
               <div className="text-xs text-fg-muted font-code mt-1">tecnologias</div>
             </div>
-            <div className="w-px h-12 bg-fg-primary/10" />
+            <div className="hidden sm:block w-px h-12 bg-fg-primary/10" />
             <div className="text-center">
-              <div className="text-4xl font-bold bg-gradient-to-r from-accent-purple to-pink-400 bg-clip-text text-transparent">
+              <div className="text-4xl font-bold bg-linear-to-r from-accent-purple to-pink-400 bg-clip-text text-transparent">
                 2+
               </div>
               <div className="text-xs text-fg-muted font-code mt-1">anos</div>
             </div>
-            <div className="w-px h-12 bg-fg-primary/10" />
+            <div className="hidden sm:block w-px h-12 bg-fg-primary/10" />
             <div className="text-center">
-              <div className="text-4xl font-bold bg-gradient-to-r from-accent-green to-teal-400 bg-clip-text text-transparent">
+              <div className="text-4xl font-bold bg-linear-to-r from-accent-green to-teal-400 bg-clip-text text-transparent">
                 4
               </div>
               <div className="text-xs text-fg-muted font-code mt-1">hackathons</div>
