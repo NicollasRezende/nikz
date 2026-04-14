@@ -54,9 +54,9 @@ export default function Hero() {
               delay: HERO_SEQUENCE.codeBlock.delay,
               duration: HERO_SEQUENCE.codeBlock.duration,
             }}
-            className="w-full max-w-lg mx-auto text-left font-code text-sm sm:text-base bg-bg-secondary/50 backdrop-blur-sm border border-fg-primary/10 rounded-lg p-4 sm:p-8 overflow-x-auto"
+            className="w-full max-w-lg mx-auto text-left font-code text-sm sm:text-base bg-bg-secondary/50 backdrop-blur-sm border border-fg-primary/10 rounded-lg p-4 sm:p-8 overflow-hidden"
           >
-            <pre className="text-fg-secondary">
+            <pre className="text-fg-secondary whitespace-pre-wrap wrap-break-word overflow-x-auto">
               <code>
                 <span className="text-syntax-purple">const</span>{" "}
                 <span className="text-syntax-cyan">developer</span>{" "}

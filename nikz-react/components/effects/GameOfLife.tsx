@@ -10,17 +10,8 @@ export default function GameOfLife() {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {
-    // Only render on desktop (1024px+)
-    const checkViewport = () => {
-      setShouldRender(window.innerWidth >= 1024);
-    };
-
-    checkViewport();
-    window.addEventListener("resize", checkViewport);
-
-    return () => {
-      window.removeEventListener("resize", checkViewport);
-    };
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!prefersReduced) setShouldRender(true);
   }, []);
 
   useEffect(() => {
@@ -44,7 +35,8 @@ export default function GameOfLife() {
       if (gameRef.current) {
         gameRef.current.resize(canvas.width, canvas.height);
       } else {
-        gameRef.current = new GameOfLifeEngine(canvas.width, canvas.height, 50);
+        const cellSize = window.innerWidth < 768 ? 60 : 50;
+        gameRef.current = new GameOfLifeEngine(canvas.width, canvas.height, cellSize);
       }
     };
 
