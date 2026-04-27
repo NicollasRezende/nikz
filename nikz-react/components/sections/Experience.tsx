@@ -1,77 +1,77 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { EXPERIENCE } from "@/lib/content";
-import SectionHeading from "@/components/ui/SectionHeading";
-import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 export default function Experience() {
+  const railRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = railRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          el.style.setProperty("--rail", "100%");
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
-    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30">
-      <div className="max-w-4xl mx-auto">
-        <SectionHeading number="04" title="experience" />
+    <section
+      className="section-pad exp-section"
+      id="exp"
+      style={{ paddingTop: 40 }}
+    >
+      <div className="exp-bigword" data-parallax="-0.04">
+        JOURNEY
+      </div>
+      <div className="section-num reveal">EXPERIENCE / 05</div>
+      <h2 className="section-title reveal">Trajetória.</h2>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: "-100px" }}
-          className="relative space-y-12"
-        >
-          {/* Timeline line */}
-          <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-accent-cyan via-accent-purple to-transparent" />
-
-          {EXPERIENCE.map((job, index) => (
-            <motion.div
-              key={job.id}
-              variants={fadeInUp}
-              className="relative pl-8 space-y-4"
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-0 top-1 w-2 h-2 rounded-full bg-accent-cyan glow-cyan" />
-
-              {/* Content */}
-              <div>
-                <div className="font-code text-xs text-fg-muted mb-2">
-                  {job.period} · {job.location}
-                </div>
-                <h3 className="font-display font-bold text-xl text-fg-primary">
-                  {job.role}
-                </h3>
-                <p className="font-code text-sm text-accent-cyan">{job.company}</p>
-              </div>
-
-              <p className="text-fg-secondary leading-relaxed">
-                {job.description}
-              </p>
-
-              {/* Achievements */}
-              <ul className="space-y-2">
-                {job.achievements.map((achievement, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start gap-3 text-fg-secondary text-sm"
-                  >
-                    <span className="text-accent-green mt-1">▹</span>
-                    <span>{achievement}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Tech stack */}
-              <div className="flex flex-wrap gap-2">
-                {job.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2 py-1 bg-bg-primary border border-fg-primary/10 rounded text-xs font-code text-fg-muted"
-                  >
-                    {tech}
+      <div className="exp-rail" ref={railRef}>
+        {EXPERIENCE.map((e, i) => (
+          <div
+            key={i}
+            className={`exp-node reveal ${e.current ? "current" : ""}`}
+            data-cursor
+          >
+            <div className="exp-side">
+              <div className="exp-period">{e.period}</div>
+              <div className="exp-year">{e.yearLabel}</div>
+              <div className="exp-loc">{e.location}</div>
+              <div className="exp-stack">
+                {e.tech.map((t, j) => (
+                  <span key={j}>
+                    {t}
+                    {j < e.tech.length - 1 ? " · " : ""}
                   </span>
                 ))}
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            </div>
+            <div className="exp-main">
+              <div className="exp-co">
+                <span>{e.company}</span>
+                <span className="arr">↗</span>
+              </div>
+              <div className="exp-role">{e.role}</div>
+              <p className="exp-desc">{e.description}</p>
+              <div className="exp-wins">
+                {e.achievements.map((a, j) => (
+                  <div key={j} className="exp-win">
+                    <span className="ix">{String(j + 1).padStart(2, "0")}</span>
+                    <span>{a}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

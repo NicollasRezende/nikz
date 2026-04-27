@@ -1,128 +1,190 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { SKILLS } from "@/lib/content";
-import SectionHeading from "@/components/ui/SectionHeading";
-import { Code2, Server, Wrench } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { STACK_ALL, type StackCategory } from "@/lib/content";
+
+type Tab = "all" | StackCategory;
+
+function Counter({
+  to,
+  duration = 1800,
+}: {
+  to: number;
+  duration?: number;
+}) {
+  const [n, setN] = useState(0);
+  const ref = useRef<HTMLSpanElement | null>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          const start = performance.now();
+          const tick = (t: number) => {
+            const p = Math.min(1, (t - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setN(Math.round(to * eased));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [to, duration]);
+
+  return <span ref={ref}>{n}</span>;
+}
 
 export default function Skills() {
-  const skillCategories = [
-    {
-      key: "frontend" as const,
-      label: "Frontend",
-      color: "from-accent-cyan to-blue-400",
-      borderColor: "border-accent-cyan/30",
-      Icon: Code2,
-    },
-    {
-      key: "backend" as const,
-      label: "Backend",
-      color: "from-accent-purple to-pink-400",
-      borderColor: "border-accent-purple/30",
-      Icon: Server,
-    },
-    {
-      key: "tools" as const,
-      label: "Tools & DevOps",
-      color: "from-accent-green to-teal-400",
-      borderColor: "border-accent-green/30",
-      Icon: Wrench,
-    },
-  ];
+  const [tab, setTab] = useState<Tab>("all");
+  const visible =
+    tab === "all" ? STACK_ALL : STACK_ALL.filter((s) => s.cat === tab);
+  const counts = {
+    all: STACK_ALL.length,
+    frontend: STACK_ALL.filter((s) => s.cat === "frontend").length,
+    backend: STACK_ALL.filter((s) => s.cat === "backend").length,
+    tools: STACK_ALL.filter((s) => s.cat === "tools").length,
+  };
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      document.querySelectorAll<HTMLElement>(".tech-tile").forEach((el) => {
+        if (el.classList.contains("in")) return;
+        const obs = new IntersectionObserver(
+          ([e]) => {
+            if (e.isIntersecting) {
+              el.classList.add("in");
+              obs.disconnect();
+            }
+          },
+          { threshold: 0.3 }
+        );
+        obs.observe(el);
+      });
+    }, 50);
+    return () => clearTimeout(t);
+  }, [tab]);
 
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30">
-      <div className="max-w-6xl mx-auto">
-        <SectionHeading number="02" title="skills" />
+    <section
+      className="section-pad skills-section"
+      id="skills"
+      style={{ paddingTop: 80 }}
+    >
+      <div className="skills-bigword" data-parallax="-0.05">
+        STACK
+      </div>
+      <div className="section-num reveal">STACK / 02</div>
+      <h2 className="section-title reveal">
+        Ferramentas
+        <br />
+        do ofício.
+      </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {skillCategories.map((category) => (
-            <motion.div
-              key={category.key}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.3 }}
-              className="group"
-            >
-              {/* Card */}
-              <div className={`relative bg-bg-primary/50 border ${category.borderColor} rounded-xl p-6 transition-colors duration-200 h-full`}>
-                {/* Header */}
-                <div className="mb-6">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className={`w-10 h-10 rounded-lg bg-linear-to-br ${category.color} flex items-center justify-center`}>
-                      <category.Icon className="text-bg-primary" size={20} />
-                    </div>
-                    <h3 className={`font-display text-xl font-bold bg-linear-to-r ${category.color} bg-clip-text text-transparent`}>
-                      {category.label}
-                    </h3>
-                  </div>
-                  <div className={`h-1 w-16 bg-linear-to-r ${category.color} rounded-full`} />
-                </div>
-
-                {/* Skills */}
-                <div className="space-y-4">
-                  {SKILLS[category.key].map((skill) => (
-                    <div key={skill.name} className="space-y-2">
-                      {/* Skill name and level */}
-                      <div className="flex justify-between items-center">
-                        <span className="font-code text-sm text-fg-primary">
-                          {skill.name}
-                        </span>
-                        <span className="font-code text-xs text-fg-muted">
-                          {skill.level}%
-                        </span>
-                      </div>
-
-                      {/* Progress bar */}
-                      <div className="h-1.5 bg-bg-secondary/50 rounded-full overflow-hidden">
-                        <motion.div
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 0.5, ease: "easeOut" }}
-                          className={`h-full bg-linear-to-r ${category.color} rounded-full`}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Stats Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.3 }}
-          className="mt-16 text-center"
-        >
-          <div className="inline-flex flex-wrap items-center justify-center gap-6 px-6 sm:px-8 py-6 bg-bg-primary/50 border border-fg-primary/10 rounded-2xl">
-            <div className="text-center">
-              <div className="text-4xl font-bold bg-linear-to-r from-accent-cyan to-blue-400 bg-clip-text text-transparent">
-                {SKILLS.frontend.length + SKILLS.backend.length + SKILLS.tools.length}
-              </div>
-              <div className="text-xs text-fg-muted font-code mt-1">tecnologias</div>
-            </div>
-            <div className="hidden sm:block w-px h-12 bg-fg-primary/10" />
-            <div className="text-center">
-              <div className="text-4xl font-bold bg-linear-to-r from-accent-purple to-pink-400 bg-clip-text text-transparent">
-                2+
-              </div>
-              <div className="text-xs text-fg-muted font-code mt-1">anos</div>
-            </div>
-            <div className="hidden sm:block w-px h-12 bg-fg-primary/10" />
-            <div className="text-center">
-              <div className="text-4xl font-bold bg-linear-to-r from-accent-green to-teal-400 bg-clip-text text-transparent">
-                4
-              </div>
-              <div className="text-xs text-fg-muted font-code mt-1">hackathons</div>
-            </div>
+      <div className="skills-meta reveal-stagger">
+        <div className="stat">
+          <div className="label">Languages</div>
+          <div className="value">
+            <Counter to={12} />
           </div>
-        </motion.div>
+          <div className="sub">production-ready</div>
+        </div>
+        <div className="stat">
+          <div className="label">Years coding</div>
+          <div className="value">
+            <Counter to={5} />
+            <span className="unit">+</span>
+          </div>
+          <div className="sub">since 2020</div>
+        </div>
+        <div className="stat">
+          <div className="label">Production projects</div>
+          <div className="value">
+            <Counter to={30} />
+            <span className="unit">+</span>
+          </div>
+          <div className="sub">shipped &amp; maintained</div>
+        </div>
+        <div className="stat">
+          <div className="label">Hackathon wins</div>
+          <div className="value">
+            <Counter to={4} />
+            <span className="unit">/4</span>
+          </div>
+          <div className="sub">all in 2025</div>
+        </div>
+      </div>
+
+      <div className="stack-tabs">
+        <button
+          className={`stack-tab ${tab === "all" ? "active" : ""}`}
+          onClick={() => setTab("all")}
+          data-cursor
+        >
+          All <span className="count">[{counts.all}]</span>
+        </button>
+        <button
+          className={`stack-tab ${tab === "frontend" ? "active" : ""}`}
+          onClick={() => setTab("frontend")}
+          data-cursor
+        >
+          Frontend <span className="count">[{counts.frontend}]</span>
+        </button>
+        <button
+          className={`stack-tab ${tab === "backend" ? "active" : ""}`}
+          onClick={() => setTab("backend")}
+          data-cursor
+        >
+          Backend <span className="count">[{counts.backend}]</span>
+        </button>
+        <button
+          className={`stack-tab ${tab === "tools" ? "active" : ""}`}
+          onClick={() => setTab("tools")}
+          data-cursor
+        >
+          Tools <span className="count">[{counts.tools}]</span>
+        </button>
+      </div>
+
+      <div className="stack-matrix">
+        {visible.map((s, i) => (
+          <div
+            key={`${tab}-${s.name}`}
+            className={`tech-tile ${s.size || "t-3x1"} ${
+              s.featured ? "featured" : ""
+            }`}
+            style={{ ["--p" as never]: s.lvl + "%" }}
+            data-cursor
+            onMouseMove={(e) => {
+              const r = e.currentTarget.getBoundingClientRect();
+              e.currentTarget.style.setProperty(
+                "--mx",
+                ((e.clientX - r.left) / r.width) * 100 + "%"
+              );
+              e.currentTarget.style.setProperty(
+                "--my",
+                ((e.clientY - r.top) / r.height) * 100 + "%"
+              );
+            }}
+          >
+            <span className="num">{String(i + 1).padStart(2, "0")}</span>
+            <span className="glyph">{s.glyph}</span>
+            <div className="name">{s.name}</div>
+            <div className="lvl">
+              <span>
+                {s.years} · {s.proj}
+              </span>
+              <span className="pct">{s.lvl}</span>
+            </div>
+            <span className="bar" />
+          </div>
+        ))}
       </div>
     </section>
   );

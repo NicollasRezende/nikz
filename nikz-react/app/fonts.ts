@@ -1,18 +1,22 @@
-import { Outfit, Fira_Code } from 'next/font/google'
+import { Space_Grotesk, JetBrains_Mono, Inter } from 'next/font/google'
 
-// Display font: Outfit with single weight for performance
-// Modern geometric sans with distinctive character
-export const outfit = Outfit({
+export const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-outfit',
-  display: 'optional', // Avoid FOIT/FOUT - use fallback if font not loaded quickly
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-display',
+  display: 'swap',
 })
 
-// Code font: Fira Code with single weight
-export const firaCode = Fira_Code({
+export const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-fira-code',
-  display: 'optional',
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+export const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-sans',
+  display: 'swap',
 })

@@ -1,238 +1,244 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useMemo } from "react";
-import { GitHubRepo, ContributionDay } from "@/lib/github";
-import SectionHeading from "@/components/ui/SectionHeading";
-import { GitBranch, Star, GitFork, Users } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { GitHubRepo, ContributionDay } from "@/lib/github";
+import { LANG_COLORS } from "@/lib/content";
 
 interface GitHubStatsProps {
   repos: GitHubRepo[];
   contributions: ContributionDay[];
 }
 
-const MONTH_LABELS = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
-const DAY_LABELS = ["Dom","Seg","Ter","Qua","Qui","Sex","Sab"];
+function levelFor(count: number): 0 | 1 | 2 | 3 | 4 {
+  if (count <= 0) return 0;
+  if (count <= 2) return 1;
+  if (count <= 5) return 2;
+  if (count <= 9) return 3;
+  return 4;
+}
 
-function getIntensity(count: number): string {
-  if (count === 0) return "bg-bg-secondary border border-fg-primary/10";
-  if (count <= 2)  return "bg-accent-cyan/20 border border-accent-cyan/30";
-  if (count <= 5)  return "bg-accent-cyan/45 border border-accent-cyan/50";
-  if (count <= 9)  return "bg-accent-cyan/70 border border-accent-cyan/70";
-  return               "bg-accent-cyan border border-accent-cyan";
+function Counter({
+  to,
+  duration = 1500,
+}: {
+  to: number;
+  duration?: number;
+}) {
+  const [n, setN] = useState(0);
+  const ref = useRef<HTMLSpanElement | null>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          const start = performance.now();
+          const tick = (t: number) => {
+            const p = Math.min(1, (t - start) / duration);
+            const eased = 1 - Math.pow(1 - p, 3);
+            setN(Math.round(to * eased));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [to, duration]);
+  return <span ref={ref}>{n}</span>;
 }
 
 export default function GitHubStats({ repos, contributions }: GitHubStatsProps) {
-  const { totalStars, totalForks, publicRepos, topLanguages } = useMemo(() => {
-    const stars = repos.reduce((acc, r) => acc + r.stargazers_count, 0);
-    const forks = repos.reduce((acc, r) => acc + r.forks_count, 0);
-    const count = repos.length;
-    const languages = repos.reduce((acc, r) => {
-      if (r.language) acc[r.language] = (acc[r.language] || 0) + 1;
-      return acc;
-    }, {} as Record<string, number>);
-    const topLangs = Object.entries(languages).sort(([,a],[,b]) => b - a).slice(0, 5);
-    return { totalStars: stars, totalForks: forks, publicRepos: count, topLanguages: topLangs };
-  }, [repos]);
+  const cells = useMemo(() => {
+    if (!contributions.length) return [] as { lvl: 0 | 1 | 2 | 3 | 4; date: string; count: number }[];
 
-  // Build the week columns for the heatmap
-  const { weeks, monthMarkers, totalContributions } = useMemo(() => {
-    const total = contributions.reduce((s, d) => s + d.count, 0);
-
-    // Pad the start so the first day aligns with its weekday (0=Sun)
-    const firstDow = new Date(contributions[0]?.date ?? Date.now()).getDay();
+    const firstDow = new Date(contributions[0].date).getDay();
     const padded: (ContributionDay | null)[] = [
       ...Array(firstDow).fill(null),
       ...contributions,
     ];
+    while (padded.length < 53 * 7) padded.push(null);
+    padded.length = 53 * 7;
 
-    // Split into columns of 7 (one column = one week)
-    const cols: (ContributionDay | null)[][] = [];
-    for (let i = 0; i < padded.length; i += 7) cols.push(padded.slice(i, i + 7));
-
-    // Month labels: track when the month changes across columns
-    const markers: { col: number; label: string }[] = [];
-    let lastMonth = -1;
-    cols.forEach((week, ci) => {
-      const firstReal = week.find(Boolean) as ContributionDay | undefined;
-      if (!firstReal) return;
-      const m = new Date(firstReal.date).getMonth();
-      if (m !== lastMonth) { markers.push({ col: ci, label: MONTH_LABELS[m] }); lastMonth = m; }
-    });
-
-    return { weeks: cols, monthMarkers: markers, totalContributions: total };
+    const byCol: { lvl: 0 | 1 | 2 | 3 | 4; date: string; count: number }[] = [];
+    for (let day = 0; day < 7; day++) {
+      for (let week = 0; week < 53; week++) {
+        const idx = week * 7 + day;
+        const d = padded[idx];
+        if (d) {
+          byCol.push({ lvl: levelFor(d.count), date: d.date, count: d.count });
+        } else {
+          byCol.push({ lvl: 0, date: "", count: 0 });
+        }
+      }
+    }
+    return byCol;
   }, [contributions]);
 
-  const stats = [
-    { Icon: GitBranch, label: "Repositórios Públicos", value: publicRepos, color: "from-accent-cyan to-blue-400" },
-    { Icon: Star,      label: "Total de Stars",         value: totalStars,  color: "from-accent-purple to-pink-400" },
-    { Icon: GitFork,   label: "Total de Forks",          value: totalForks,  color: "from-accent-green to-teal-400" },
-  ];
+  const totalContributions = useMemo(
+    () => contributions.reduce((a, d) => a + d.count, 0),
+    [contributions]
+  );
+
+  const langs = useMemo(() => {
+    const counts: Record<string, number> = {};
+    repos.forEach((r) => {
+      if (r.language) counts[r.language] = (counts[r.language] || 0) + 1;
+    });
+    const total = Object.values(counts).reduce((a, b) => a + b, 0) || 1;
+    const top = Object.entries(counts)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 5)
+      .map(([name, count]) => ({
+        name,
+        pct: Math.round((count / total) * 100),
+        color: LANG_COLORS[name] ?? LANG_COLORS.Other,
+      }));
+    const used = top.reduce((a, l) => a + l.pct, 0);
+    if (used < 100 && top.length) {
+      top.push({ name: "Other", pct: 100 - used, color: LANG_COLORS.Other });
+    }
+    return top;
+  }, [repos]);
+
+  const topRepos = useMemo(
+    () => repos.filter((r) => !r.fork).slice(0, 3),
+    [repos]
+  );
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      document.querySelectorAll<HTMLElement>(".gh-lang").forEach((el) => {
+        if (el.classList.contains("in")) return;
+        const obs = new IntersectionObserver(
+          ([e]) => {
+            if (e.isIntersecting) {
+              el.classList.add("in");
+              obs.disconnect();
+            }
+          },
+          { threshold: 0.3 }
+        );
+        obs.observe(el);
+      });
+    }, 50);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
-    <section id="github-stats" className="py-24 px-4 sm:px-6 lg:px-8 bg-bg-secondary/30">
-      <div className="max-w-6xl mx-auto">
-        <SectionHeading number="05" title="github stats" />
+    <section
+      className="section-pad gh-section"
+      id="github"
+      style={{ paddingTop: 120, paddingBottom: 120 }}
+    >
+      <div className="section-num reveal">OPEN SOURCE / 03</div>
+      <h2 className="section-title reveal" style={{ marginBottom: 60 }}>
+        github.com/
+        <br />
+        NicollasRezende
+      </h2>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.3, delay: index * 0.1 }}
-            >
-              <div className="bg-bg-primary/50 border border-fg-primary/10 rounded-xl p-6 hover:border-accent-cyan/30 transition-colors duration-200">
-                <div className={`inline-flex items-center justify-center w-12 h-12 rounded-lg bg-gradient-to-br ${stat.color} mb-4`}>
-                  <stat.Icon className="text-bg-primary" size={24} />
-                </div>
-                <div className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
-                  {stat.value}
-                </div>
-                <div className="text-sm text-fg-muted font-code">{stat.label}</div>
-              </div>
-            </motion.div>
-          ))}
+      <div className="gh-grid reveal">
+        <div className="gh-card">
+          <div className="gh-label">
+            <span>CONTRIBUTIONS / LAST 12 MONTHS</span>
+            <span className="live">LIVE</span>
+          </div>
+          <div className="gh-heatmap">
+            {cells.map((c, i) => (
+              <div
+                key={i}
+                className={`cell ${c.lvl > 0 ? "l" + c.lvl : ""}`}
+                style={{ transitionDelay: (i % 60) * 8 + "ms" }}
+                title={c.date ? `${c.date}: ${c.count} commit${c.count !== 1 ? "s" : ""}` : ""}
+              />
+            ))}
+          </div>
+          <div className="gh-heatmap-legend">
+            <span>
+              <Counter to={totalContributions} /> contributions
+            </span>
+            <span style={{ marginLeft: 16 }}>less</span>
+            <div className="lg">
+              <span style={{ background: "var(--bg-3)" }} />
+              <span style={{ background: "rgba(125, 207, 255, 0.15)" }} />
+              <span style={{ background: "rgba(125, 207, 255, 0.35)" }} />
+              <span style={{ background: "rgba(125, 207, 255, 0.6)" }} />
+              <span style={{ background: "var(--accent)" }} />
+            </div>
+            <span>more</span>
+          </div>
         </div>
 
-        {/* Contribution Heatmap */}
-        {contributions.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.3 }}
-            className="bg-bg-primary/50 border border-fg-primary/10 rounded-xl p-6 sm:p-8 mb-8"
-          >
-            <div className="flex items-center justify-between mb-6 flex-wrap gap-2">
-              <h3 className="font-display text-xl font-bold text-fg-primary">
-                Contribuições
-              </h3>
-              <span className="font-code text-sm text-fg-muted">
-                <span className="text-accent-cyan font-bold">{totalContributions}</span> commits no último ano
-              </span>
-            </div>
-
-            {/* Scrollable grid */}
-            <div className="overflow-x-auto pb-1">
-              <div className="min-w-[640px]">
-                {/* Month labels row */}
-                <div className="relative flex ml-8 h-4 mb-1">
-                  {monthMarkers.map(({ col, label }) => (
-                    <span
-                      key={`${col}-${label}`}
-                      className="absolute font-code text-[10px] text-fg-muted"
-                      style={{ left: `${col * 13}px` }}
-                    >
-                      {label}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Grid: day labels + week columns */}
-                <div className="flex gap-0.5">
-                  {/* Day-of-week labels */}
-                  <div className="flex flex-col gap-0.5 mr-1.5 shrink-0">
-                    {DAY_LABELS.map((d, i) => (
-                      <div key={d} className="h-[10px] w-6 font-code text-[9px] text-fg-muted leading-none flex items-center">
-                        {i % 2 === 1 ? d.slice(0, 3) : ""}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Week columns */}
-                  {weeks.map((week, wi) => (
-                    <div key={wi} className="flex flex-col gap-0.5">
-                      {week.map((day, di) => (
-                        <div
-                          key={di}
-                          title={day ? `${day.date}: ${day.count} commit${day.count !== 1 ? "s" : ""}` : ""}
-                          className={`w-[10px] h-[10px] rounded-sm transition-transform hover:scale-125 cursor-default ${
-                            day ? getIntensity(day.count) : "invisible"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Legend — outside scroll, always visible */}
-            <div className="flex items-center gap-2 mt-3 justify-end">
-              <span className="font-code text-[10px] text-fg-muted">Menos</span>
-              {[0, 2, 5, 9, 12].map((v) => (
-                <div key={v} className={`w-[10px] h-[10px] rounded-sm ${getIntensity(v)}`} />
-              ))}
-              <span className="font-code text-[10px] text-fg-muted">Mais</span>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Languages Distribution */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.3 }}
-          className="bg-bg-primary/50 border border-fg-primary/10 rounded-xl p-8"
-        >
-          <h3 className="font-display text-xl font-bold text-fg-primary mb-6">
-            Linguagens Mais Usadas
-          </h3>
-          <div className="space-y-4">
-            {topLanguages.map(([language, count], index) => {
-              const percentage = (count / publicRepos) * 100;
-              const colors = [
-                "from-accent-cyan to-blue-400",
-                "from-accent-purple to-pink-400",
-                "from-accent-green to-teal-400",
-                "from-accent-pink to-red-400",
-                "from-blue-400 to-accent-purple",
-              ];
-              return (
-                <div key={language} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="font-code text-sm text-fg-primary">{language}</span>
-                    <span className="font-code text-xs text-fg-muted">
-                      {count} {count === 1 ? "repo" : "repos"} ({percentage.toFixed(0)}%)
-                    </span>
-                  </div>
-                  <div className="h-1.5 bg-bg-secondary/50 rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${percentage}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.1 * index, ease: "easeOut" }}
-                      className={`h-full bg-gradient-to-r ${colors[index % colors.length]} rounded-full`}
-                    />
-                  </div>
-                </div>
-              );
-            })}
+        <div className="gh-card">
+          <div className="gh-label">
+            <span>TOP LANGUAGES</span>
+            <span style={{ color: "var(--fg-2)" }}>BY USAGE</span>
           </div>
-        </motion.div>
+          <div className="gh-langs">
+            {langs.map((l, i) => (
+              <div
+                key={i}
+                className="gh-lang"
+                style={{ ["--w" as never]: l.pct + "%" }}
+              >
+                <span className="lname">{l.name}</span>
+                <div className="lbar">
+                  <i
+                    style={{
+                      background: l.color,
+                      ["--w" as never]: l.pct + "%",
+                    }}
+                  />
+                </div>
+                <span className="lpct">{l.pct}%</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
-        {/* GitHub Profile Link */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.3 }}
-          className="mt-12 text-center"
-        >
-          <a
-            href="https://github.com/NicollasRezende"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-accent-cyan to-accent-purple text-white font-code rounded-lg hover:scale-105 transition-transform"
-          >
-            <Users size={20} />
-            <span>Seguir no GitHub</span>
-          </a>
-        </motion.div>
+      <div className="gh-repos reveal-stagger">
+        {topRepos.map((r) => {
+          const color = r.language
+            ? LANG_COLORS[r.language] ?? LANG_COLORS.Other
+            : LANG_COLORS.Other;
+          return (
+            <a
+              key={r.id}
+              className="gh-repo"
+              href={r.html_url}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor
+            >
+              <div className="rh">
+                <div className="rname">{r.name}</div>
+                <span className="arr">↗</span>
+              </div>
+              <div className="rdesc">
+                {r.description ?? "No description available"}
+              </div>
+              <div className="rmeta">
+                {r.language ? (
+                  <span
+                    className="lang"
+                    style={{ ["--lc" as never]: color }}
+                  >
+                    {r.language}
+                  </span>
+                ) : (
+                  <span className="lang">—</span>
+                )}
+                <span>★ {r.stargazers_count}</span>
+                <span>{new Date(r.pushed_at).getFullYear()}</span>
+              </div>
+            </a>
+          );
+        })}
       </div>
     </section>
   );

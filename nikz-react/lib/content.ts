@@ -1,12 +1,12 @@
 export const PERSONAL_INFO = {
   name: "Nicollas Rezende",
   fullName: "Nicollas Pereira Rezende",
-  role: "Desenvolvedor Full Stack",
+  role: "Full Stack Developer",
   tagline: "Transformando desafios em soluções reais",
-  bio: "Desenvolvedor Full Stack especializado em portais governamentais, automação de processos e soluções escaláveis. Campeão em 4 hackathons. Expertise em Java (Spring/Liferay), Python (Flask/FastAPI) e React/Next.js.",
-  philosophy: "Cada obstáculo é uma oportunidade de crescer",
+  bio: "Desenvolvedor full stack focado em portais governamentais, automação de processos e soluções escaláveis. Campeão em 4 hackathons. Expertise em Java (Spring/Liferay), Python (Flask/FastAPI) e React/Next.js.",
+  philosophy: "Cada obstáculo é uma oportunidade de crescer.",
   location: "Brasília, DF",
-  availability: "Aberto a novas oportunidades",
+  availability: "Aberto a oportunidades",
   links: {
     email: "nicollaspereirarezende@outlook.com.br",
     github: "https://github.com/NicollasRezende",
@@ -16,169 +16,223 @@ export const PERSONAL_INFO = {
   },
 };
 
-export const SKILLS = {
-  frontend: [
-    { name: "React", level: 95 },
-    { name: "Next.js", level: 95 },
-    { name: "TypeScript", level: 90 },
-    { name: "Tailwind CSS", level: 95 },
-    { name: "JavaScript", level: 95 },
-    { name: "Sass", level: 85 },
-  ],
-  backend: [
-    { name: "Java", level: 95 },
-    { name: "Spring", level: 95 },
-    { name: "Python", level: 95 },
-    { name: "Flask", level: 90 },
-    { name: "FastAPI", level: 90 },
-    { name: "Node.js", level: 85 },
-    { name: "Liferay", level: 95 },
-  ],
-  tools: [
-    { name: "Git", level: 95 },
-    { name: "Docker", level: 90 },
-    { name: "PostgreSQL", level: 90 },
-    { name: "Keycloak", level: 85 },
-    { name: "Selenium", level: 90 },
-    { name: "CI/CD", level: 85 },
-  ],
-};
+export type StackCategory = "frontend" | "backend" | "tools";
+export type StackTileSize =
+  | "t-2x1"
+  | "t-3x1"
+  | "t-3x2"
+  | "t-4x2"
+  | "t-2x2"
+  | "t-4x1"
+  | "t-6x1";
 
-export const PROJECTS = [
+export interface StackTile {
+  cat: StackCategory;
+  name: string;
+  lvl: number;
+  glyph: string;
+  years: string;
+  proj: string;
+  size: StackTileSize;
+  featured?: boolean;
+}
+
+export const STACK_ALL: StackTile[] = [
+  { cat: "frontend", name: "React", lvl: 95, glyph: "</>", years: "4y", proj: "20+ projects", size: "t-3x2", featured: true },
+  { cat: "frontend", name: "Next.js", lvl: 95, glyph: "▲", years: "3y", proj: "12 projects", size: "t-3x1" },
+  { cat: "frontend", name: "TypeScript", lvl: 90, glyph: "TS", years: "3y", proj: "Daily driver", size: "t-3x1" },
+  { cat: "frontend", name: "Tailwind", lvl: 95, glyph: "~", years: "3y", proj: "Default styling", size: "t-3x1" },
+  { cat: "frontend", name: "JavaScript", lvl: 95, glyph: "{ }", years: "5y", proj: "Daily", size: "t-3x1" },
+  { cat: "frontend", name: "Sass", lvl: 85, glyph: "$", years: "3y", proj: "Theme work", size: "t-3x1" },
+
+  { cat: "backend", name: "Java", lvl: 95, glyph: "☕", years: "3y", proj: "Liferay portals", size: "t-3x2", featured: true },
+  { cat: "backend", name: "Spring", lvl: 95, glyph: "S", years: "3y", proj: "Production APIs", size: "t-3x1" },
+  { cat: "backend", name: "Liferay", lvl: 95, glyph: "LR", years: "3y", proj: "Gov portals", size: "t-3x1" },
+  { cat: "backend", name: "Python", lvl: 95, glyph: ">_", years: "5y", proj: "Automation", size: "t-3x1" },
+  { cat: "backend", name: "Flask", lvl: 90, glyph: "Fl", years: "2y", proj: "Microservices", size: "t-3x1" },
+  { cat: "backend", name: "FastAPI", lvl: 90, glyph: "→", years: "2y", proj: "Modern APIs", size: "t-3x1" },
+
+  { cat: "tools", name: "Git", lvl: 95, glyph: "⎇", years: "5y", proj: "Daily", size: "t-3x2", featured: true },
+  { cat: "tools", name: "Docker", lvl: 90, glyph: "⬢", years: "3y", proj: "Containerization", size: "t-3x1" },
+  { cat: "tools", name: "PostgreSQL", lvl: 90, glyph: "DB", years: "3y", proj: "Production", size: "t-3x1" },
+  { cat: "tools", name: "Keycloak", lvl: 85, glyph: "🔒", years: "2y", proj: "SSO gov.br", size: "t-3x1" },
+  { cat: "tools", name: "Selenium", lvl: 90, glyph: "Se", years: "3y", proj: "Scraping", size: "t-3x1" },
+  { cat: "tools", name: "CI/CD", lvl: 85, glyph: "⟳", years: "2y", proj: "Pipelines", size: "t-3x1" },
+];
+
+export interface ProjectItem {
+  id: string;
+  title: string;
+  description: string;
+  tech: string[];
+  github?: string;
+  demo?: string;
+  status: "production" | "shipped";
+  year: string;
+  visual: string;
+  url?: string;
+}
+
+export const PROJECTS: ProjectItem[] = [
   {
-    id: "nikz-portfolio",
-    title: "Portfolio Profissional",
-    description: "Portfólio moderno e interativo com Next.js 16, TypeScript e animações avançadas",
-    longDescription:
-      "Portfólio completo com 8 seções interativas, GitHub Activity Heatmap, página de trajetória com parallax scrolling, design glassmorphism e performance otimizada (Lighthouse 95+).",
-    tech: ["Next.js 16", "TypeScript", "Tailwind v4", "Framer Motion", "Zustand"],
-    image: "/projects/portfolio.png",
+    id: "01",
+    title: "Portal Gov.br Federal",
+    description:
+      "Portal governamental enterprise em Liferay DXP 7.4 com SSO gov.br, Service Builder, REST APIs customizadas, multi-tenant e tema React + FreeMarker. Integração com Keycloak, CKPE e barramento de serviços federais.",
+    tech: ["Liferay", "Java", "Spring", "React", "Keycloak", "PostgreSQL", "Docker"],
+    status: "production",
+    year: "2025",
+    visual: "[gov]",
+    url: "portal.gov.br",
+  },
+  {
+    id: "02",
+    title: "Sales Automation Engine",
+    description:
+      "Suite Python de automação de vendas: scraping concorrente em Selenium async, pipelines de processamento, geração inteligente de orçamentos, fila Redis e dashboards em tempo real. Reduziu o ciclo operacional em 70%.",
+    tech: ["Python", "FastAPI", "Selenium", "Asyncio", "Redis", "Docker", "PostgreSQL"],
+    status: "production",
+    year: "2024",
+    visual: "< >",
+    url: "automation.internal",
+  },
+  {
+    id: "03",
+    title: "High-Conversion Landing System",
+    description:
+      "Sistema modular de landing pages para campanhas de marketing com A/B testing nativo, analytics integrado, edge rendering e templates reutilizáveis. Lighthouse 100 e CTR otimizado.",
+    tech: ["Next.js 16", "TypeScript", "Tailwind v4", "Framer Motion", "Vercel Edge"],
+    status: "shipped",
+    year: "2025",
+    visual: "/*/",
+    url: "campaigns.brand",
+  },
+  {
+    id: "04",
+    title: "Microservices API Platform",
+    description:
+      "Plataforma de microserviços em Spring Boot com API gateway, rate limiting, circuit breaker, mensageria Kafka e observabilidade Prometheus/Grafana. CI/CD automatizado em Docker + Kubernetes.",
+    tech: ["Java", "Spring Boot", "Kafka", "Docker", "Kubernetes", "Prometheus"],
+    status: "production",
+    year: "2025",
+    visual: "{*}",
+    url: "api.internal",
+  },
+  {
+    id: "05",
+    title: "Liferay Widget Library",
+    description:
+      "Biblioteca de Client Extensions React (Custom Elements) para múltiplos portais Liferay. Design tokens compartilhados, Storybook, build via Vite, versionamento semântico e deploy automatizado.",
+    tech: ["React", "TypeScript", "Liferay CE", "Vite", "Storybook", "Sass"],
+    status: "production",
+    year: "2025",
+    visual: "</>",
+    url: "widgets.lib",
+  },
+  {
+    id: "06",
+    title: "Portfolio v2",
+    description:
+      "Este portfólio. Next.js 16 com design system custom, animações cinemáticas, GitHub Activity Heatmap em tempo real, custom cursor, parallax e bento grid. Performance Lighthouse 95+.",
+    tech: ["Next.js 16", "TypeScript", "Tailwind v4", "Framer Motion"],
     github: "https://github.com/NicollasRezende/nikz",
     demo: "https://nikz.vercel.app",
-    featured: true,
     status: "production",
-    year: 2025,
-  },
-  {
-    id: "government-portal",
-    title: "Portal Governamental",
-    description: "Portal governamental de alta complexidade usando Liferay DXP",
-    longDescription:
-      "Desenvolvimento de portal governamental completo com autenticação gov.br, integração Keycloak, Service Builder, temas customizados em React e automação de processos.",
-    tech: ["Java", "Spring", "Liferay", "React", "Keycloak", "PostgreSQL"],
-    image: "/projects/gov-portal.png",
-    github: undefined,
-    demo: undefined,
-    featured: true,
-    status: "production",
-    year: 2025,
-  },
-  {
-    id: "automation-suite",
-    title: "Suite de Automação",
-    description: "Sistema completo de automação de vendas e processos internos",
-    longDescription:
-      "Ferramenta de automação massiva com scraping, pipelines assíncronos, geração de orçamentos, integração com múltiplas APIs e microserviços escaláveis.",
-    tech: ["Python", "Flask", "Selenium", "Asyncio", "Docker", "Microservices"],
-    image: "/projects/automation.png",
-    github: undefined,
-    demo: undefined,
-    featured: false,
-    status: "production",
-    year: 2024,
+    year: "2026",
+    visual: "{ }",
+    url: "nikz.vercel.app",
   },
 ];
 
-export const EXPERIENCE = [
+export interface ExperienceItem {
+  company: string;
+  role: string;
+  period: string;
+  location: string;
+  description: string;
+  achievements: string[];
+  tech: string[];
+  yearLabel: string;
+  current: boolean;
+}
+
+export const EXPERIENCE: ExperienceItem[] = [
   {
-    id: "sea-tecnologia",
     company: "SEA Tecnologia",
-    role: "Desenvolvedor Full Stack",
-    period: "Jan 2025 - Presente",
+    role: "Full Stack Developer",
+    period: "Jan 2025 — Presente",
     location: "Brasília, DF · Híbrido",
-    description: "Desenvolvimento e manutenção de portais governamentais utilizando Liferay",
+    description:
+      "Desenvolvimento e manutenção de portais governamentais utilizando Liferay DXP, com foco em escalabilidade e segurança.",
     achievements: [
-      "Desenvolvimento de serviços REST e aplicações Java",
-      "Criação e customização de temas com React, Freemarker e Sass",
-      "Integração de autenticação gov.br com CKPE e Keycloak",
-      "Ferramentas de automação e scraping massivo",
-      "Múltiplos reconhecimentos e premiações",
+      "Serviços REST e aplicações Java",
+      "Customização de temas em React, Freemarker e Sass",
+      "Integração gov.br com CKPE e Keycloak",
+      "Ferramentas de automação e scraping",
     ],
     tech: ["Java", "Spring", "Liferay", "React", "Python", "Keycloak"],
+    yearLabel: "2025",
+    current: true,
   },
   {
-    id: "teletron",
     company: "Teletron",
     role: "Engenheiro Chefe de Automação",
-    period: "Fev 2023 - Mar 2024",
+    period: "Fev 2023 — Mar 2024",
     location: "Brasília, DF · Presencial",
-    description: "Liderança no desenvolvimento de soluções de automação escaláveis",
+    description:
+      "Liderança no desenvolvimento de soluções de automação escaláveis para operações de vendas e processos internos.",
     achievements: [
-      "Automações avançadas em Python (Flask) com integração de APIs",
+      "Automações Python (Flask) com integração de APIs",
       "Microserviços escaláveis para operações internas",
-      "Scraping massivo usando Selenium e asyncio",
-      "Automação de vendas e geração de orçamentos",
-      "Redução de custos operacionais",
+      "Scraping massivo com Selenium e asyncio",
+      "Redução significativa de custos operacionais",
     ],
-    tech: ["Python", "Flask", "Selenium", "Microserviços", "Docker", "APIs"],
+    tech: ["Python", "Flask", "Selenium", "Microserviços", "Docker"],
+    yearLabel: "2023",
+    current: false,
   },
 ];
 
-export const HACKATHONS = [
-  {
-    id: "crea-mutua-2025",
-    title: "1º Lugar Hackathon Crea Jr x Mútua Jr",
-    position: "🥇 Campeão",
-    year: 2025,
-    location: "Brasília, DF",
-    description: "Solução inovadora para gestão de empresas juniores",
-    achievements: [
-      "Desenvolvimento rápido e colaborativo",
-      "Aplicação de tecnologias modernas",
-      "Reconhecimento pela qualidade técnica",
-      "Networking com profissionais do ecossistema júnior",
-    ],
-  },
-  {
-    id: "ideathon-2025",
-    title: "3º Lugar Ideathon de Brasília",
-    position: "🥉 Bronze",
-    year: 2025,
-    location: "Brasília, DF",
-    description: "Conceito inovador para desafios urbanos",
-    achievements: [
-      "Prototipagem rápida e validação de ideias",
-      "Apresentação impactante",
-      "Networking com empreendedores e investidores",
-      "Metodologias ágeis e design thinking",
-    ],
-  },
-  {
-    id: "agrohack-2025",
-    title: "1º Lugar AgroHack Brasília",
-    position: "🏆 Campeão",
-    year: 2025,
-    location: "Brasília, DF",
-    description: "Soluções inovadoras para o agronegócio brasileiro",
-    achievements: [
-      "Trabalho em equipe excepcional",
-      "Aplicação prática de IA",
-      "Impacto real no setor agrícola",
-      "Dedicação e criatividade premiadas",
-    ],
-  },
-  {
-    id: "hackathon-bsb-2025",
-    title: "1º Lugar 2ª Hackathon de Brasília",
-    position: "🥇 Campeão",
-    year: 2025,
-    location: "Brasília, DF",
-    description: "Solução inovadora desenvolvida em tempo recorde",
-    achievements: [
-      "Colaboração multidisciplinar",
-      "Transformação de ideias em realidade",
-      "Excelência técnica e criatividade",
-      "Apresentação impactante",
-    ],
-  },
+export interface HackathonItem {
+  pos: string;
+  title: string;
+  year: string;
+  loc: string;
+  note: string;
+}
+
+export const HACKATHONS: HackathonItem[] = [
+  { pos: "01", title: "Hackathon Crea Jr × Mútua Jr", year: "2025", loc: "Brasília", note: "Campeão" },
+  { pos: "01", title: "AgroHack Brasília", year: "2025", loc: "Brasília", note: "Campeão" },
+  { pos: "01", title: "2ª Hackathon de Brasília", year: "2025", loc: "Brasília", note: "Campeão" },
+  { pos: "03", title: "Ideathon de Brasília", year: "2025", loc: "Brasília", note: "Bronze" },
 ];
+
+export const MARQUEE_ITEMS = [
+  "JAVA",
+  "SPRING",
+  "LIFERAY",
+  "REACT",
+  "NEXT.JS",
+  "PYTHON",
+  "TYPESCRIPT",
+  "DOCKER",
+  "AUTOMATION",
+  "FULL STACK",
+];
+
+export const LANG_COLORS: Record<string, string> = {
+  TypeScript: "#3178c6",
+  JavaScript: "#f7df1e",
+  Java: "#f89820",
+  Python: "#ffd43b",
+  HTML: "#e34c26",
+  CSS: "#bb9af7",
+  SCSS: "#bb9af7",
+  Sass: "#bb9af7",
+  Shell: "#9ece6a",
+  Vue: "#42b883",
+  Go: "#00ADD8",
+  Rust: "#dea584",
+  Other: "#7dcfff",
+};
